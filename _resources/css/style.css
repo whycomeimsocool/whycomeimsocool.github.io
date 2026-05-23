@@ -9,7 +9,7 @@
 
 :root {
     --fontRatio: calc(32 / 27);
-    --minFontSize: calc((10 / var(--fontRatio)) * 1px);
+    --minFontSize: calc((16 / var(--fontRatio)) * 1px);
     --fontSizeGrow: 1vw;
     --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
     --note01: calc(var(--note00) * var(--fontRatio));
