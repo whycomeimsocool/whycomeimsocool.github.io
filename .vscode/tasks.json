@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Publish GitHub Pages",
+      "type": "shell",
+      "command": "/Users/rayemilio/Documents/Visual_Studio_Code/deploy.sh",
+      "args": [
+        "${workspaceFolder}"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

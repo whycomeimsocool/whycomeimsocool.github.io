@@ -8,451 +8,473 @@
 /* ── Variables ──────────────────────────────── */
 
 :root {
-  --fontRatio: calc(32 / 27);
-  --minFontSize: calc((16 / var(--fontRatio)) * 1px);
-  --fontSizeGrow: 1vw;
-  --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
-  --note01: calc(var(--note00) * var(--fontRatio));
-  --note02: calc(var(--note01) * var(--fontRatio));
-  --note03: calc(var(--note02) * var(--fontRatio));
-  --note04: calc(var(--note03) * var(--fontRatio));
-  --note05: calc(var(--note04) * var(--fontRatio));
-  --note06: calc(var(--note05) * var(--fontRatio));
-  --note07: calc(var(--note06) * var(--fontRatio));
-  --note08: calc(var(--note07) * var(--fontRatio));
-  --note09: calc(var(--note08) * var(--fontRatio));
-  --note10: calc(var(--note09) * var(--fontRatio));
-  --note11: calc(var(--note10) * var(--fontRatio));
-  --note12: calc(var(--note11) * var(--fontRatio));
-  --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
-  --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
-  --note01VW: calc(var(--note00VW) * var(--fontRatio));
-  --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
-  --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+    --fontRatio: calc(32 / 27);
+    --minFontSize: calc((10 / var(--fontRatio)) * 1px);
+    --fontSizeGrow: 1vw;
+    --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
+    --note01: calc(var(--note00) * var(--fontRatio));
+    --note02: calc(var(--note01) * var(--fontRatio));
+    --note03: calc(var(--note02) * var(--fontRatio));
+    --note04: calc(var(--note03) * var(--fontRatio));
+    --note05: calc(var(--note04) * var(--fontRatio));
+    --note06: calc(var(--note05) * var(--fontRatio));
+    --note07: calc(var(--note06) * var(--fontRatio));
+    --note08: calc(var(--note07) * var(--fontRatio));
+    --note09: calc(var(--note08) * var(--fontRatio));
+    --note10: calc(var(--note09) * var(--fontRatio));
+    --note11: calc(var(--note10) * var(--fontRatio));
+    --note12: calc(var(--note11) * var(--fontRatio));
+    --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+    --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+    --note01VW: calc(var(--note00VW) * var(--fontRatio));
+    --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+    --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
 
-  --ink: #1a1a18;
-  --ink-muted: #555550;
-  --ink-faint: #999990;
-  --paper: #f5f4ee;
-  --rule: #ccc9be;
-  --accent: #2a2a26;
+    --ink: #1a1a18;
+    --ink-muted: #555550;
+    --ink-faint: #999990;
+    --paper: #f5f4ee;
+    --rule: #ccc9be;
+    --accent: #2a2a26;
 }
 
 /* ── Reset ──────────────────────────────────── */
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* ── Base ───────────────────────────────────── */
 
 html {
-  background: var(--paper);
-  color: var(--ink);
+    background: var(--paper);
+    color: var(--ink);
 }
 
 body {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note03);
-  line-height: var(--note06);
-  background: var(--paper);
-  color: var(--ink);
-  width: 50vw;
-  min-width: var(--bodyMinWidth);
-  margin: 0 auto;
-  padding: var(--note08) 0 var(--note10) 0;
-  opacity: 0;
-  animation: fadein 1.1s ease forwards;
-  animation-delay: 0.15s;
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    background: var(--paper);
+    color: var(--ink);
+    width: 50vw;
+    min-width: var(--bodyMinWidth);
+    margin: 0 auto;
+    padding: var(--note08) 0 var(--note10) 0;
+    opacity: 0;
+    animation: fadein 1.1s ease forwards;
+    animation-delay: 0.15s;
 }
 
 @media only screen and (max-width: 767px) {
-  body {
-    min-width: inherit;
-    width: calc(var(--bodyMinWidthVW) / 767 * 100);
-    text-align: left;
-  }
+    body {
+        min-width: inherit;
+        width: calc(var(--bodyMinWidthVW) / 767 * 100);
+        text-align: left;
+    }
 }
 
-@keyframes fadein { to { opacity: 1; } }
+@keyframes fadein {
+    to {
+        opacity: 1;
+    }
+}
 
 /* ── Typography ─────────────────────────────── */
 
 h1 {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note07);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin-bottom: var(--note02);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note07);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--note02);
 }
 
 h2 {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note05);
-  font-weight: 400;
-  line-height: 1.2;
-  margin-top: var(--note07);
-  margin-bottom: var(--note03);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note05);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: var(--note07);
+    margin-bottom: var(--note03);
 }
 
 h3 {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note03);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-muted);
-  margin-top: var(--note05);
-  margin-bottom: var(--note02);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-top: var(--note05);
+    margin-bottom: var(--note02);
 }
 
 p {
-  margin-bottom: var(--note04);
-  text-align: justify;
-  hyphens: auto;
+    margin-bottom: var(--note04);
+    text-align: justify;
+    hyphens: auto;
 }
 
-p:last-child { margin-bottom: 0; }
+p:last-child {
+    margin-bottom: 0;
+}
 
-em { font-style: italic; }
+em {
+    font-style: italic;
+}
 
 /* ── Portfolio page — typography overrides ── */
 
-.portfolio-page h1 { margin-bottom: var(--note03); }
+.portfolio-page h1 {
+    margin-bottom: var(--note03);
+}
 
 .portfolio-page h2 {
-  letter-spacing: 0.01em;
-  margin-top: 0;
-  margin-bottom: var(--note02);
+    letter-spacing: 0.01em;
+    margin-top: 0;
+    margin-bottom: var(--note02);
 }
 
 .portfolio-page h3 {
-  letter-spacing: 0.04em;
-  margin-top: 0;
-  margin-bottom: var(--note01);
+    letter-spacing: 0.04em;
+    margin-top: 0;
+    margin-bottom: var(--note01);
 }
 
 /* ── Rules & Dividers ───────────────────────── */
 
 hr {
-  border: none;
-  border-top: 1px solid var(--rule);
-  margin: var(--note07) 0;
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: var(--note07) 0;
 }
 
 hr.thin {
-  border-top: 0.5px solid var(--rule);
-  margin: var(--note05) 0;
+    border-top: 0.5px solid var(--rule);
+    margin: var(--note05) 0;
 }
 
 .rule {
-  border: none;
-  border-top: 1px solid var(--rule);
-  margin: var(--note07) 0;
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: var(--note07) 0;
 }
 
 .rule-thin {
-  border: none;
-  border-top: 0.5px solid var(--rule);
-  margin: var(--note05) 0;
+    border: none;
+    border-top: 0.5px solid var(--rule);
+    margin: var(--note05) 0;
 }
 
 /* ── Doc page — navigation ──────────────────── */
 
 .back {
-  display: inline-block;
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note01);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-faint);
-  text-decoration: none;
-  border-bottom: 0.5px solid var(--rule);
-  letter-spacing: 0.04em;
-  margin-bottom: var(--note07);
-  transition: color 0.2s ease, border-color 0.2s ease;
+    display: inline-block;
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--note07);
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.back:hover { color: var(--ink); border-color: var(--ink); }
+.back:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+}
 
 .doc-label {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note00);
-  font-weight: 300;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--note03);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--note03);
 }
 
 /* ── Doc page — header ──────────────────────── */
 
 .subtitle {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note03);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-muted);
-  margin-bottom: var(--note06);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: var(--note06);
 }
 
 .meta {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note01);
-  font-weight: 300;
-  color: var(--ink-faint);
-  letter-spacing: 0.06em;
-  margin-bottom: var(--note02);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--note02);
 }
 
 /* ── Portfolio page — header ────────────────── */
 
 header {
-  margin-bottom: var(--note08);
+    margin-bottom: var(--note08);
 }
 
 .byline {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note02);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-muted);
-  letter-spacing: 0.06em;
-  margin-bottom: var(--note06);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note02);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--note06);
 }
 
 .intro {
-  margin-bottom: var(--note05);
+    margin-bottom: var(--note05);
 }
 
 .contact-line {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note01);
-  font-weight: 300;
-  color: var(--ink-faint);
-  letter-spacing: 0.08em;
-  margin-top: var(--note05);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    margin-top: var(--note05);
 }
 
 .contact-line a {
-  color: var(--ink-muted);
-  text-decoration: none;
-  border-bottom: 0.5px solid var(--rule);
-  transition: color 0.2s ease, border-color 0.2s ease;
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .contact-line a:hover {
-  color: var(--ink);
-  border-color: var(--ink);
+    color: var(--ink);
+    border-color: var(--ink);
 }
 
 /* ── Portfolio page — section label ─────────── */
 
 .section-label {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note00);
-  font-weight: 300;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--note05);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--note05);
 }
 
 /* ── Portfolio page — project entries ───────── */
 
 .project {
-  margin-bottom: var(--note08);
+    margin-bottom: var(--note08);
 }
 
 .project-meta {
-  display: flex;
-  align-items: baseline;
-  gap: var(--note02);
-  margin-bottom: var(--note02);
-  flex-wrap: wrap;
+    display: flex;
+    align-items: baseline;
+    gap: var(--note02);
+    margin-bottom: var(--note02);
+    flex-wrap: wrap;
 }
 
 .project-status {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note00);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-faint);
-  letter-spacing: 0.06em;
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
 }
 
 .project-stack {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note00);
-  font-weight: 300;
-  color: var(--ink-faint);
-  letter-spacing: 0.04em;
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
 }
 
 .project p {
-  margin-bottom: var(--note03);
+    margin-bottom: var(--note03);
 }
 
 /* ── Project links ──────────────────────────── */
 
 .project-links {
-  margin-top: var(--note05);
-  display: flex;
-  gap: var(--note04);
-  flex-wrap: wrap;
+    margin-top: var(--note05);
+    display: flex;
+    gap: var(--note04);
+    flex-wrap: wrap;
 }
 
 .portfolio-page .project-links {
-  margin-top: var(--note03);
+    margin-top: var(--note03);
 }
 
 .project-links a {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note01);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-muted);
-  text-decoration: none;
-  border-bottom: 0.5px solid var(--rule);
-  letter-spacing: 0.04em;
-  transition: color 0.2s ease, border-color 0.2s ease;
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.project-links a:hover { color: var(--ink); border-color: var(--ink); }
+.project-links a:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+}
 
 /* ── Portfolio page — capabilities ──────────── */
 
 .capabilities {
-  columns: 2;
-  column-gap: var(--note06);
-  margin-bottom: var(--note05);
+    columns: 2;
+    column-gap: var(--note06);
+    margin-bottom: var(--note05);
 }
 
 @media only screen and (max-width: 600px) {
-  .capabilities {
-    columns: 1;
-  }
+    .capabilities {
+        columns: 1;
+    }
 }
 
 .cap-group {
-  break-inside: avoid;
-  margin-bottom: var(--note04);
+    break-inside: avoid;
+    margin-bottom: var(--note04);
 }
 
 .cap-group h4 {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note01);
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  color: var(--ink-muted);
-  margin-bottom: var(--note00);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    margin-bottom: var(--note00);
 }
 
 .cap-group ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .cap-group li {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note02);
-  color: var(--ink);
-  line-height: var(--note05);
-  padding-left: var(--note02);
-  position: relative;
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note02);
+    color: var(--ink);
+    line-height: var(--note05);
+    padding-left: var(--note02);
+    position: relative;
 }
 
 .cap-group li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--ink-faint);
-  font-size: 0.8em;
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.8em;
 }
 
 /* ── Doc page — feature lists ───────────────── */
 
 .feature-list {
-  list-style: none;
-  padding: 0;
-  margin: var(--note03) 0 var(--note04) 0;
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
 }
 
 .feature-list li {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note03);
-  line-height: var(--note06);
-  padding-left: var(--note04);
-  position: relative;
-  margin-bottom: var(--note01);
-  text-align: justify;
-  hyphens: auto;
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    padding-left: var(--note04);
+    position: relative;
+    margin-bottom: var(--note01);
+    text-align: justify;
+    hyphens: auto;
 }
 
 .feature-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--ink-faint);
-  font-size: 0.85em;
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
 }
 
 /* ── Doc page — tech stack table ────────────── */
 
 .stack-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: var(--note04) 0;
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--note04) 0;
 }
 
 .stack-table td {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note02);
-  padding: var(--note01) var(--note03) var(--note01) 0;
-  border-bottom: 0.5px solid var(--rule);
-  vertical-align: top;
-  line-height: var(--note05);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note02);
+    padding: var(--note01) var(--note03) var(--note01) 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+    line-height: var(--note05);
 }
 
 .stack-table td:first-child {
-  font-family: 'Spectral', Georgia, serif;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-faint);
-  white-space: nowrap;
-  width: 30%;
+    font-family: "Spectral", Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    width: 30%;
 }
 
 /* ── Doc page — code blocks ─────────────────── */
 
 .code-block {
-  background: #eeeee6;
-  border-left: 2px solid var(--rule);
-  padding: var(--note03) var(--note04);
-  margin: var(--note04) 0;
-  overflow-x: auto;
+    background: #eeeee6;
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note04) 0;
+    overflow-x: auto;
 }
 
 .code-block pre {
-  font-family: 'Inconsolata', 'Courier New', monospace;
-  font-size: var(--note02);
-  font-weight: 300;
-  line-height: 1.7;
-  color: var(--ink);
-  white-space: pre;
+    font-family: "Inconsolata", "Courier New", monospace;
+    font-size: var(--note02);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+    white-space: pre;
 }
 
 .code-caption {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note00);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-faint);
-  margin-top: calc(-1 * var(--note02));
-  margin-bottom: var(--note04);
-  padding-left: var(--note04);
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: calc(-1 * var(--note02));
+    margin-bottom: var(--note04);
+    padding-left: var(--note04);
 }
 
 /* ── Doc page — callout notes ───────────────── */
@@ -460,173 +482,185 @@ header {
 .origin-note,
 .constraint-note,
 .status-note {
-  border-left: 2px solid var(--rule);
-  padding: var(--note03) var(--note04);
-  margin: var(--note05) 0;
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note05) 0;
 }
 
 .origin-note p,
 .constraint-note p,
 .status-note p {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note02);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-muted);
-  margin-bottom: 0;
-  text-align: left;
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note02);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: 0;
+    text-align: left;
 }
 
 /* ── Doc page — architecture diagram ────────── */
 
 .arch-diagram {
-  background: #eeeee6;
-  border-left: 2px solid var(--rule);
-  padding: var(--note04) var(--note05);
-  margin: var(--note04) 0;
-  overflow-x: auto;
+    background: #eeeee6;
+    border-left: 2px solid var(--rule);
+    padding: var(--note04) var(--note05);
+    margin: var(--note04) 0;
+    overflow-x: auto;
 }
 
 .arch-diagram pre {
-  font-family: 'Inconsolata', 'Courier New', monospace;
-  font-size: var(--note01);
-  font-weight: 300;
-  line-height: 1.8;
-  color: var(--ink-muted);
-  white-space: pre;
+    font-family: "Inconsolata", "Courier New", monospace;
+    font-size: var(--note01);
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--ink-muted);
+    white-space: pre;
 }
 
 /* ── Doc page — OSC API table ───────────────── */
 
 .doc-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: var(--note04) 0;
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note02);
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--note04) 0;
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note02);
 }
 
 .doc-table th {
-  font-family: 'Spectral', Georgia, serif;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-faint);
-  text-align: left;
-  padding: var(--note01) var(--note03) var(--note01) 0;
-  border-bottom: 0.5px solid var(--rule);
-  letter-spacing: 0.04em;
+    font-family: "Spectral", Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    text-align: left;
+    padding: var(--note01) var(--note03) var(--note01) 0;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
 }
 
 .doc-table td {
-  padding: var(--note01) var(--note03) var(--note01) 0;
-  border-bottom: 0.5px solid var(--rule);
-  vertical-align: top;
-  line-height: var(--note05);
-  color: var(--ink);
+    padding: var(--note01) var(--note03) var(--note01) 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+    line-height: var(--note05);
+    color: var(--ink);
 }
 
 .doc-table td:first-child {
-  font-family: 'Inconsolata', 'Courier New', monospace;
-  font-size: var(--note01);
-  font-weight: 400;
-  color: var(--ink-muted);
-  white-space: nowrap;
+    font-family: "Inconsolata", "Courier New", monospace;
+    font-size: var(--note01);
+    font-weight: 400;
+    color: var(--ink-muted);
+    white-space: nowrap;
 }
 
 .doc-table td.meaning {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note02);
-  color: var(--ink);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note02);
+    color: var(--ink);
 }
 
 /* ── Doc page — credits ─────────────────────── */
 
 .credits {
-  list-style: none;
-  padding: 0;
-  margin: var(--note03) 0 var(--note04) 0;
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
 }
 
 .credits li {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note02);
-  line-height: var(--note05);
-  padding-left: var(--note03);
-  position: relative;
-  margin-bottom: var(--note01);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note02);
+    line-height: var(--note05);
+    padding-left: var(--note03);
+    position: relative;
+    margin-bottom: var(--note01);
 }
 
 .credits li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--ink-faint);
-  font-size: 0.85em;
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
 }
 
 .credits a {
-  color: var(--ink-muted);
-  text-decoration: none;
-  border-bottom: 0.5px solid var(--rule);
-  transition: color 0.2s ease, border-color 0.2s ease;
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.credits a:hover { color: var(--ink); border-color: var(--ink); }
+.credits a:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+}
 
 /* ── Doc page — sources list ────────────────── */
 
 .sources {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .sources li {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: var(--note02);
-  line-height: var(--note05);
-  padding-left: var(--note03);
-  position: relative;
-  margin-bottom: var(--note01);
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note02);
+    line-height: var(--note05);
+    padding-left: var(--note03);
+    position: relative;
+    margin-bottom: var(--note01);
 }
 
 .sources li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--ink-faint);
-  font-size: 0.85em;
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
 }
 
 .sources a {
-  color: var(--ink-muted);
-  text-decoration: none;
-  border-bottom: 0.5px solid var(--rule);
-  transition: color 0.2s ease, border-color 0.2s ease;
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.sources a:hover { color: var(--ink); border-color: var(--ink); }
+.sources a:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+}
 
 /* ── Footer ─────────────────────────────────── */
 
 footer {
-  margin-top: var(--note08);
+    margin-top: var(--note08);
 }
 
 footer p {
-  font-family: 'Spectral', Georgia, serif;
-  font-size: var(--note00);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--ink-faint);
-  letter-spacing: 0.04em;
-  text-align: center;
+    font-family: "Spectral", Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-align: center;
 }
 
 footer a {
-  color: var(--ink-faint);
-  text-decoration: none;
-  border-bottom: 0.5px solid var(--rule);
-  transition: color 0.2s ease;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease;
 }
 
-footer a:hover { color: var(--ink); }
+footer a:hover {
+    color: var(--ink);
+}
