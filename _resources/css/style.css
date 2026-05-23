@@ -447,6 +447,33 @@ header {
     width: 30%;
 }
 
+/* ── Doc page — key files table ────────────── */
+
+.files-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--note04) 0;
+}
+
+.files-table td {
+    font-family: "EB Garamond", Georgia, serif;
+    font-size: var(--note02);
+    padding: var(--note02) var(--note03) var(--note02) 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+    line-height: var(--note05);
+}
+
+.files-table td:first-child {
+    font-family: "Inconsolata", "Courier New", monospace;
+    font-size: var(--note01);
+    font-weight: 400;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    width: 42%;
+    padding-right: var(--note04);
+}
+
 /* ── Doc page — code blocks ─────────────────── */
 
 .code-block {
@@ -480,6 +507,7 @@ header {
 /* ── Doc page — callout notes ───────────────── */
 
 .origin-note,
+.context-note,
 .constraint-note,
 .status-note {
     border-left: 2px solid var(--rule);
@@ -488,6 +516,7 @@ header {
 }
 
 .origin-note p,
+.context-note p,
 .constraint-note p,
 .status-note p {
     font-family: "Spectral", Georgia, serif;
@@ -586,7 +615,8 @@ header {
     font-size: 0.85em;
 }
 
-.credits a {
+.credits a,
+p a {
     color: var(--ink-muted);
     text-decoration: none;
     border-bottom: 0.5px solid var(--rule);
@@ -595,7 +625,8 @@ header {
         border-color 0.2s ease;
 }
 
-.credits a:hover {
+.credits a:hover,
+p a:hover {
     color: var(--ink);
     border-color: var(--ink);
 }

@@ -8,7 +8,7 @@ Built with hand-authored HTML and CSS. No framework, no build step, no dependenc
 
 ```
 index.html          Portfolio landing page
-docs/
+pages/
   astrocal.html     AstroCal — astronomical calendar
   cms.html          Custom CMS & Admin Panel
   edutone.html      EduToneBox — real-time educational synthesizer
