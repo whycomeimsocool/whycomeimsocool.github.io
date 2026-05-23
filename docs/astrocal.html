@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AstroCal — Ray Reich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fontRatio: calc(32 / 27);
+    --minFontSize: calc((16 / var(--fontRatio)) * 1px);
+    --fontSizeGrow: 1vw;
+    --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
+    --note01: calc(var(--note00) * var(--fontRatio));
+    --note02: calc(var(--note01) * var(--fontRatio));
+    --note03: calc(var(--note02) * var(--fontRatio));
+    --note04: calc(var(--note03) * var(--fontRatio));
+    --note05: calc(var(--note04) * var(--fontRatio));
+    --note06: calc(var(--note05) * var(--fontRatio));
+    --note07: calc(var(--note06) * var(--fontRatio));
+    --note08: calc(var(--note07) * var(--fontRatio));
+    --note09: calc(var(--note08) * var(--fontRatio));
+    --note10: calc(var(--note09) * var(--fontRatio));
+    --note11: calc(var(--note10) * var(--fontRatio));
+    --note12: calc(var(--note11) * var(--fontRatio));
+    --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+    --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+    --note01VW: calc(var(--note00VW) * var(--fontRatio));
+    --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+    --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+
+    --ink: #1a1a18;
+    --ink-muted: #555550;
+    --ink-faint: #999990;
+    --paper: #f5f4ee;
+    --rule: #ccc9be;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--paper); color: var(--ink); }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    background: var(--paper);
+    color: var(--ink);
+    width: 50vw;
+    min-width: var(--bodyMinWidth);
+    margin: 0 auto;
+    padding: var(--note08) 0 var(--note10) 0;
+    opacity: 0;
+    animation: fadein 1.1s ease forwards;
+    animation-delay: 0.15s;
+  }
+
+  @media only screen and (max-width: 767px) {
+    body {
+      min-width: inherit;
+      width: calc(var(--bodyMinWidthVW) / 767 * 100);
+      text-align: left;
+    }
+  }
+
+  @keyframes fadein { to { opacity: 1; } }
+
+  .back {
+    display: inline-block;
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--note07);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back:hover { color: var(--ink); border-color: var(--ink); }
+
+  .doc-label {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--note03);
+  }
+
+  h1 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note07);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--note02);
+  }
+
+  .subtitle {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: var(--note06);
+  }
+
+  .meta {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--note02);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: var(--note07) 0;
+  }
+
+  hr.thin {
+    border-top: 0.5px solid var(--rule);
+    margin: var(--note05) 0;
+  }
+
+  p {
+    margin-bottom: var(--note04);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note05);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: var(--note07);
+    margin-bottom: var(--note03);
+  }
+
+  h3 {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-top: var(--note05);
+    margin-bottom: var(--note02);
+  }
+
+  /* ── Feature lists ──────────────────────────── */
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
+  }
+
+  .feature-list li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    padding-left: var(--note04);
+    position: relative;
+    margin-bottom: var(--note01);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .feature-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+  }
+
+  /* ── Stack table ────────────────────────────── */
+
+  .stack-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--note04) 0;
+  }
+
+  .stack-table td {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    padding: var(--note01) var(--note03) var(--note01) 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+    line-height: var(--note05);
+  }
+
+  .stack-table td:first-child {
+    font-family: 'Spectral', Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    width: 30%;
+  }
+
+  /* ── Origin note ────────────────────────────── */
+
+  .origin-note {
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note05) 0;
+  }
+
+  .origin-note p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note02);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  /* ── External links ─────────────────────────── */
+
+  .project-links {
+    margin-top: var(--note05);
+    display: flex;
+    gap: var(--note04);
+    flex-wrap: wrap;
+  }
+
+  .project-links a {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .project-links a:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── Credits ────────────────────────────────── */
+
+  .credits {
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
+  }
+
+  .credits li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    line-height: var(--note05);
+    padding-left: var(--note03);
+    position: relative;
+    margin-bottom: var(--note01);
+  }
+
+  .credits li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+  }
+
+  .credits a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .credits a:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── Footer ─────────────────────────────────── */
+
+  footer { margin-top: var(--note08); }
+
+  footer p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  footer a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease;
+  }
+
+  footer a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">← Portfolio</a>
+
+<p class="doc-label">Technical Documentation</p>
+<h1>AstroCal</h1>
+<p class="subtitle">An astronomical calendar with lunar phases, solar and lunar eclipses, hemisphere awareness, timezone support, and Zmanim — built from scratch in vanilla JavaScript</p>
+
+<p class="meta">JavaScript · Astronomy Engine · Hebcal · SVG · CSS &nbsp;·&nbsp; Live</p>
+
+<div class="project-links">
+  <a href="https://bachtogauss.com/calendar/" target="_blank">Open the live calendar →</a>
+</div>
+
+<hr>
+
+<h2>Origin</h2>
+
+<div class="origin-note">
+  <p>This calendar started out as a table in Microsoft Word — initially created as a more aesthetically pleasing option than the printable calendars available online. Moon phase symbols came next. Having to retype the calendar every month, the decision was made to turn it into a dynamic website. What followed was a years-long process of layering in precision: date navigation, hemispheres, eclipses, timezones, Zmanim. Each feature integrated into the existing architecture rather than bolted on.</p>
+</div>
+
+<p>
+  The project is a good illustration of how software grows when driven by genuine need rather than specification. No feature was added for its own sake — each one existed because the calendar was being used and something was missing from it. The result is a system with considerable depth that nonetheless started as a Word document.
+</p>
+
+<hr class="thin">
+
+<h2>Features</h2>
+
+<h3>Lunar phases</h3>
+<ul class="feature-list">
+  <li>All eight principal moon phases rendered per day across the month</li>
+  <li>Phase calculations performed using Don Cross's Astronomy Engine — chosen specifically for mathematical accuracy</li>
+  <li>All phase symbols are Unicode icons converted to hand-crafted SVGs, aligned to the pixel</li>
+  <li>Hemisphere toggle adjusts icon orientation accordingly — northern and southern hemisphere rendering differ</li>
+</ul>
+
+<h3>Eclipses</h3>
+<ul class="feature-list">
+  <li>Both lunar and solar eclipses detected and displayed for the current month</li>
+  <li>Eclipse data computed via Astronomy Engine alongside phase data — same calculation pass, no separate lookup</li>
+  <li>Eclipse indicators rendered inline within the calendar grid</li>
+</ul>
+
+<h3>Timezone support</h3>
+<ul class="feature-list">
+  <li>Full timezone selection with precise UTC offset conversion</li>
+  <li>All astronomical times — phase transitions, eclipse moments, Zmanim — displayed in the selected timezone</li>
+  <li>Timezone state persists across navigation</li>
+</ul>
+
+<h3>Zmanim — Dawn and Midnight</h3>
+<ul class="feature-list">
+  <li>Halachic dawn and astronomical midnight calculated via the <a href="https://hebcal.github.io/api/core/classes/Zmanim.html" target="_blank">Hebcal Zmanim library</a></li>
+  <li>Times displayed per day when Zmanim mode is active</li>
+  <li>Geolocation-aware: calculations use the observer's coordinates</li>
+</ul>
+
+<h3>Interactive legend</h3>
+<ul class="feature-list">
+  <li>Fully interactive legend explaining all symbols used in the calendar</li>
+  <li>Toggle controls for showing and hiding individual data layers</li>
+</ul>
+
+<h3>Date navigation</h3>
+<ul class="feature-list">
+  <li>Forward and backward month navigation with full recalculation on each view</li>
+  <li>Jumps to any month and year</li>
+  <li>Current day highlighted automatically</li>
+</ul>
+
+<hr class="thin">
+
+<h2>Technical Approach</h2>
+
+<p>
+  The calendar is built entirely in vanilla JavaScript — no framework, no build step, no bundler. The decision to avoid dependencies was deliberate: the Astronomy Engine and Hebcal libraries are the two exceptions, both chosen for domain-specific accuracy rather than convenience.
+</p>
+
+<p>
+  Astronomical calculations are performed client-side on each render. Phase and eclipse data for the visible month is computed in a single pass using the Astronomy Engine, which provides the mathematical precision required for reliable eclipse detection. Zmanim calculations are layered on top via Hebcal, using the observer's geolocation when available.
+</p>
+
+<p>
+  The SVG icon system was built by hand: each moon phase symbol started as a Unicode character, was traced and refined into a clean SVG path, and then tuned for visual consistency across the full phase cycle. Hemisphere-awareness required a separate set of orientations for southern-hemisphere rendering, where the crescent and gibbous phases appear mirrored.
+</p>
+
+<hr class="thin">
+
+<h2>Tech Stack</h2>
+
+<table class="stack-table">
+  <tr><td>Language</td><td>Vanilla JavaScript — no framework, no build step</td></tr>
+  <tr><td>Astronomical calculations</td><td>Astronomy Engine by Don Cross</td></tr>
+  <tr><td>Zmanim calculations</td><td>Hebcal Core (Zmanim class)</td></tr>
+  <tr><td>Icons</td><td>Unicode characters converted to hand-authored SVGs</td></tr>
+  <tr><td>Styling</td><td>Hand-authored CSS using the Musical Interval Typography System</td></tr>
+  <tr><td>Hosting</td><td>Static site, served via PHP host</td></tr>
+</table>
+
+<hr class="thin">
+
+<h2>Design Notes</h2>
+
+<p>
+  The calendar was conceived as something beautiful before it was conceived as something functional. The original Word table prioritized aesthetics — readable type, clean grid, considered spacing — and that priority carried through every subsequent version. The SVG icons were aligned to the pixel not because it was required but because misalignment was noticeable and unacceptable.
+</p>
+
+<p>
+  The same Musical Interval Typography System that governs bachtogauss.com governs the calendar's layout — the same ratio, the same note variables, the same two media queries. The calendar is not a separate design artifact; it is part of the same document.
+</p>
+
+<p>
+  A native app version of the calendar extends this work to mobile, preserving the same calculation engine and visual language in an application context.
+</p>
+
+<hr class="thin">
+
+<h2>Credits</h2>
+
+<ul class="credits">
+  <li><a href="https://github.com/cosinekitty/astronomy" target="_blank">Astronomy Engine</a> by <a href="http://cosinekitty.com/" target="_blank">Don Cross</a> — astronomical calculations including lunar phases and eclipse detection</li>
+  <li><a href="https://hebcal.github.io/api/core/classes/Zmanim.html" target="_blank">Hebcal Core / Zmanim</a> — halachic and astronomical time calculations</li>
+  <li><a href="https://www.ianvenskus.com" target="_blank">Ian Venskus</a> — pixel-level design alignment and consultation</li>
+</ul>
+
+<hr>
+
+<footer>
+  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; <a href="https://bachtogauss.com/calendar/" target="_blank">Open the live calendar</a></p>
+</footer>
+
+</body>
+</html>

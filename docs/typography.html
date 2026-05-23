@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musical Interval Typography System — Ray Reich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fontRatio: calc(32 / 27);
+    --minFontSize: calc((16 / var(--fontRatio)) * 1px);
+    --fontSizeGrow: 1vw;
+    --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
+    --note01: calc(var(--note00) * var(--fontRatio));
+    --note02: calc(var(--note01) * var(--fontRatio));
+    --note03: calc(var(--note02) * var(--fontRatio));
+    --note04: calc(var(--note03) * var(--fontRatio));
+    --note05: calc(var(--note04) * var(--fontRatio));
+    --note06: calc(var(--note05) * var(--fontRatio));
+    --note07: calc(var(--note06) * var(--fontRatio));
+    --note08: calc(var(--note07) * var(--fontRatio));
+    --note09: calc(var(--note08) * var(--fontRatio));
+    --note10: calc(var(--note09) * var(--fontRatio));
+    --note11: calc(var(--note10) * var(--fontRatio));
+    --note12: calc(var(--note11) * var(--fontRatio));
+    --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+    --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+    --note01VW: calc(var(--note00VW) * var(--fontRatio));
+    --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+    --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+
+    --ink: #1a1a18;
+    --ink-muted: #555550;
+    --ink-faint: #999990;
+    --paper: #f5f4ee;
+    --rule: #ccc9be;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--paper); color: var(--ink); }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    background: var(--paper);
+    color: var(--ink);
+    width: 50vw;
+    min-width: var(--bodyMinWidth);
+    margin: 0 auto;
+    padding: var(--note08) 0 var(--note10) 0;
+    opacity: 0;
+    animation: fadein 1.1s ease forwards;
+    animation-delay: 0.15s;
+  }
+
+  @media only screen and (max-width: 767px) {
+    body {
+      min-width: inherit;
+      width: calc(var(--bodyMinWidthVW) / 767 * 100);
+      text-align: left;
+    }
+  }
+
+  @keyframes fadein { to { opacity: 1; } }
+
+  /* ── Nav ────────────────────────────────────── */
+
+  .back {
+    display: inline-block;
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--note07);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── Header ─────────────────────────────────── */
+
+  .doc-label {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--note03);
+  }
+
+  h1 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note07);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--note02);
+  }
+
+  .subtitle {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: var(--note06);
+  }
+
+  .meta {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--note02);
+  }
+
+  /* ── Rules ──────────────────────────────────── */
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: var(--note07) 0;
+  }
+
+  hr.thin {
+    border-top: 0.5px solid var(--rule);
+    margin: var(--note05) 0;
+  }
+
+  /* ── Body text ──────────────────────────────── */
+
+  p {
+    margin-bottom: var(--note04);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note05);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: var(--note07);
+    margin-bottom: var(--note03);
+  }
+
+  h3 {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-top: var(--note05);
+    margin-bottom: var(--note02);
+  }
+
+  /* ── Code blocks ────────────────────────────── */
+
+  .code-block {
+    background: #eeeee6;
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note04) 0;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: 'Inconsolata', 'Courier New', monospace;
+    font-size: var(--note02);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+    white-space: pre;
+  }
+
+  .code-caption {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: calc(-1 * var(--note02));
+    margin-bottom: var(--note04);
+    padding-left: var(--note04);
+  }
+
+  /* ── Sources list ───────────────────────────── */
+
+  .sources {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    line-height: var(--note05);
+    padding-left: var(--note03);
+    position: relative;
+    margin-bottom: var(--note01);
+  }
+
+  .sources li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+  }
+
+  .sources a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .sources a:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── Footer ─────────────────────────────────── */
+
+  footer {
+    margin-top: var(--note08);
+  }
+
+  footer p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  footer a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease;
+  }
+
+  footer a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">← Portfolio</a>
+
+<p class="doc-label">Technical Documentation</p>
+<h1>Musical Interval Typography System</h1>
+<p class="subtitle">A type scale derived from the intervals of a musical scale</p>
+
+<p class="meta">HTML · CSS custom properties · Zero dependencies &nbsp;·&nbsp; License: CC BY-NC 4.0</p>
+
+<hr>
+
+<h2>Summary</h2>
+
+<p>
+  As a musician exploring various design philosophies, this system was born out of a simple question: can the notes of a musical scale, rather than numerical values, be used to set font sizes? Although just a few lines of code, it was a complicated and time-consuming process to arrive there. Into the end result went many hours of experimentation, trial and error, mental problem-solving, and consultation with designer and developer Ian Venskus, without whom this project would not have been possible.
+</p>
+
+<p>
+  The underlying design system is essentially one of math and variables, using only HTML and CSS. It takes inputs for a ratio (ideally a musical interval), a minimum font size (set to 16px for accessibility), and a scaling factor which determines how everything grows in accordance with the viewport width. To best accommodate text-only content, the body width is set to 50% — notice how the padding fluidly expands to fill the screen in the margins as the viewport width is adjusted, while keeping all sizing and spacing related and within bounds.
+</p>
+
+<p>
+  An interesting aspect of this fluid responsiveness is that there are practically no media queries involved. In truth, there are precisely two in use: one changes the text from justified to left-aligned on small screen sizes for improved aesthetics and legibility; the other sets the viewport width at which point the side margins start to shrink, maintaining a correct and balanced look on all device sizes.
+</p>
+
+<p>
+  The system is not limited to determining font sizes. Musical intervals are employed wherever possible, so that margins, padding, line heights, header and paragraph spacing (vertical rhythm), and anything else to do with size and space are all based on the one fundamental musical interval.
+</p>
+
+<hr class="thin">
+
+<h2>The Code</h2>
+
+<h3>The ratio</h3>
+
+<div class="code-block"><pre>--fontRatio: calc(32 / 27);</pre></div>
+<p class="code-caption">Sets the Font Ratio variable — the basis for the entire system. Preferably a musical interval, though any numerical value in any form will do.</p>
+
+<h3>Minimum font size</h3>
+
+<div class="code-block"><pre>--minFontSize: calc((16 / var(--fontRatio)) * 1px);</pre></div>
+<p class="code-caption">Defines the Minimum Font Size variable, to be used in conjunction with Note 00. Starts at 16px for accessibility.</p>
+
+<h3>Note 00 — the root</h3>
+
+<div class="code-block"><pre>--note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);</pre></div>
+<p class="code-caption">Defines the Note 00 variable — the starting point for all other Notes — scaling all the way up to infinity (1 billion pixels, to be precise).</p>
+
+<h3>The scale</h3>
+
+<div class="code-block"><pre>--note01: calc(var(--note00) * var(--fontRatio));
+--note02: calc(var(--note01) * var(--fontRatio));
+--note03: calc(var(--note02) * var(--fontRatio));
+--note04: calc(var(--note03) * var(--fontRatio));</pre></div>
+<p class="code-caption">Each subsequent Note is defined by multiplying the immediately previous Note by the Font Ratio. These Notes are used to size everything. More can be added as needed.</p>
+
+<h3>The viewport-width track</h3>
+
+<p>
+  The Note system's unit is tied to pixels. In order to adjust how the body and page margins grow and shrink according to viewport width, a parallel system with <code>vw</code> units is required.
+</p>
+
+<div class="code-block"><pre>--minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+--note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+--note01VW: calc(var(--note00VW) * var(--fontRatio));
+--bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+--bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+--fontSizeGrow: 1vw;</pre></div>
+<p class="code-caption">The vw-unit track mirrors the px track and is used exclusively for body and margin proportions.</p>
+
+<h3>Body sizing</h3>
+
+<div class="code-block"><pre>body {
+  width: 50vw;
+  min-width: var(--bodyMinWidth);
+  margin: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    min-width: inherit;
+    width: calc(var(--bodyMinWidthVW) / 767 * 100);
+  }
+}</pre></div>
+<p class="code-caption">The only media query concerned with sizing and responsiveness. At 767px the body sizes down using vw-based variables.</p>
+
+<h3>The complete block</h3>
+
+<div class="code-block"><pre>/*
+  The following musical interval system and its associated code,
+  created by Raymond Reich for bachtogauss.com,
+  is licensed under the CC BY-NC 4.0 Deed License.
+  https://creativecommons.org/licenses/by-nc/4.0/deed.en
+*/
+
+:root {
+  --fontRatio: calc(32 / 27);
+  --minFontSize: calc((16 / var(--fontRatio)) * 1px);
+  --fontSizeGrow: 1vw;
+  --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
+  --note01: calc(var(--note00) * var(--fontRatio));
+  --note02: calc(var(--note01) * var(--fontRatio));
+  --note03: calc(var(--note02) * var(--fontRatio));
+  --note04: calc(var(--note03) * var(--fontRatio));
+  --note05: calc(var(--note04) * var(--fontRatio));
+  --note06: calc(var(--note05) * var(--fontRatio));
+  --note07: calc(var(--note06) * var(--fontRatio));
+  --note08: calc(var(--note07) * var(--fontRatio));
+  --note09: calc(var(--note08) * var(--fontRatio));
+  --note10: calc(var(--note09) * var(--fontRatio));
+  --note11: calc(var(--note10) * var(--fontRatio));
+  --note12: calc(var(--note11) * var(--fontRatio));
+  --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+  --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+  --note01VW: calc(var(--note00VW) * var(--fontRatio));
+  --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+  --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+}
+
+body {
+  width: 50vw;
+  min-width: var(--bodyMinWidth);
+  margin: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    min-width: inherit;
+    width: calc(var(--bodyMinWidthVW) / 767 * 100);
+  }
+}</pre></div>
+<p class="code-caption">The complete block. Free to use with credit, under CC BY-NC 4.0.</p>
+
+<h3>Example usage</h3>
+
+<div class="code-block"><pre>font-size: var(--note03);
+line-height: var(--note06);
+margin-top: var(--note08);</pre></div>
+<p class="code-caption">How the system's implementation looks for a few properties — in this case, body text on this very page.</p>
+
+<hr>
+
+<h2>Sources &amp; Inspiration</h2>
+
+<p>A significant amount was learned, and much inspiration taken, from the following works — upon which this system builds:</p>
+
+<ul class="sources">
+  <li><a href="https://alistapart.com/article/more-meaningful-typography/" target="_blank">More Meaningful Typography — Tim Brown</a></li>
+  <li><a href="https://practicaltypography.com/" target="_blank">Practical Typography — Matthew Butterick</a></li>
+  <li><a href="https://medium.com/@jordan.foster/typographic-scales-979272e0ad08" target="_blank">Typographic Scaling — Fozzie Foster</a></li>
+  <li><a href="https://www.modularscale.com/" target="_blank">Modular Scale Calculator — Scott Kellum &amp; Tim Brown</a></li>
+  <li><a href="https://spencermortensen.com/articles/typographic-scale/" target="_blank">Typographic Scale — Spencer Mortensen</a></li>
+  <li><a href="https://medium.com/sketch-app-sources/exploring-responsive-type-scales-cf1da541be54" target="_blank">Exploring Responsive Type Scales — Joseph Mueller</a></li>
+  <li><a href="https://pairfonts.eu/articles/typographic-scale.php" target="_blank">The Typographic Scale — G.P.</a></li>
+  <li><a href="https://8thlight.com/insights/vertical-rhythm-in-typography" target="_blank">Vertical Rhythm in Typography — Chris Peak</a></li>
+  <li><a href="https://www.codementor.io/@ricardozea/100-responsive-typography-system-using-a-modular-scale-s5rhft58g" target="_blank">100% Responsive Typography System using a Modular Scale — Ricardo Zea</a></li>
+</ul>
+
+<hr>
+
+<footer>
+  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; <a href="https://bachtogauss.com/about/#about-site" target="_blank">See it live at bachtogauss.com</a></p>
+</footer>
+
+</body>
+</html>

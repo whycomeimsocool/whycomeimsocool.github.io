@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom CMS & Admin Panel — Ray Reich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fontRatio: calc(32 / 27);
+    --minFontSize: calc((16 / var(--fontRatio)) * 1px);
+    --fontSizeGrow: 1vw;
+    --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
+    --note01: calc(var(--note00) * var(--fontRatio));
+    --note02: calc(var(--note01) * var(--fontRatio));
+    --note03: calc(var(--note02) * var(--fontRatio));
+    --note04: calc(var(--note03) * var(--fontRatio));
+    --note05: calc(var(--note04) * var(--fontRatio));
+    --note06: calc(var(--note05) * var(--fontRatio));
+    --note07: calc(var(--note06) * var(--fontRatio));
+    --note08: calc(var(--note07) * var(--fontRatio));
+    --note09: calc(var(--note08) * var(--fontRatio));
+    --note10: calc(var(--note09) * var(--fontRatio));
+    --note11: calc(var(--note10) * var(--fontRatio));
+    --note12: calc(var(--note11) * var(--fontRatio));
+    --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+    --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+    --note01VW: calc(var(--note00VW) * var(--fontRatio));
+    --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+    --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+
+    --ink: #1a1a18;
+    --ink-muted: #555550;
+    --ink-faint: #999990;
+    --paper: #f5f4ee;
+    --rule: #ccc9be;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--paper); color: var(--ink); }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    background: var(--paper);
+    color: var(--ink);
+    width: 50vw;
+    min-width: var(--bodyMinWidth);
+    margin: 0 auto;
+    padding: var(--note08) 0 var(--note10) 0;
+    opacity: 0;
+    animation: fadein 1.1s ease forwards;
+    animation-delay: 0.15s;
+  }
+
+  @media only screen and (max-width: 767px) {
+    body {
+      min-width: inherit;
+      width: calc(var(--bodyMinWidthVW) / 767 * 100);
+      text-align: left;
+    }
+  }
+
+  @keyframes fadein { to { opacity: 1; } }
+
+  .back {
+    display: inline-block;
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--note07);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back:hover { color: var(--ink); border-color: var(--ink); }
+
+  .doc-label {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--note03);
+  }
+
+  h1 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note07);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--note02);
+  }
+
+  .subtitle {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: var(--note06);
+  }
+
+  .meta {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--note02);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: var(--note07) 0;
+  }
+
+  hr.thin {
+    border-top: 0.5px solid var(--rule);
+    margin: var(--note05) 0;
+  }
+
+  p {
+    margin-bottom: var(--note04);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note05);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: var(--note07);
+    margin-bottom: var(--note03);
+  }
+
+  h3 {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-top: var(--note05);
+    margin-bottom: var(--note02);
+  }
+
+  /* ── Code blocks ────────────────────────────── */
+
+  .code-block {
+    background: #eeeee6;
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note04) 0;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: 'Inconsolata', 'Courier New', monospace;
+    font-size: var(--note02);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+    white-space: pre;
+  }
+
+  .code-caption {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: calc(-1 * var(--note02));
+    margin-bottom: var(--note04);
+    padding-left: var(--note04);
+  }
+
+  /* ── Feature lists ──────────────────────────── */
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
+  }
+
+  .feature-list li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    padding-left: var(--note04);
+    position: relative;
+    margin-bottom: var(--note01);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .feature-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+  }
+
+  /* ── Stack table ────────────────────────────── */
+
+  .stack-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--note04) 0;
+  }
+
+  .stack-table td {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    padding: var(--note01) var(--note03) var(--note01) 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+    line-height: var(--note05);
+  }
+
+  .stack-table td:first-child {
+    font-family: 'Spectral', Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    width: 30%;
+  }
+
+  /* ── Constraint note ────────────────────────── */
+
+  .constraint-note {
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note05) 0;
+  }
+
+  .constraint-note p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note02);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  /* ── Footer ─────────────────────────────────── */
+
+  footer { margin-top: var(--note08); }
+
+  footer p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  footer a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease;
+  }
+
+  footer a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">← Portfolio</a>
+
+<p class="doc-label">Technical Documentation</p>
+<h1>Custom CMS &amp; Admin Panel</h1>
+<p class="subtitle">A bespoke full-stack content management system built from scratch — public PHP site, local Python admin backend, dual-mode storage</p>
+
+<p class="meta">Python · SQLite · PHP · vanilla JS · ES modules · Jest · pytest &nbsp;·&nbsp; Live</p>
+
+<hr>
+
+<h2>Overview</h2>
+
+<p>
+  This is a purpose-built content management system designed around a specific operational constraint: a single operator managing a public-facing website entirely from a local machine, with no cloud CMS, no third-party admin interface, and no unnecessary dependencies. Every part of the system — from the storage layer to the publish workflow — was designed to serve that constraint precisely.
+</p>
+
+<p>
+  The public site is intentionally lightweight: PHP, JSON, and vanilla JavaScript. The local admin panel is a browser UI backed by a Python standard-library HTTP server with modular handlers, a dual-mode SQLite/JSON storage adapter, and an extensive suite of utility scripts covering post ingestion, media backup, QR tracking, access log analytics, resource management, and publishing.
+</p>
+
+<div class="constraint-note">
+  <p>The architecture was shaped by a deliberate choice to avoid external dependencies wherever possible. The Python backend uses only the standard library. The public site consumes static JSON files. The admin panel runs locally and publishes to a remote PHP host — a workflow that influenced every design decision in the system.</p>
+</div>
+
+<hr class="thin">
+
+<h2>Project Map</h2>
+
+<div class="code-block"><pre>site/                          Public website
+site/posts.json                Published posts data
+site/action/action-items.json  Published action artwork and download data
+site/resources/resources.json  Published resources sections and cards
+site/wikipedia-tracker/        Public Wikipedia tracker config, cache, PHP API
+
+admin-panel/                   Local admin UI
+admin-panel/index.html         Admin shell and tab markup
+admin-panel/_resources/js/     Admin ES modules and Jest tests
+admin-panel/_resources/python/ Python backend, scripts, handlers, tests
+admin-panel/_resources/data/   SQLite database and QR history data
+
+_commands/                     macOS command launchers, test helpers, migrations
+_config/                       Templates and local configuration examples
+_assets/docs/                  Current docs and historical plans and reports
+_production_logs/              Local synced access log input</pre></div>
+
+<hr class="thin">
+
+<h2>Storage Model</h2>
+
+<p>
+  The backend uses a dual-mode storage adapter that supports both SQLite and JSON, selectable via configuration. Active admin operations prefer SQLite; the public site consumes JSON files under <code>site/</code>. Handlers that mutate SQLite state sync back to JSON as part of the publish workflow.
+</p>
+
+<ul class="feature-list">
+  <li><code>db_adapter.py</code> is the public data access layer for all handlers, abstracting the storage mode from handler logic</li>
+  <li><code>config.json</code> controls the active storage mode via <code>"migration": { "use_database": true }</code></li>
+  <li>Legacy JSON mode remains available for migration, parity testing, and fallback</li>
+  <li>SQLite schema migrations run automatically via <code>db_layer.py</code> when the database is opened — no manual migration steps required</li>
+</ul>
+
+<hr class="thin">
+
+<h2>Admin Panel Capabilities</h2>
+
+<h3>Posts</h3>
+<ul class="feature-list">
+  <li>Add, edit, batch edit, search, sort, select, archive, restore, delete</li>
+  <li>Duplicate checking across active, archived, and deleted records</li>
+  <li>Link checking, media backup, thumbnail sync</li>
+  <li>Upload-date backfill and duration extraction workflow</li>
+</ul>
+
+<h3>Post ingestion pipeline</h3>
+<p>
+  The ingestion pipeline handles the full lifecycle of bringing a new post into the system. Each step is automated where possible and logged where not:
+</p>
+<ul class="feature-list">
+  <li>URL normalization and tracking-parameter removal</li>
+  <li>Platform and media-type detection</li>
+  <li>Duplicate checking across active, archived, and deleted posts</li>
+  <li>Upload date and duration extraction</li>
+  <li>Thumbnail extraction and generation</li>
+  <li>Article archiving and article thumbnail generation</li>
+  <li>Persistence to both JSON and SQLite</li>
+</ul>
+
+<h3>Action items</h3>
+<ul class="feature-list">
+  <li>Category and artwork item management</li>
+  <li>PDF and image uploads with print-size detection and preview generation</li>
+  <li>Download metadata, variants, archive and restore</li>
+  <li>QR code assignment per item</li>
+</ul>
+
+<h3>QR system</h3>
+<ul class="feature-list">
+  <li>Structured QR ID generation and QR image generation UI</li>
+  <li>Server-side QR history with link and unlink state</li>
+  <li>Scan-log sync, analytics endpoints, and redirect handling</li>
+</ul>
+
+<h3>Resources</h3>
+<ul class="feature-list">
+  <li>Sections and resource cards</li>
+  <li>Logo upload, favicon and logo fetching, direct logo download</li>
+  <li>Social link fields per resource</li>
+</ul>
+
+<h3>Access log analytics</h3>
+<ul class="feature-list">
+  <li>SFTP sync of Apache logs from the production server</li>
+  <li>Apache log parsing with persistent parse-error tracking</li>
+  <li>SQLite storage with grouped visitor views, filters, stats, and charts</li>
+  <li>Geolocation cache for visitor IP resolution</li>
+</ul>
+
+<h3>Wikipedia tracker</h3>
+<ul class="feature-list">
+  <li>Admin article configuration with reorder, update, and delete</li>
+  <li>Cache status and cache-clear controls</li>
+  <li>Public stale-while-revalidate API for the live site</li>
+</ul>
+
+<h3>Publishing and export</h3>
+<ul class="feature-list">
+  <li>Sync current SQLite-backed data to public JSON files</li>
+  <li>Create export packages for deployment</li>
+</ul>
+
+<hr class="thin">
+
+<h2>Tech Stack</h2>
+
+<table class="stack-table">
+  <tr><td>Public site</td><td>PHP, JSON, vanilla JavaScript</td></tr>
+  <tr><td>Admin UI</td><td>HTML, CSS, ES modules (vanilla JS)</td></tr>
+  <tr><td>Admin backend</td><td>Python 3, standard library HTTP server</td></tr>
+  <tr><td>Storage</td><td>SQLite (primary), JSON (legacy / public consumption)</td></tr>
+  <tr><td>Frontend tests</td><td>Jest</td></tr>
+  <tr><td>Backend tests</td><td>pytest</td></tr>
+  <tr><td>Platform</td><td>macOS (local admin), Apache (production host)</td></tr>
+</table>
+
+<hr class="thin">
+
+<h2>Backend Architecture</h2>
+
+<p>
+  The Python backend is built entirely on the standard library — no Flask, no Django, no third-party web framework. The HTTP server dispatches requests to modular handlers, each responsible for a discrete feature area. This architecture makes it straightforward to add, test, or remove handlers independently.
+</p>
+
+<h3>Starting the backend</h3>
+
+<div class="code-block"><pre>cd admin-panel/_resources/python
+./setup_venv.sh
+python3 simple_server.py</pre></div>
+<p class="code-caption">The configured admin start port is 5500, with up to 10 attempts for the next free port.</p>
+
+<h3>Starting the public site</h3>
+
+<div class="code-block"><pre>open "_commands/ports_and_servers/servers/launch_PHP.command"</pre></div>
+
+<h3>Combined launcher</h3>
+
+<div class="code-block"><pre>open "_commands/CLEAN+LAUNCH.command"</pre></div>
+
+<h3>Running tests</h3>
+
+<div class="code-block"><pre># Python backend tests
+cd admin-panel/_resources/python
+python3 -m pytest
+
+# Frontend tests
+cd admin-panel/_resources/js
+npm test</pre></div>
+
+<hr class="thin">
+
+<h2>Documentation Structure</h2>
+
+<p>The project maintains a layered documentation system covering current state, historical decisions, and operational procedures:</p>
+
+<ul class="feature-list">
+  <li><code>_assets/docs/README.md</code> — documentation index and status of every Markdown file</li>
+  <li><code>CURRENT_SYSTEM_REFERENCE.md</code> — current feature and architecture reference</li>
+  <li><code>ADMIN_PANEL_WORKFLOWS.md</code> — detailed admin UI and feature workflows</li>
+  <li><code>OPERATIONS_AND_MAINTENANCE.md</code> — testing, deployment, backup, link-checking, and maintenance procedures</li>
+  <li><code>admin-panel/_resources/python/README.md</code> — Python backend reference</li>
+  <li><code>CONFIG_REFERENCE.md</code> — full configuration reference</li>
+  <li><code>README-DURATION.md</code> — duration extraction feature notes</li>
+  <li><code>_commands/_commands_analysis.md</code> — command launcher inventory</li>
+  <li><code>_assets/docs/history/</code> — completed code-review records, audits, migration notes, and superseded implementation summaries</li>
+</ul>
+
+<hr class="thin">
+
+<h2>Security Baseline</h2>
+
+<p>
+  The admin panel is designed to run locally or behind trusted network controls. A code review identified the absence of active admin authentication in <code>simple_server.py</code>. The following are documented as required before any public or network exposure:
+</p>
+
+<ul class="feature-list">
+  <li>Admin authentication layer</li>
+  <li>CSRF protection for state-changing browser workflows</li>
+  <li>Stricter SSRF and download limits</li>
+</ul>
+
+<p>
+  None of these represent an architectural constraint — they are known gaps, deliberately deferred given the local-only operational model, and clearly documented for any future deployment that changes that assumption.
+</p>
+
+<hr>
+
+<footer>
+  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; Full documentation and code available upon request</p>
+</footer>
+
+</body>
+</html>
