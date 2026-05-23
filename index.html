@@ -59,6 +59,34 @@
                 <span class="project-stack">Python · SQLite · PHP · vanilla JS · ES modules</span>
             </div>
 
+            <p>
+                A bespoke content management system built entirely from scratch for a public educational website. The
+                public-facing site is intentionally lightweight — PHP, JSON, and vanilla JavaScript — while the local
+                admin panel is a sophisticated browser UI backed by a Python standard-library HTTP server with modular
+                handlers, a dual-mode SQLite/JSON storage adapter, and an extensive suite of utility scripts.
+            </p>
+
+            <p>
+                The system manages posts, action artwork, resources, QR code generation and scan analytics, access log
+                ingestion and geolocation, a Wikipedia tracker with stale-while-revalidate caching, and publishing
+                workflows that sync SQLite state to public JSON. Post ingestion alone handles URL normalization,
+                tracking-parameter removal, platform detection, duplicate checking across active and archived records,
+                thumbnail extraction, and article archiving. The architecture was designed for a single operator running
+                the admin panel locally and publishing to a remote PHP host — a constraint that shaped every design
+                decision.
+            </p>
+
+            <p>
+                The codebase includes Python unit tests via pytest, frontend tests via Jest, and documentation covering
+                current architecture, admin workflows, operations and maintenance, and a full configuration reference.
+            </p>
+
+            <div class="project-links">
+                <a href="pages/cms.html">Read the technical documentation →</a>
+                <a href="mailto:ray@bachtogauss.com">Request a demo →</a>
+            </div>
+        </div>
+
         <hr class="rule-thin" />
 
         <div class="project">
@@ -68,39 +96,6 @@
             <div class="project-meta">
                 <span class="project-status">In development</span>
                 <span class="project-stack">C++17 · Qt6/QML · CoreAudio · ALSA · FFTW3 · OSC · CMake</span>
-            </div>
-
-        <hr class="rule-thin" />
-
-        <div class="project">
-            <h2>AstroCal — iOS &amp; Android App</h2>
-            <h3>React Native adaptation of Astronomical Calendar for native mobile</h3>
-
-            <div class="project-meta">
-                <span class="project-status">In development</span>
-                <span class="project-stack">React Native · TypeScript · Zustand · Astronomy Engine · Hebcal</span>
-            </div>
-
-        <hr class="rule-thin" />
-
-        <div class="project">
-            <h2>Astronomical Calendar — Web</h2>
-            <h3>Astronomical calendar with lunar, solar, and timezone precision</h3>
-
-            <div class="project-meta">
-                <span class="project-status">Live</span>
-                <span class="project-stack">JavaScript · Astronomy Engine · Hebcal · SVG · CSS</span>
-            </div>
-
-        <hr class="rule-thin" />
-
-        <div class="project">
-            <h2>Musical Interval Typography System</h2>
-            <h3>A type scale derived from the notes of a musical scale</h3>
-
-            <div class="project-meta">
-                <span class="project-status">Live · CC BY-NC 4.0</span>
-                <span class="project-stack">HTML · CSS custom properties · zero dependencies</span>
             </div>
 
             <p>
@@ -131,6 +126,113 @@
                 <a href="mailto:ray@bachtogauss.com">Get in touch →</a>
             </div>
         </div>
+
+        <hr class="rule-thin" />
+
+        <div class="project">
+            <h2>AstroCal — iOS &amp; Android App</h2>
+            <h3>React Native adaptation of Astronomical Calendar for native mobile</h3>
+
+            <div class="project-meta">
+                <span class="project-status">In development</span>
+                <span class="project-stack">React Native · TypeScript · Zustand · Astronomy Engine · Hebcal</span>
+            </div>
+
+            <p>
+                A cross-platform mobile app adapting the web calendar's calculation engine into a native iOS and Android
+                experience. The app coordinates multiple independent calculation domains — astronomical rise/set events,
+                photography light windows, moon phases, eclipse detection, and halachic Zmanim — running them in
+                parallel with fault-tolerant merging so a failure in one domain never degrades the others.
+            </p>
+
+            <p>
+                The architecture separates concerns cleanly:
+                <code>moonDataService</code>
+                owns all phase, eclipse, illumination, and age data for the visible month in a single pass;
+                <code>timeService</code>
+                orchestrates parallel astronomy and halachic fetches;
+                <code>geocodingService</code>
+                handles GPS, manual entry, Nominatim search, and reverse geocoding. A small Zustand store holds only
+                what is genuinely shared across screens. The web calendar's original calculation logic is preserved in a
+                <code>web_reference/</code>
+                directory and the React Native code migrates intent while replacing DOM patterns with native navigation,
+                gesture paging, and platform font registration.
+            </p>
+
+            <div class="project-links">
+                <a href="pages/astrocal-app.html">Read the technical documentation →</a>
+                <a href="mailto:ray@bachtogauss.com">Get in touch →</a>
+            </div>
+        </div>
+
+        <hr class="rule-thin" />
+
+        <div class="project">
+            <h2>Astronomical Calendar — Web</h2>
+            <h3>Astronomical calendar with lunar, solar, and timezone precision</h3>
+
+            <div class="project-meta">
+                <span class="project-status">Live</span>
+                <span class="project-stack">JavaScript · Astronomy Engine · Hebcal · SVG · CSS</span>
+            </div>
+
+            <p>
+                What began as a Word table — a more beautiful calendar than the printable ones available online — became
+                a study in astronomical precision. The calendar renders moon phases, lunar and solar eclipses,
+                hemisphere-aware iconography, full timezone support with UTC conversion, Dawn and Midnight Zmanim via
+                the Hebcal library, and an interactive legend. All phase and eclipse data is calculated using Don
+                Cross's Astronomy Engine, chosen specifically for the accuracy of its mathematics.
+            </p>
+
+            <p>
+                All symbols are Unicode icons converted to SVGs, hand-aligned to the pixel. The interface evolved
+                iteratively: navigation, then hemispheres, then eclipses, then timezones, then Zmanim — each addition
+                integrated into the existing architecture rather than bolted on. A native app version of the calendar
+                extends this work to mobile.
+            </p>
+
+            <div class="project-links">
+                <a href="https://bachtogauss.com/calendar/" target="_blank">Open the calendar →</a>
+                <a href="pages/astrocal.html">Read the technical documentation →</a>
+            </div>
+        </div>
+
+        <hr class="rule-thin" />
+
+        <div class="project">
+            <h2>Musical Interval Typography System</h2>
+            <h3>A type scale derived from the notes of a musical scale</h3>
+
+            <div class="project-meta">
+                <span class="project-status">Live · CC BY-NC 4.0</span>
+                <span class="project-stack">HTML · CSS custom properties · zero dependencies</span>
+            </div>
+
+            <p>
+                Born from a single question: can the intervals of a musical scale, rather than arbitrary numerical
+                values, define the sizes of type? The answer is a pure CSS system — no JavaScript, no build step, no
+                dependencies — in which a single ratio (the minor third, expressed as
+                <em>32/27</em>
+                ) governs every measurement on the page: font sizes, margins, padding, line heights, and vertical
+                rhythm.
+            </p>
+
+            <p>
+                The system is fully fluid and responsive with practically no media queries. It uses
+                <code>clamp()</code>
+                and CSS custom properties to scale from the minimum accessible font size upward, and a parallel
+                <code>vw</code>
+                -unit track handles body and margin proportions independently. The code is published openly on the site
+                with a full written explanation of how it works and why each variable exists. The result is what the
+                site you are reading now is built on.
+            </p>
+
+            <div class="project-links">
+                <a href="https://bachtogauss.com" target="_blank">Experience it →</a>
+                <a href="pages/typography.html">Read the technical documentation →</a>
+            </div>
+        </div>
+
 
         <hr class="rule" />
 
