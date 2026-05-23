@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astronomical Calendar App — Ray Reich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fontRatio: calc(32 / 27);
+    --minFontSize: calc((16 / var(--fontRatio)) * 1px);
+    --fontSizeGrow: 1vw;
+    --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
+    --note01: calc(var(--note00) * var(--fontRatio));
+    --note02: calc(var(--note01) * var(--fontRatio));
+    --note03: calc(var(--note02) * var(--fontRatio));
+    --note04: calc(var(--note03) * var(--fontRatio));
+    --note05: calc(var(--note04) * var(--fontRatio));
+    --note06: calc(var(--note05) * var(--fontRatio));
+    --note07: calc(var(--note06) * var(--fontRatio));
+    --note08: calc(var(--note07) * var(--fontRatio));
+    --note09: calc(var(--note08) * var(--fontRatio));
+    --note10: calc(var(--note09) * var(--fontRatio));
+    --note11: calc(var(--note10) * var(--fontRatio));
+    --note12: calc(var(--note11) * var(--fontRatio));
+    --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+    --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+    --note01VW: calc(var(--note00VW) * var(--fontRatio));
+    --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+    --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+
+    --ink: #1a1a18;
+    --ink-muted: #555550;
+    --ink-faint: #999990;
+    --paper: #f5f4ee;
+    --rule: #ccc9be;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--paper); color: var(--ink); }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    background: var(--paper);
+    color: var(--ink);
+    width: 50vw;
+    min-width: var(--bodyMinWidth);
+    margin: 0 auto;
+    padding: var(--note08) 0 var(--note10) 0;
+    opacity: 0;
+    animation: fadein 1.1s ease forwards;
+    animation-delay: 0.15s;
+  }
+
+  @media only screen and (max-width: 767px) {
+    body {
+      min-width: inherit;
+      width: calc(var(--bodyMinWidthVW) / 767 * 100);
+      text-align: left;
+    }
+  }
+
+  @keyframes fadein { to { opacity: 1; } }
+
+  .back {
+    display: inline-block;
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--note07);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back:hover { color: var(--ink); border-color: var(--ink); }
+
+  .doc-label {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--note03);
+  }
+
+  h1 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note07);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--note02);
+  }
+
+  .subtitle {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: var(--note06);
+  }
+
+  .meta {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--note02);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: var(--note07) 0;
+  }
+
+  hr.thin {
+    border-top: 0.5px solid var(--rule);
+    margin: var(--note05) 0;
+  }
+
+  p {
+    margin-bottom: var(--note04);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note05);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: var(--note07);
+    margin-bottom: var(--note03);
+  }
+
+  h3 {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-top: var(--note05);
+    margin-bottom: var(--note02);
+  }
+
+  /* ── Code blocks ────────────────────────────── */
+
+  .code-block {
+    background: #eeeee6;
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note04) 0;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: 'Inconsolata', 'Courier New', monospace;
+    font-size: var(--note02);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+    white-space: pre;
+  }
+
+  .code-caption {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: calc(-1 * var(--note02));
+    margin-bottom: var(--note04);
+    padding-left: var(--note04);
+  }
+
+  /* ── Feature lists ──────────────────────────── */
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
+  }
+
+  .feature-list li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    padding-left: var(--note04);
+    position: relative;
+    margin-bottom: var(--note01);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .feature-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+  }
+
+  /* ── Stack table ────────────────────────────── */
+
+  .stack-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--note04) 0;
+  }
+
+  .stack-table td {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    padding: var(--note01) var(--note03) var(--note01) 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+    line-height: var(--note05);
+  }
+
+  .stack-table td:first-child {
+    font-family: 'Spectral', Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    width: 30%;
+  }
+
+  /* ── Key files table ────────────────────────── */
+
+  .files-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--note04) 0;
+  }
+
+  .files-table td {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    padding: var(--note02) var(--note03) var(--note02) 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+    line-height: var(--note05);
+  }
+
+  .files-table td:first-child {
+    font-family: 'Inconsolata', 'Courier New', monospace;
+    font-size: var(--note01);
+    font-weight: 400;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    width: 42%;
+    padding-right: var(--note04);
+  }
+
+  /* ── Context note ───────────────────────────── */
+
+  .context-note {
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note05) 0;
+  }
+
+  .context-note p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note02);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  /* ── Credits ────────────────────────────────── */
+
+  .credits {
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
+  }
+
+  .credits li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    line-height: var(--note05);
+    padding-left: var(--note03);
+    position: relative;
+    margin-bottom: var(--note01);
+  }
+
+  .credits li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+  }
+
+  .credits a, p a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .credits a:hover, p a:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ── Footer ─────────────────────────────────── */
+
+  footer { margin-top: var(--note08); }
+
+  footer p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  footer a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease;
+  }
+
+  footer a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">← Portfolio</a>
+
+<p class="doc-label">Technical Documentation</p>
+<h1>Astronomical Calendar</h1>
+<p class="subtitle">A cross-platform React Native app for exploring astronomical events, photography light windows, and halachic Zmanim by date and location</p>
+
+<p class="meta">React Native · TypeScript · Zustand · Luxon · Astronomy Engine · Hebcal &nbsp;·&nbsp; iOS &amp; Android</p>
+
+<hr>
+
+<h2>Overview</h2>
+
+<p>
+  This app adapts the calculation and interaction model from <a href="https://bachtogauss.com/calendar" target="_blank">bachtogauss.com/calendar</a> into a native mobile experience. It is designed as a practical celestial calendar: select a day, change location, review sun and moon data, inspect moon phases and eclipses on the calendar grid, and toggle the supporting systems that matter to you.
+</p>
+
+<div class="context-note">
+  <p>The most interesting engineering work is in separating astronomical calculations, halachic calculations, moon phase data, eclipse data, and UI state into clear independent modules — then running them in parallel while preserving partial results if one source fails. The web calendar was the reference implementation; this project is the native re-architecture.</p>
+</div>
+
+<p>
+  The app coordinates multiple calculation domains, location input paths, timezone formatting, user settings, custom iconography, and native mobile concerns behind one interface. Each domain is isolated so that a failure in one — say, a geocoding timeout — does not degrade the others.
+</p>
+
+<hr class="thin">
+
+<h2>Features</h2>
+
+<h3>Calendar</h3>
+<ul class="feature-list">
+  <li>Interactive month grid with day, month, and year navigation</li>
+  <li>Moon phase symbols rendered directly in calendar cells</li>
+  <li>Solar and lunar eclipse markers for the selected month</li>
+  <li>Calendar rows fixed at six weeks to prevent layout jumps between months</li>
+  <li>Legend screen with toggles controlling which symbols appear on the grid</li>
+</ul>
+
+<h3>Sun and moon dashboard</h3>
+<ul class="feature-list">
+  <li>Sunrise and sunset</li>
+  <li>Moonrise and moonset</li>
+  <li>Moon illumination percentage</li>
+  <li>Moon age in days</li>
+  <li>Waxing and waning direction</li>
+</ul>
+
+<h3>Photography windows</h3>
+<ul class="feature-list">
+  <li>Morning and evening blue hour</li>
+  <li>Morning and evening golden hour</li>
+  <li>Calculated from solar altitude thresholds via Astronomy Engine</li>
+</ul>
+
+<h3>Upcoming events</h3>
+<ul class="feature-list">
+  <li>New moons, full moons, lunar eclipses, solar eclipses — browsable in a swipeable view</li>
+</ul>
+
+<h3>Halachic Zmanim</h3>
+<ul class="feature-list">
+  <li>Alot HaShachar (halachic dawn)</li>
+  <li>Tzeit Hakochavim (nightfall)</li>
+  <li>Chatzot (midday and midnight)</li>
+  <li>Sof Zman Shma</li>
+  <li>Sof Zman Tfilla</li>
+  <li>GRA and MGA system selection</li>
+</ul>
+
+<h3>Location</h3>
+<ul class="feature-list">
+  <li>GPS-based precise location via device geolocation</li>
+  <li>Manual entry: city name, ZIP/postal code, decimal coordinates</li>
+  <li>OpenStreetMap Nominatim geocoding with search ranking by region, OSM importance, exact-name matching, and major-city handling</li>
+  <li>Reverse geocoding for display names</li>
+  <li>Coordinate display with source metadata</li>
+  <li>Default location of New York City before user input</li>
+</ul>
+
+<h3>Settings</h3>
+<ul class="feature-list">
+  <li>Sunday or Monday week start</li>
+  <li>12-hour or 24-hour time format</li>
+  <li>Photography section visibility toggle</li>
+  <li>Zmanim section visibility toggle</li>
+  <li>GRA/MGA Zmanim system selection</li>
+</ul>
+
+<hr class="thin">
+
+<h2>Architecture</h2>
+
+<p>
+  The app is organized around calculation services, UI components, and a small global state store. Calculation domains are kept strictly independent — astronomical and halachic data are fetched in parallel and merged only after each path completes.
+</p>
+
+<div class="code-block"><pre>src/
+  components/          Reusable UI: calendar grid, legend, location input, cards
+  components/icons/    Bottom tab icons
+  components/symbols/  Moon phase and eclipse SVG symbols
+  lib/                 Library access wrappers
+  navigation/          React Navigation configuration
+  screens/             Calendar, Legend, and Settings screens
+  services/            Location, geocoding, moon data, and merged time services
+  store/               Zustand calendar and settings store
+  styles/              Shared theme, colors, typography, spacing
+  types/               Shared TypeScript interfaces
+  utils/               Astronomy, halachic, eclipse, moon phase, and time helpers</pre></div>
+
+<h3>Calculation pipeline</h3>
+
+<p>
+  The pipeline is designed so that each domain operates independently and the UI degrades gracefully when any value is unavailable — returning <code>null</code> for that value rather than blocking the whole view.
+</p>
+
+<ul class="feature-list">
+  <li><code>CalendarScreen</code> reacts to changes in selected date, current month, location, and hemisphere</li>
+  <li><code>moonDataService</code> calculates moon phases, eclipses, age, and illumination for the visible month in a single pass</li>
+  <li><code>timeService.fetchAllTimes()</code> fetches astronomy and halachic data in parallel</li>
+  <li>The astronomy path uses Astronomy Engine for rise/set events and solar altitude thresholds</li>
+  <li>The halachic path uses Hebcal <code>GeoLocation</code> and <code>Zmanim</code></li>
+  <li>Results merge into a <code>MergedTimes</code> object rendered by <code>SunMoonBar</code> and <code>ZmanimCard</code></li>
+</ul>
+
+<h3>Key files</h3>
+
+<table class="files-table">
+  <tr><td>CalendarScreen.tsx</td><td>Main composition layer: calendar, pager, moon data loading, time loading</td></tr>
+  <tr><td>CalendarGrid.tsx</td><td>Fixed-height month grid, date navigation, phase and eclipse markers</td></tr>
+  <tr><td>timeService.ts</td><td>Parallel orchestration of astronomy and halachic calculations with fault-tolerant fallbacks</td></tr>
+  <tr><td>moonDataService.ts</td><td>Unified moon phase, eclipse, illumination, and age pipeline</td></tr>
+  <tr><td>astronomyUtils.ts</td><td>Sunrise, sunset, moonrise, moonset, blue hour, golden hour, illumination, moon direction</td></tr>
+  <tr><td>halachicUtils.ts</td><td>Hebcal-backed Zmanim with per-value error isolation</td></tr>
+  <tr><td>eclipseUtils.ts</td><td>Solar and lunar eclipse searches and symbol mapping</td></tr>
+  <tr><td>geocodingService.ts</td><td>Location parsing, search ranking, geocoding, reverse geocoding, coordinate formatting</td></tr>
+  <tr><td>LocationField.tsx</td><td>Debounced manual search, GPS flow, dropdown selection, location status display</td></tr>
+  <tr><td>calendarStore.ts</td><td>Centralized date, location, display preference, and feature-toggle state via Zustand</td></tr>
+</table>
+
+<hr class="thin">
+
+<h2>Tech Stack</h2>
+
+<table class="stack-table">
+  <tr><td>Mobile framework</td><td>React Native 0.81</td></tr>
+  <tr><td>Language</td><td>TypeScript</td></tr>
+  <tr><td>UI foundation</td><td>React Native Paper, custom styles, custom fonts</td></tr>
+  <tr><td>Navigation</td><td>React Navigation bottom tabs</td></tr>
+  <tr><td>State management</td><td>Zustand</td></tr>
+  <tr><td>Date/time handling</td><td>Luxon</td></tr>
+  <tr><td>Astronomy calculations</td><td>astronomy-engine</td></tr>
+  <tr><td>Halachic calculations</td><td>@hebcal/core</td></tr>
+  <tr><td>Location</td><td>@react-native-community/geolocation</td></tr>
+  <tr><td>Geocoding</td><td>OpenStreetMap Nominatim</td></tr>
+  <tr><td>Testing</td><td>Jest, React Test Renderer, standalone calculation scripts</td></tr>
+</table>
+
+<hr class="thin">
+
+<h2>Engineering Decisions</h2>
+
+<h3>Fault-tolerant data merging</h3>
+<p>
+  Astronomy and halachic data are fetched separately and merged only after each path completes. A failure in one domain does not erase the other domain's usable results. Individual Zmanim values are each wrapped in per-value error isolation — a single bad calculation does not blank the entire Zmanim card.
+</p>
+
+<h3>Unified moon data source</h3>
+<p>
+  Moon phases, current moon age, current illumination, and eclipse markers are all calculated through <code>moonDataService</code> in a single pass. This ensures the calendar grid and detail cards always agree on the selected month and date — no possibility of the grid showing a different phase than the dashboard.
+</p>
+
+<h3>Platform-aware layout</h3>
+<p>
+  The calendar grid uses explicit percentage widths and a fixed six-row structure to avoid platform-specific flexbox inconsistencies and month-to-month height changes. Northern and southern hemisphere orientation is handled explicitly for first and last quarter moon symbols, which appear mirrored depending on hemisphere.
+</p>
+
+<h3>Small global store</h3>
+<p>
+  Zustand stores only app-level state shared across screens: selected date, visible month, location, loading and error state, hemisphere, time format, feature toggles, and Zmanim system. Component-local state stays local.
+</p>
+
+<h3>Native-friendly migration from web</h3>
+<p>
+  A <code>web_reference/</code> directory preserves source material from the original browser implementation. The React Native code keeps the calculation intent while replacing DOM-oriented patterns with native navigation, gesture paging, React Native Paper controls, and platform font registration.
+</p>
+
+<hr class="thin">
+
+<h2>Testing and Verification</h2>
+
+<p>The repository includes both React Native test coverage and calculation-focused Node scripts that can be run independently of the full app build:</p>
+
+<ul class="feature-list">
+  <li><code>App.test.tsx</code> — verifies the app tree renders</li>
+  <li><code>test_calculations.js</code> — checks real astronomy and halachic calculations for the default location</li>
+  <li><code>test_edge_cases.js</code> — runs calculations across representative cities and seasonal dates including high-latitude cases</li>
+  <li><code>test_simple_celestial.js</code> — validates basic astronomy-engine API usage for moon phase and eclipse lookup</li>
+</ul>
+
+<hr class="thin">
+
+<h2>Known Limitations</h2>
+
+<ul class="feature-list">
+  <li>Geocoding requires network access and depends on Nominatim availability and rate limits</li>
+  <li>Timezone handling currently uses app/user offset formatting rather than a complete timezone database per searched location</li>
+  <li>Elevation is fixed at 0 in all astronomy and halachic calculations</li>
+  <li>Persistent storage not yet implemented for settings and saved locations</li>
+  <li>Automated coverage is strongest around smoke/render checks and standalone calculation scripts — component-level tests for settings, geocoding UI, and calendar interactions are planned</li>
+</ul>
+
+<hr class="thin">
+
+<h2>Roadmap</h2>
+
+<ul class="feature-list">
+  <li>Persist user settings and last selected location</li>
+  <li>Improve timezone handling for manually searched locations</li>
+  <li>Deepen Jest and component-level test coverage</li>
+  <li>Add production geocoding strategy with request throttling</li>
+  <li>App Store and Play Store release packaging</li>
+</ul>
+
+<hr>
+
+<h2>Attribution</h2>
+
+<ul class="credits">
+  <li><a href="https://github.com/cosinekitty/astronomy" target="_blank">Astronomy Engine</a> by <a href="http://cosinekitty.com/" target="_blank">Don Cross</a> — astronomical calculations including rise/set events, solar altitude, and eclipse detection</li>
+  <li><a href="https://github.com/hebcal/hebcal-es6" target="_blank">Hebcal Core</a> — halachic Zmanim calculations</li>
+  <li><a href="https://bachtogauss.com/calendar" target="_blank">bachtogauss.com/calendar</a> — original web reference implementation</li>
+</ul>
+
+<hr>
+
+<footer>
+  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; Documentation and code available upon request</p>
+</footer>
+
+</body>
+</html>

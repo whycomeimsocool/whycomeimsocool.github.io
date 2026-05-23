@@ -1,504 +1,292 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ray Reich — Developer Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --fontRatio: calc(32 / 27);
-    --minFontSize: calc((16 / var(--fontRatio)) * 1px);
-    --fontSizeGrow: 1vw;
-    --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
-    --note01: calc(var(--note00) * var(--fontRatio));
-    --note02: calc(var(--note01) * var(--fontRatio));
-    --note03: calc(var(--note02) * var(--fontRatio));
-    --note04: calc(var(--note03) * var(--fontRatio));
-    --note05: calc(var(--note04) * var(--fontRatio));
-    --note06: calc(var(--note05) * var(--fontRatio));
-    --note07: calc(var(--note06) * var(--fontRatio));
-    --note08: calc(var(--note07) * var(--fontRatio));
-    --note09: calc(var(--note08) * var(--fontRatio));
-    --note10: calc(var(--note09) * var(--fontRatio));
-    --note11: calc(var(--note10) * var(--fontRatio));
-    --note12: calc(var(--note11) * var(--fontRatio));
-    --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
-    --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
-    --note01VW: calc(var(--note00VW) * var(--fontRatio));
-    --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
-    --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
-
-    --ink: #1a1a18;
-    --ink-muted: #555550;
-    --ink-faint: #999990;
-    --paper: #f5f4ee;
-    --rule: #ccc9be;
-    --accent: #2a2a26;
-  }
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html {
-    background: var(--paper);
-    color: var(--ink);
-  }
-
-  body {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: var(--note03);
-    line-height: var(--note06);
-    background: var(--paper);
-    color: var(--ink);
-    width: 50vw;
-    min-width: var(--bodyMinWidth);
-    margin: 0 auto;
-    padding: var(--note08) 0 var(--note10) 0;
-    opacity: 0;
-    animation: fadein 1.1s ease forwards;
-    animation-delay: 0.15s;
-  }
-
-  @media only screen and (max-width: 767px) {
-    body {
-      min-width: inherit;
-      width: calc(var(--bodyMinWidthVW) / 767 * 100);
-      text-align: left;
-    }
-  }
-
-  @keyframes fadein {
-    to { opacity: 1; }
-  }
-
-  /* ── Typography ─────────────────────────────── */
-
-  h1 {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: var(--note07);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    margin-bottom: var(--note03);
-  }
-
-  h2 {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: var(--note05);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: 0.01em;
-    margin-bottom: var(--note02);
-  }
-
-  h3 {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note03);
-    font-weight: 300;
-    font-style: italic;
-    letter-spacing: 0.04em;
-    color: var(--ink-muted);
-    margin-bottom: var(--note01);
-  }
-
-  p {
-    margin-bottom: var(--note04);
-    text-align: justify;
-    hyphens: auto;
-  }
-
-  p:last-child {
-    margin-bottom: 0;
-  }
-
-  em {
-    font-style: italic;
-  }
-
-  /* ── Rules & Dividers ───────────────────────── */
-
-  .rule {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: var(--note07) 0;
-  }
-
-  .rule-thin {
-    border: none;
-    border-top: 0.5px solid var(--rule);
-    margin: var(--note05) 0;
-  }
-
-  /* ── Header ─────────────────────────────────── */
-
-  header {
-    margin-bottom: var(--note08);
-  }
-
-  .byline {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note02);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--ink-muted);
-    letter-spacing: 0.06em;
-    margin-bottom: var(--note06);
-  }
-
-  .intro {
-    margin-bottom: var(--note05);
-  }
-
-  /* ── Contact line ───────────────────────────── */
-
-  .contact-line {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note01);
-    font-weight: 300;
-    color: var(--ink-faint);
-    letter-spacing: 0.08em;
-    margin-top: var(--note05);
-  }
-
-  .contact-line a {
-    color: var(--ink-muted);
-    text-decoration: none;
-    border-bottom: 0.5px solid var(--rule);
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .contact-line a:hover {
-    color: var(--ink);
-    border-color: var(--ink);
-  }
-
-  /* ── Project entries ────────────────────────── */
-
-  .project {
-    margin-bottom: var(--note08);
-  }
-
-  .project-meta {
-    display: flex;
-    align-items: baseline;
-    gap: var(--note02);
-    margin-bottom: var(--note02);
-    flex-wrap: wrap;
-  }
-
-  .project-status {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note00);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--ink-faint);
-    letter-spacing: 0.06em;
-  }
-
-  .project-stack {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note00);
-    font-weight: 300;
-    color: var(--ink-faint);
-    letter-spacing: 0.04em;
-  }
-
-  .project p {
-    margin-bottom: var(--note03);
-  }
-
-  .project-links {
-    margin-top: var(--note03);
-    display: flex;
-    gap: var(--note04);
-    flex-wrap: wrap;
-  }
-
-  .project-links a {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note01);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--ink-muted);
-    text-decoration: none;
-    border-bottom: 0.5px solid var(--rule);
-    letter-spacing: 0.04em;
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .project-links a:hover {
-    color: var(--ink);
-    border-color: var(--ink);
-  }
-
-  /* ── Section label ──────────────────────────── */
-
-  .section-label {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note00);
-    font-weight: 300;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: var(--note05);
-  }
-
-  /* ── Capabilities ───────────────────────────── */
-
-  .capabilities {
-    columns: 2;
-    column-gap: var(--note06);
-    margin-bottom: var(--note05);
-  }
-
-  @media only screen and (max-width: 600px) {
-    .capabilities {
-      columns: 1;
-    }
-  }
-
-  .cap-group {
-    break-inside: avoid;
-    margin-bottom: var(--note04);
-  }
-
-  .cap-group h4 {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note01);
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: var(--ink-muted);
-    margin-bottom: var(--note00);
-  }
-
-  .cap-group ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .cap-group li {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: var(--note02);
-    color: var(--ink);
-    line-height: var(--note05);
-    padding-left: var(--note02);
-    position: relative;
-  }
-
-  .cap-group li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--ink-faint);
-    font-size: 0.8em;
-  }
-
-  /* ── Footer ─────────────────────────────────── */
-
-  footer {
-    margin-top: var(--note08);
-  }
-
-  footer p {
-    font-family: 'Spectral', Georgia, serif;
-    font-size: var(--note00);
-    font-weight: 300;
-    font-style: italic;
-    color: var(--ink-faint);
-    letter-spacing: 0.04em;
-    text-align: center;
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <p class="byline">Ray Reich &nbsp;·&nbsp; Developer</p>
-  <h1>Self-taught.<br>Astronomically precise.<br>Genuinely curious.</h1>
-
-  <hr class="rule-thin">
-
-  <p class="intro">
-    I am a musician and producer who taught himself to build software — not as a career pivot, but because the problems I wanted to solve required it. The projects here span backend systems, real-time audio DSP, astronomical calculation, and typographic mathematics. Each one started with a question no existing tool could answer.
-  </p>
-
-  <p class="intro">
-    My code reflects the same values I bring to music: precision, attention to detail, and a refusal to treat complexity as an excuse for sloppiness. I read the source. I understand the math. I write documentation worth reading.
-  </p>
-
-  <p class="contact-line">
-    Available for conversation &nbsp;·&nbsp; <a href="mailto:ray@bachtogauss.com">ray@bachtogauss.com</a> &nbsp;·&nbsp; <a href="https://bachtogauss.com" target="_blank">bachtogauss.com</a>
-  </p>
-</header>
-
-<hr class="rule">
-
-<p class="section-label">Selected Work</p>
-
-<div class="project">
-  <h2>Custom CMS &amp; Admin Panel</h2>
-  <h3>Full-stack content management system built from scratch</h3>
-
-  <div class="project-meta">
-    <span class="project-status">Live</span>
-    <span class="project-stack">Python · SQLite · PHP · vanilla JS · ES modules</span>
-  </div>
-
-  <p>
-    A bespoke content management system built entirely from scratch for a public educational website. The public-facing site is intentionally lightweight — PHP, JSON, and vanilla JavaScript — while the local admin panel is a sophisticated browser UI backed by a Python standard-library HTTP server with modular handlers, a dual-mode SQLite/JSON storage adapter, and an extensive suite of utility scripts.
-  </p>
-
-  <p>
-    The system manages posts, action artwork, resources, QR code generation and scan analytics, access log ingestion and geolocation, a Wikipedia tracker with stale-while-revalidate caching, and publishing workflows that sync SQLite state to public JSON. Post ingestion alone handles URL normalization, tracking-parameter removal, platform detection, duplicate checking across active and archived records, thumbnail extraction, and article archiving. The architecture was designed for a single operator running the admin panel locally and publishing to a remote PHP host — a constraint that shaped every design decision.
-  </p>
-
-  <p>
-    The codebase includes Python unit tests via pytest, frontend tests via Jest, and documentation covering current architecture, admin workflows, operations and maintenance, and a full configuration reference.
-  </p>
-
-  <div class="project-links">
-    <a href="docs/cms.html">Read the technical documentation →</a>
-    <a href="mailto:ray@bachtogauss.com">Request a demo →</a>
-  </div>
-</div>
-
-<hr class="rule-thin">
-
-<div class="project">
-  <h2>AstroCal</h2>
-  <h3>Astronomical calendar with lunar, solar, and timezone precision</h3>
-
-  <div class="project-meta">
-    <span class="project-status">Live</span>
-    <span class="project-stack">JavaScript · Astronomy Engine · Hebcal · SVG · CSS</span>
-  </div>
-
-  <p>
-    What began as a Word table — a more beautiful calendar than the printable ones available online — became a study in astronomical precision. The calendar renders moon phases, lunar and solar eclipses, hemisphere-aware iconography, full timezone support with UTC conversion, Dawn and Midnight Zmanim via the Hebcal library, and an interactive legend. All phase and eclipse data is calculated using Don Cross's Astronomy Engine, chosen specifically for the accuracy of its mathematics.
-  </p>
-
-  <p>
-    All symbols are Unicode icons converted to SVGs, hand-aligned to the pixel. The interface evolved iteratively: navigation, then hemispheres, then eclipses, then timezones, then Zmanim — each addition integrated into the existing architecture rather than bolted on. A native app version of the calendar extends this work to mobile.
-  </p>
-
-  <div class="project-links">
-    <a href="https://bachtogauss.com/calendar/" target="_blank">Open the calendar →</a>
-    <a href="docs/astrocal.html">Read the technical documentation →</a>
-  </div>
-</div>
-
-<hr class="rule-thin">
-
-<div class="project">
-  <h2>Musical Interval Typography System</h2>
-  <h3>A type scale derived from the notes of a musical scale</h3>
-
-  <div class="project-meta">
-    <span class="project-status">Live · CC BY-NC 4.0</span>
-    <span class="project-stack">HTML · CSS custom properties · zero dependencies</span>
-  </div>
-
-  <p>
-    Born from a single question: can the intervals of a musical scale, rather than arbitrary numerical values, define the sizes of type? The answer is a pure CSS system — no JavaScript, no build step, no dependencies — in which a single ratio (the minor third, expressed as <em>32/27</em>) governs every measurement on the page: font sizes, margins, padding, line heights, and vertical rhythm.
-  </p>
-
-  <p>
-    The system is fully fluid and responsive with practically no media queries. It uses <code>clamp()</code> and CSS custom properties to scale from the minimum accessible font size upward, and a parallel <code>vw</code>-unit track handles body and margin proportions independently. The code is published openly on the site with a full written explanation of how it works and why each variable exists. The result is what the site you are reading now is built on.
-  </p>
-
-  <div class="project-links">
-    <a href="https://bachtogauss.com" target="_blank">Experience it →</a>
-    <a href="docs/typography.html">Read the technical documentation →</a>
-  </div>
-</div>
-
-<hr class="rule-thin">
-
-<div class="project">
-  <h2>EduToneBox</h2>
-  <h3>Real-time educational synthesizer · C++ · Qt6 · Raspberry Pi</h3>
-
-  <div class="project-meta">
-    <span class="project-status">In development</span>
-    <span class="project-stack">C++17 · Qt6/QML · CoreAudio · ALSA · FFTW3 · OSC · CMake</span>
-  </div>
-
-  <p>
-    A physical educational synthesizer prototype: a C++17 DSP engine connected over OSC/UDP to a Qt6/QML control surface, deployable on both macOS and Raspberry Pi. The goal is to make synthesis concepts visible and playable — waveform shape, frequency, amplitude, ADSR envelopes, LFO modulation, multi-algorithm filtering, and effects — with real-time FFT spectrum visualization feeding back to the UI.
-  </p>
-
-  <p>
-    The audio engine and UI are deliberately separate processes. DSP modules — oscillator with PolyBLEP band-limiting, ADSR, LFO, state variable filter, Butterworth, virtual-analog, and modal resonator algorithms, reverb, delay, chorus, flanger, distortion, and bit crusher — are plain C++ classes with explicit state, independently unit-tested via Catch2 and CTest. The Raspberry Pi build path adds ALSA, FFTW3, and ARM/NEON optimization hooks with full deploy and audio-test scripts. The OSC control API is fully documented.
-  </p>
-
-  <p>
-    33 of 34 CTest tests pass. The single known failure is a test that predates PolyBLEP implementation and expects hard-edge waveform samples — the fix is already understood, not yet written. The roadmap includes MIDI input, preset storage, hardware encoder mapping, and guided lesson modes.
-  </p>
-
-  <div class="project-links">
-    <a href="docs/edutone.html">Read the technical documentation →</a>
-    <a href="mailto:ray@bachtogauss.com">Get in touch →</a>
-  </div>
-</div>
-
-<hr class="rule">
-
-<p class="section-label">Capabilities</p>
-
-<div class="capabilities">
-  <div class="cap-group">
-    <h4>Languages</h4>
-    <ul>
-      <li>JavaScript (ES modules, vanilla)</li>
-      <li>Python (standard library, pytest)</li>
-      <li>C++17</li>
-      <li>PHP</li>
-      <li>HTML &amp; CSS (hand-authored)</li>
-    </ul>
-  </div>
-  <div class="cap-group">
-    <h4>Systems</h4>
-    <ul>
-      <li>SQLite · JSON storage adapters</li>
-      <li>HTTP server design (Python stdlib)</li>
-      <li>Real-time audio (CoreAudio, ALSA)</li>
-      <li>OSC / UDP inter-process communication</li>
-      <li>Cross-platform build systems (CMake)</li>
-    </ul>
-  </div>
-  <div class="cap-group">
-    <h4>Domains</h4>
-    <ul>
-      <li>Astronomical calculation</li>
-      <li>DSP &amp; audio synthesis</li>
-      <li>Typographic systems</li>
-      <li>Content management</li>
-      <li>Access log analytics</li>
-    </ul>
-  </div>
-  <div class="cap-group">
-    <h4>Practices</h4>
-    <ul>
-      <li>Unit &amp; integration testing</li>
-      <li>Technical documentation</li>
-      <li>Iterative architecture design</li>
-      <li>Mobile-responsive CSS</li>
-      <li>Privacy-first web design</li>
-    </ul>
-  </div>
-</div>
-
-<hr class="rule">
-
-<footer>
-  <p>All code available for review upon request. &nbsp;·&nbsp; Documentation for each project provided on inquiry.</p>
-</footer>
-
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ray Reich — Developer Portfolio</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="_resources/css/style.css" />
+    </head>
+    <body class="portfolio-page">
+        <header>
+            <p class="byline">Ray Reich &nbsp;·&nbsp; Developer</p>
+            <h1>
+                Self-taught.
+                <br />
+                Astronomically precise.
+                <br />
+                Genuinely curious.
+            </h1>
+
+            <hr class="rule-thin" />
+
+            <p class="intro">
+                I am a musician and producer who taught himself to build software — not as a career pivot, but because
+                the problems I wanted to solve required it. The projects here span backend systems, real-time audio DSP,
+                astronomical calculation, and typographic mathematics. Each one started with a question no existing tool
+                could answer.
+            </p>
+
+            <p class="intro">
+                My code reflects the same values I bring to music: precision, attention to detail, and a refusal to
+                treat complexity as an excuse for sloppiness. I read the source. I understand the math. I write
+                documentation worth reading.
+            </p>
+
+            <p class="contact-line">
+                Available for conversation &nbsp;·&nbsp;
+                <a href="mailto:ray@bachtogauss.com">ray@bachtogauss.com</a>
+                &nbsp;·&nbsp;
+                <a href="https://bachtogauss.com" target="_blank">bachtogauss.com</a>
+            </p>
+        </header>
+
+        <hr class="rule" />
+
+        <p class="section-label">Selected Work</p>
+
+        <div class="project">
+            <h2>Custom CMS &amp; Admin Panel</h2>
+            <h3>Full-stack content management system built from scratch</h3>
+
+            <div class="project-meta">
+                <span class="project-status">Live</span>
+                <span class="project-stack">Python · SQLite · PHP · vanilla JS · ES modules</span>
+            </div>
+
+            <p>
+                A bespoke content management system built entirely from scratch for a public educational website. The
+                public-facing site is intentionally lightweight — PHP, JSON, and vanilla JavaScript — while the local
+                admin panel is a sophisticated browser UI backed by a Python standard-library HTTP server with modular
+                handlers, a dual-mode SQLite/JSON storage adapter, and an extensive suite of utility scripts.
+            </p>
+
+            <p>
+                The system manages posts, action artwork, resources, QR code generation and scan analytics, access log
+                ingestion and geolocation, a Wikipedia tracker with stale-while-revalidate caching, and publishing
+                workflows that sync SQLite state to public JSON. Post ingestion alone handles URL normalization,
+                tracking-parameter removal, platform detection, duplicate checking across active and archived records,
+                thumbnail extraction, and article archiving. The architecture was designed for a single operator running
+                the admin panel locally and publishing to a remote PHP host — a constraint that shaped every design
+                decision.
+            </p>
+
+            <p>
+                The codebase includes Python unit tests via pytest, frontend tests via Jest, and documentation covering
+                current architecture, admin workflows, operations and maintenance, and a full configuration reference.
+            </p>
+
+            <div class="project-links">
+                <a href="docs/cms.html">Read the technical documentation →</a>
+                <a href="mailto:ray@bachtogauss.com">Request a demo →</a>
+            </div>
+        </div>
+
+        <hr class="rule-thin" />
+
+        <div class="project">
+            <h2>AstroCal</h2>
+            <h3>Astronomical calendar with lunar, solar, and timezone precision</h3>
+
+            <div class="project-meta">
+                <span class="project-status">Live</span>
+                <span class="project-stack">JavaScript · Astronomy Engine · Hebcal · SVG · CSS</span>
+            </div>
+
+            <p>
+                What began as a Word table — a more beautiful calendar than the printable ones available online — became
+                a study in astronomical precision. The calendar renders moon phases, lunar and solar eclipses,
+                hemisphere-aware iconography, full timezone support with UTC conversion, Dawn and Midnight Zmanim via
+                the Hebcal library, and an interactive legend. All phase and eclipse data is calculated using Don
+                Cross's Astronomy Engine, chosen specifically for the accuracy of its mathematics.
+            </p>
+
+            <p>
+                All symbols are Unicode icons converted to SVGs, hand-aligned to the pixel. The interface evolved
+                iteratively: navigation, then hemispheres, then eclipses, then timezones, then Zmanim — each addition
+                integrated into the existing architecture rather than bolted on. A native app version of the calendar
+                extends this work to mobile.
+            </p>
+
+            <div class="project-links">
+                <a href="https://bachtogauss.com/calendar/" target="_blank">Open the calendar →</a>
+                <a href="docs/astrocal.html">Read the technical documentation →</a>
+            </div>
+        </div>
+
+        <hr class="rule-thin" />
+
+        <div class="project">
+            <h2>Astronomical Calendar — iOS &amp; Android App</h2>
+            <h3>React Native adaptation of AstroCal for native mobile</h3>
+
+            <div class="project-meta">
+                <span class="project-status">In development</span>
+                <span class="project-stack">React Native · TypeScript · Zustand · Astronomy Engine · Hebcal</span>
+            </div>
+
+            <p>
+                A cross-platform mobile app adapting the web calendar's calculation engine into a native iOS and Android
+                experience. The app coordinates multiple independent calculation domains — astronomical rise/set events,
+                photography light windows, moon phases, eclipse detection, and halachic Zmanim — running them in
+                parallel with fault-tolerant merging so a failure in one domain never degrades the others.
+            </p>
+
+            <p>
+                The architecture separates concerns cleanly:
+                <code>moonDataService</code>
+                owns all phase, eclipse, illumination, and age data for the visible month in a single pass;
+                <code>timeService</code>
+                orchestrates parallel astronomy and halachic fetches;
+                <code>geocodingService</code>
+                handles GPS, manual entry, Nominatim search, and reverse geocoding. A small Zustand store holds only
+                what is genuinely shared across screens. The web calendar's original calculation logic is preserved in a
+                <code>web_reference/</code>
+                directory and the React Native code migrates intent while replacing DOM patterns with native navigation,
+                gesture paging, and platform font registration.
+            </p>
+
+            <div class="project-links">
+                <a href="docs/astrocal-app.html">Read the technical documentation →</a>
+                <a href="mailto:ray@bachtogauss.com">Get in touch →</a>
+            </div>
+        </div>
+
+        <hr class="rule-thin" />
+
+        <div class="project">
+            <h2>Musical Interval Typography System</h2>
+            <h3>A type scale derived from the notes of a musical scale</h3>
+
+            <div class="project-meta">
+                <span class="project-status">Live · CC BY-NC 4.0</span>
+                <span class="project-stack">HTML · CSS custom properties · zero dependencies</span>
+            </div>
+
+            <p>
+                Born from a single question: can the intervals of a musical scale, rather than arbitrary numerical
+                values, define the sizes of type? The answer is a pure CSS system — no JavaScript, no build step, no
+                dependencies — in which a single ratio (the minor third, expressed as
+                <em>32/27</em>
+                ) governs every measurement on the page: font sizes, margins, padding, line heights, and vertical
+                rhythm.
+            </p>
+
+            <p>
+                The system is fully fluid and responsive with practically no media queries. It uses
+                <code>clamp()</code>
+                and CSS custom properties to scale from the minimum accessible font size upward, and a parallel
+                <code>vw</code>
+                -unit track handles body and margin proportions independently. The code is published openly on the site
+                with a full written explanation of how it works and why each variable exists. The result is what the
+                site you are reading now is built on.
+            </p>
+
+            <div class="project-links">
+                <a href="https://bachtogauss.com" target="_blank">Experience it →</a>
+                <a href="docs/typography.html">Read the technical documentation →</a>
+            </div>
+        </div>
+
+        <hr class="rule-thin" />
+
+        <div class="project">
+            <h2>EduToneBox</h2>
+            <h3>Real-time educational synthesizer · C++ · Qt6 · Raspberry Pi</h3>
+
+            <div class="project-meta">
+                <span class="project-status">In development</span>
+                <span class="project-stack">C++17 · Qt6/QML · CoreAudio · ALSA · FFTW3 · OSC · CMake</span>
+            </div>
+
+            <p>
+                A physical educational synthesizer prototype: a C++17 DSP engine connected over OSC/UDP to a Qt6/QML
+                control surface, deployable on both macOS and Raspberry Pi. The goal is to make synthesis concepts
+                visible and playable — waveform shape, frequency, amplitude, ADSR envelopes, LFO modulation,
+                multi-algorithm filtering, and effects — with real-time FFT spectrum visualization feeding back to the
+                UI.
+            </p>
+
+            <p>
+                The audio engine and UI are deliberately separate processes. DSP modules — oscillator with PolyBLEP
+                band-limiting, ADSR, LFO, state variable filter, Butterworth, virtual-analog, and modal resonator
+                algorithms, reverb, delay, chorus, flanger, distortion, and bit crusher — are plain C++ classes with
+                explicit state, independently unit-tested via Catch2 and CTest. The Raspberry Pi build path adds ALSA,
+                FFTW3, and ARM/NEON optimization hooks with full deploy and audio-test scripts. The OSC control API is
+                fully documented.
+            </p>
+
+            <p>
+                33 of 34 CTest tests pass. The single known failure is a test that predates PolyBLEP implementation and
+                expects hard-edge waveform samples — the fix is already understood, not yet written. The roadmap
+                includes MIDI input, preset storage, hardware encoder mapping, and guided lesson modes.
+            </p>
+
+            <div class="project-links">
+                <a href="docs/edutone.html">Read the technical documentation →</a>
+                <a href="mailto:ray@bachtogauss.com">Get in touch →</a>
+            </div>
+        </div>
+
+        <hr class="rule" />
+
+        <p class="section-label">Capabilities</p>
+
+        <div class="capabilities">
+            <div class="cap-group">
+                <h4>Languages</h4>
+                <ul>
+                    <li>JavaScript (ES modules, vanilla)</li>
+                    <li>Python (standard library, pytest)</li>
+                    <li>C++17</li>
+                    <li>PHP</li>
+                    <li>HTML &amp; CSS (hand-authored)</li>
+                </ul>
+            </div>
+            <div class="cap-group">
+                <h4>Systems</h4>
+                <ul>
+                    <li>SQLite · JSON storage adapters</li>
+                    <li>HTTP server design (Python stdlib)</li>
+                    <li>Real-time audio (CoreAudio, ALSA)</li>
+                    <li>OSC / UDP inter-process communication</li>
+                    <li>Cross-platform build systems (CMake)</li>
+                </ul>
+            </div>
+            <div class="cap-group">
+                <h4>Domains</h4>
+                <ul>
+                    <li>Astronomical calculation</li>
+                    <li>DSP &amp; audio synthesis</li>
+                    <li>Typographic systems</li>
+                    <li>Content management</li>
+                    <li>Access log analytics</li>
+                </ul>
+            </div>
+            <div class="cap-group">
+                <h4>Practices</h4>
+                <ul>
+                    <li>Unit &amp; integration testing</li>
+                    <li>Technical documentation</li>
+                    <li>Iterative architecture design</li>
+                    <li>Mobile-responsive CSS</li>
+                    <li>Privacy-first web design</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="rule" />
+
+        <footer>
+            <p>
+                All code available for review upon request. &nbsp;·&nbsp; Documentation for each project provided on
+                inquiry.
+            </p>
+        </footer>
+    </body>
 </html>
