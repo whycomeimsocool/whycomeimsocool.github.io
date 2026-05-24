@@ -51,6 +51,46 @@
         <p class="section-label">Selected Work</p>
 
         <div class="project">
+            <h2>Sound in Paper</h2>
+            <h3>Privacy-first, QR-based audio sharing — put sound into paper</h3>
+
+            <div class="project-meta">
+                <span class="project-status">In development</span>
+                <span class="project-stack">Next.js 15 · TypeScript · Postgres · Web Crypto API · Cloudflare R2</span>
+            </div>
+
+            <p>
+                A musician hands someone a small printed card. They scan it. A private song plays. No app, no account,
+                no social profile. The QR code is not a link to a streaming service — it is the listening object itself.
+                Sound in Paper is built around the premise that the physical artifact is the product, and the service
+                exists to put sound into paper.
+            </p>
+
+            <p>
+                The privacy model is architectural: audio, artwork, title, and message are encrypted in the browser
+                before upload using the Web Crypto API. The server stores only encrypted objects. The decryption key
+                lives in the URL fragment after
+                <code>#</code>
+                — never sent in HTTP requests — so the server can serve a Piece without being able to hear it. A printed
+                QR can be updated to play different audio at any time without reprinting. The creator's encrypted key
+                set retains the Piece key; the paper stays the same.
+            </p>
+
+            <p>
+                Milestones 0, 1, and 2 are complete: Next.js 15 App Router, Auth.js v5 with PBKDF2 key derivation,
+                encrypted key vault, recovery phrase flow, and browser-side audio encryption before upload. Milestone 3
+                — Piece creation and dynamic QR generation — is next.
+            </p>
+
+            <div class="project-links">
+                <a href="docs/sound-in-paper.html">Read the technical documentation →</a>
+                <a href="mailto:ray@bachtogauss.com">Get in touch →</a>
+            </div>
+        </div>
+
+        <hr class="rule-thin" />
+
+        <div class="project">
             <h2>Custom CMS &amp; Admin Panel</h2>
             <h3>Full-stack content management system built from scratch</h3>
 
@@ -232,7 +272,6 @@
                 <a href="pages/typography.html">Read the technical documentation →</a>
             </div>
         </div>
-
 
         <hr class="rule" />
 

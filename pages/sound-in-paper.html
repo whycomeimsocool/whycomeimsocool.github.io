@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sound in Paper — Ray Reich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fontRatio: calc(32 / 27);
+    --minFontSize: calc((16 / var(--fontRatio)) * 1px);
+    --fontSizeGrow: 1vw;
+    --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
+    --note01: calc(var(--note00) * var(--fontRatio));
+    --note02: calc(var(--note01) * var(--fontRatio));
+    --note03: calc(var(--note02) * var(--fontRatio));
+    --note04: calc(var(--note03) * var(--fontRatio));
+    --note05: calc(var(--note04) * var(--fontRatio));
+    --note06: calc(var(--note05) * var(--fontRatio));
+    --note07: calc(var(--note06) * var(--fontRatio));
+    --note08: calc(var(--note07) * var(--fontRatio));
+    --note09: calc(var(--note08) * var(--fontRatio));
+    --note10: calc(var(--note09) * var(--fontRatio));
+    --note11: calc(var(--note10) * var(--fontRatio));
+    --note12: calc(var(--note11) * var(--fontRatio));
+    --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+    --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+    --note01VW: calc(var(--note00VW) * var(--fontRatio));
+    --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+    --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+
+    --ink: #1a1a18;
+    --ink-muted: #555550;
+    --ink-faint: #999990;
+    --paper: #f5f4ee;
+    --rule: #ccc9be;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--paper); color: var(--ink); }
+
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    background: var(--paper);
+    color: var(--ink);
+    width: 50vw;
+    min-width: var(--bodyMinWidth);
+    margin: 0 auto;
+    padding: var(--note08) 0 var(--note10) 0;
+    opacity: 0;
+    animation: fadein 1.1s ease forwards;
+    animation-delay: 0.15s;
+  }
+
+  @media only screen and (max-width: 767px) {
+    body {
+      min-width: inherit;
+      width: calc(var(--bodyMinWidthVW) / 767 * 100);
+      text-align: left;
+    }
+  }
+
+  @keyframes fadein { to { opacity: 1; } }
+
+  .back {
+    display: inline-block;
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--note07);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .back:hover { color: var(--ink); border-color: var(--ink); }
+
+  .doc-label {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: var(--note03);
+  }
+
+  h1 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note07);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--note02);
+  }
+
+  .subtitle {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: var(--note06);
+  }
+
+  .meta {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--note02);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: var(--note07) 0;
+  }
+
+  hr.thin {
+    border-top: 0.5px solid var(--rule);
+    margin: var(--note05) 0;
+  }
+
+  p {
+    margin-bottom: var(--note04);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note05);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: var(--note07);
+    margin-bottom: var(--note03);
+  }
+
+  h3 {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-top: var(--note05);
+    margin-bottom: var(--note02);
+  }
+
+  /* ── Code blocks ────────────────────────────── */
+
+  .code-block {
+    background: #eeeee6;
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note04) 0;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: 'Inconsolata', 'Courier New', monospace;
+    font-size: var(--note02);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+    white-space: pre;
+  }
+
+  .code-caption {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: calc(-1 * var(--note02));
+    margin-bottom: var(--note04);
+    padding-left: var(--note04);
+  }
+
+  /* ── Feature lists ──────────────────────────── */
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
+  }
+
+  .feature-list li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    padding-left: var(--note04);
+    position: relative;
+    margin-bottom: var(--note01);
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .feature-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+  }
+
+  /* ── Two-column contrast list ───────────────── */
+
+  .contrast-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--note05);
+    margin: var(--note04) 0 var(--note05) 0;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .contrast-columns { grid-template-columns: 1fr; }
+  }
+
+  .contrast-col h4 {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--note02);
+  }
+
+  .contrast-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contrast-col li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    line-height: var(--note05);
+    padding-left: var(--note03);
+    position: relative;
+    margin-bottom: var(--note00);
+  }
+
+  .contrast-col li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 0.85em;
+  }
+
+  /* ── Stack table ────────────────────────────── */
+
+  .stack-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--note04) 0;
+  }
+
+  .stack-table td {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note02);
+    padding: var(--note01) var(--note03) var(--note01) 0;
+    border-bottom: 0.5px solid var(--rule);
+    vertical-align: top;
+    line-height: var(--note05);
+  }
+
+  .stack-table td:first-child {
+    font-family: 'Spectral', Georgia, serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    width: 30%;
+  }
+
+  /* ── Milestone list ─────────────────────────── */
+
+  .milestone-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--note03) 0 var(--note04) 0;
+    counter-reset: milestone;
+  }
+
+  .milestone-list li {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: var(--note03);
+    line-height: var(--note06);
+    padding-left: var(--note06);
+    position: relative;
+    margin-bottom: var(--note02);
+    text-align: justify;
+    hyphens: auto;
+    counter-increment: milestone;
+  }
+
+  .milestone-list li::before {
+    content: counter(milestone, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    font-family: 'Inconsolata', monospace;
+    font-size: var(--note01);
+    color: var(--ink-faint);
+    top: 0.2em;
+  }
+
+  .milestone-list li strong {
+    font-weight: 500;
+  }
+
+  /* ── Privacy note ───────────────────────────── */
+
+  .principle-note {
+    border-left: 2px solid var(--rule);
+    padding: var(--note03) var(--note04);
+    margin: var(--note05) 0;
+  }
+
+  .principle-note p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note03);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  /* ── Status badge ───────────────────────────── */
+
+  .status-line {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note01);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-bottom: var(--note05);
+    letter-spacing: 0.04em;
+  }
+
+  .status-line span {
+    color: var(--ink-muted);
+  }
+
+  /* ── Footer ─────────────────────────────────── */
+
+  footer { margin-top: var(--note08); }
+
+  footer p {
+    font-family: 'Spectral', Georgia, serif;
+    font-size: var(--note00);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  footer a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--rule);
+    transition: color 0.2s ease;
+  }
+
+  footer a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">← Portfolio</a>
+
+<p class="doc-label">Technical Documentation</p>
+<h1>Sound in Paper</h1>
+<p class="subtitle">Put sound into paper — a privacy-first, QR-based audio sharing system for artists and anyone who wants to share sound as an intimate object</p>
+
+<p class="meta">Next.js 15 · TypeScript · Postgres · Prisma · Web Crypto API · Cloudflare R2</p>
+
+<p class="status-line">In development &nbsp;·&nbsp; <span>Milestones 0, 1, and 2 complete</span></p>
+
+<hr>
+
+<h2>The Idea</h2>
+
+<p>
+  A musician hands someone a small printed card. They scan it. A private song plays. No app to install, no account to create, no social profile to navigate. Just sound, unlocked by paper.
+</p>
+
+<p>
+  Sound in Paper is built around the premise that the physical artifact is the product — not the platform behind it. The QR code is not a link to a streaming profile. It is the listening object itself. The creator feels like they are preparing a piece of paper that contains sound, not publishing content to a cloud service.
+</p>
+
+<div class="principle-note">
+  <p>Control the paper = control the song.</p>
+</div>
+
+<p>
+  A printed QR code can be left in a gallery, slipped inside a record sleeve, handed to someone at a show, or placed anywhere in the physical world. The creator can update the sound behind it at any time without reprinting. The same paper continues to work.
+</p>
+
+<hr class="thin">
+
+<h2>What It Should Feel Like</h2>
+
+<div class="contrast-columns">
+  <div class="contrast-col">
+    <h4>It should feel like</h4>
+    <ul>
+      <li>a message passed by hand</li>
+      <li>a small art object</li>
+      <li>a secret song container</li>
+      <li>a minimalist music player</li>
+      <li>a physical-world sound object</li>
+    </ul>
+  </div>
+  <div class="contrast-col">
+    <h4>It should not feel like</h4>
+    <ul>
+      <li>a promo landing page</li>
+      <li>a streaming smart link</li>
+      <li>a social profile</li>
+      <li>a CRM or marketing dashboard</li>
+      <li>a generic QR generator</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="thin">
+
+<h2>Privacy Architecture</h2>
+
+<p>
+  The privacy model is architectural, not merely a policy. The server hosts encrypted sound objects and is deliberately designed so it cannot listen to them.
+</p>
+
+<h3>Client-side encryption</h3>
+<p>
+  Audio, artwork, title, and message are encrypted in the browser before upload using the Web Crypto API. The server stores only encrypted files, encrypted metadata, non-sensitive routing metadata, and aggregate event records. It never receives plaintext audio, titles, messages, or artwork.
+</p>
+
+<h3>URL fragment key</h3>
+<p>
+  The QR code points to a URL shaped like:
+</p>
+
+<div class="code-block"><pre>https://soundinpaper.com/p/quiet-river-17#k=PUBLIC_SHARE_KEY</pre></div>
+<p class="code-caption">The slug is sent to the server. The fragment — the share key after <code>#</code> — is never sent in normal HTTP requests. The browser uses it locally to decrypt the Piece.</p>
+
+<p>
+  This means the server can serve the encrypted manifest for <code>quiet-river-17</code> without ever knowing the key needed to decrypt it. The decryption capability lives only in the printed QR code and in the creator's encrypted key set.
+</p>
+
+<h3>Dynamic QR</h3>
+<p>
+  A printed QR code should keep working even when the creator changes the audio behind it. Each Piece has a stable public share key embedded in the QR. New versions are encrypted so that the same printed paper can decrypt the current assigned content. The creator's encrypted key set retains the Piece key so updates remain possible.
+</p>
+
+<h3>Key management</h3>
+<p>
+  On account creation, a creator master key is generated in the browser. A recovery phrase — shown once — can unlock it. Only encrypted key material is stored server-side. If a creator loses their recovery phrase and has no trusted device remaining, the company cannot recover their encrypted content. This is explained during setup in plain language, without making the product feel like a security bunker.
+</p>
+
+<hr class="thin">
+
+<h2>The Listener Experience</h2>
+
+<p>
+  The listener page shows almost nothing by default: a large play button, an optional progress bar, an optional title, an optional short message, and an optional artwork surface. No creator identity, no promotional links, no social mechanics, no engagement bait.
+</p>
+
+<p>
+  A quiet response control — present like a small folded corner of paper — can reveal lightweight actions such as a heart and a report. It is secondary to listening in every sense: visually, spatially, and philosophically.
+</p>
+
+<h3>Playback pipeline</h3>
+<ul class="feature-list">
+  <li>Listener browser downloads the encrypted audio blob</li>
+  <li>Web Crypto decrypts it locally using the share key from the URL fragment</li>
+  <li>Browser creates a temporary object URL from the decrypted bytes</li>
+  <li>HTML audio element plays the object URL</li>
+  <li>No plaintext audio ever transits the network</li>
+</ul>
+
+<hr class="thin">
+
+<h2>Current Build Status</h2>
+
+<p>The project is built in testable milestones — not because AI can't accelerate coding, but because the product has high-risk promises that must be validated incrementally: client-side encrypted audio, frictionless QR listening, graceful key recovery, privacy-friendly analytics, and report-based safety enforcement.</p>
+
+<ol class="milestone-list">
+  <li><strong>Repo and App Foundation</strong> — Next.js 15 App Router, TypeScript strict mode, Tailwind CSS v4, Postgres in Docker, Prisma, Vitest, Playwright. Complete.</li>
+  <li><strong>Auth, Terms Acceptance, and Private Key Setup</strong> — Email/password auth, terms acceptance, browser-side master key generation, PBKDF2 key derivation, encrypted key vault, recovery phrase shown once, trusted-device unlock flow, new-device recovery phrase requirement. 14 unit tests passing. Complete.</li>
+  <li><strong>Encrypted Audio Upload</strong> — Browser-side encryption before upload, encrypted blob to object storage, encrypted metadata to database, creator dashboard listing, delete and archive. Code-complete and locally validated. Pending real S3/R2 credentials for full acceptance.</li>
+  <li><strong>Piece Creation and Dynamic QR</strong> — Piece creation flow, stable public slug, stable public share key, encrypted manifest, QR export as SVG and PNG. Up next.</li>
+  <li><strong>Listener Playback</strong> — Public listener route, client-side decryption, minimal mobile-first player, one-tap playback.</li>
+  <li><strong>Themes and Listener Response</strong> — Restrained theme set, quiet response control, heart and report actions.</li>
+  <li><strong>Privacy-Friendly Analytics</strong> — Scan, play, and completion counts without third-party scripts, fingerprinting, or precise location.</li>
+  <li><strong>Reporting and Copyright Enforcement</strong> — Listener report flow, moderation view, DMCA notice and counter-notice intake, repeat-infringer tracking.</li>
+  <li><strong>Access Controls</strong> — Expiration, play limits, download toggle, Pass model for optional gated listening.</li>
+  <li><strong>Billing and Entitlements</strong> — Plan enforcement for Piece count, storage, QR exports, and advanced features.</li>
+  <li><strong>Print and Physical Artifact Tools</strong> — Printable PDF sheets, small card layout, sticker-safe QR, optional short printed URL beneath QR.</li>
+</ol>
+
+<hr class="thin">
+
+<h2>Tech Stack</h2>
+
+<table class="stack-table">
+  <tr><td>Framework</td><td>Next.js 15 App Router</td></tr>
+  <tr><td>Language</td><td>TypeScript (strict mode)</td></tr>
+  <tr><td>Styling</td><td>Tailwind CSS v4</td></tr>
+  <tr><td>Database</td><td>Postgres (Docker locally) · Prisma ORM</td></tr>
+  <tr><td>Object storage</td><td>Cloudflare R2 / S3-compatible</td></tr>
+  <tr><td>Encryption</td><td>Web Crypto API (browser-side) · PBKDF2 key derivation</td></tr>
+  <tr><td>Auth</td><td>Auth.js v5 credentials</td></tr>
+  <tr><td>Unit tests</td><td>Vitest</td></tr>
+  <tr><td>End-to-end tests</td><td>Playwright</td></tr>
+  <tr><td>Billing</td><td>Stripe (planned)</td></tr>
+  <tr><td>QR generation</td><td>SVG and PNG export</td></tr>
+</table>
+
+<hr class="thin">
+
+<h2>Moderation and Safety</h2>
+
+<p>
+  The privacy model creates a real tension with safety. The product does not pretend otherwise. The moderation principle is: no surveillance, clear safety boundaries, human review only when someone with access reports abuse.
+</p>
+
+<p>
+  When a listener files a report, the report flow explains that submitting it shares the Piece key with moderation — making this an explicit, informed action rather than a silent surveillance mechanism. Moderators can decrypt reported Pieces for review and disable Piece routes. DMCA notice and counter-notice intake is built into the milestone plan, along with repeat-infringer tracking.
+</p>
+
+<hr class="thin">
+
+<h2>Product Guardrails</h2>
+
+<ul class="feature-list">
+  <li>Do not turn this into a link-in-bio product</li>
+  <li>Do not add external music service links in the MVP</li>
+  <li>Do not upload plaintext audio to the server</li>
+  <li>Do not store plaintext titles, messages, artwork, or audio</li>
+  <li>Do not use magic-link-only login</li>
+  <li>Do not add ads or social mechanics to listener pages</li>
+  <li>Do not promise guaranteed autoplay</li>
+  <li>Do not add per-upload copyright checkboxes</li>
+</ul>
+
+<hr>
+
+<footer>
+  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; Documentation and code available upon request</p>
+</footer>
+
+</body>
+</html>
