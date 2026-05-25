@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 440" fill="none">
+  <defs>
+    <style>
+      .main{stroke:#111;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+      .thin{stroke:#111;stroke-width:.8;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+      .dash{stroke:#111;stroke-width:.7;stroke-dasharray:4 4;opacity:.55}
+      .label{font-family:Georgia,'Times New Roman',serif;font-size:15px;fill:#111}
+      .small{font-family:Georgia,'Times New Roman',serif;font-size:12px;fill:#111}
+    </style>
+  </defs>
+
+  <!-- axes -->
+  <path class="thin" d="M65 246 H570"/>
+  <path class="thin" d="M370 40 V405"/>
+  <path class="thin" d="M570 246 l-8 -4 M570 246 l-8 4"/>
+  <path class="thin" d="M370 40 l-4 8 M370 40 l4 8"/>
+
+  <!-- main circle and inner offset circle -->
+  <circle class="main" cx="370" cy="246" r="150"/>
+  <circle class="thin" cx="356" cy="246" r="136" opacity=".7"/>
+
+  <!-- large left/top arc -->
+  <path class="thin" d="M93 246 A277 277 0 0 1 370 39"/>
+  <path class="dash" d="M120 246 A250 250 0 0 1 370 66"/>
+
+  <!-- vertical chord and right rectangle-ish construction -->
+  <path class="main" d="M237 132 V360"/>
+  <path class="main" d="M490 92 V246"/>
+  <path class="thin" d="M370 96 H490"/>
+  <path class="thin" d="M490 246 H370"/>
+
+  <!-- rays from center and points -->
+  <path class="thin" d="M370 246 L237 132"/>
+  <path class="thin" d="M370 246 L237 360"/>
+  <path class="thin" d="M370 246 L130 410"/>
+  <path class="dash" d="M237 132 H370"/>
+  <path class="dash" d="M237 360 H370"/>
+  <path class="dash" d="M237 132 V246"/>
+  <path class="dash" d="M205 246 H370"/>
+
+  <!-- angle arcs around center -->
+  <path class="thin" d="M344 246 A26 26 0 0 1 351 228"/>
+  <path class="thin" d="M348 267 A30 30 0 0 1 370 276"/>
+  <path class="thin" d="M370 126 A120 120 0 0 0 250 166"/>
+  <path class="dash" d="M370 96 A150 150 0 0 0 220 135"/>
+
+  <!-- tick dots -->
+  <circle cx="370" cy="246" r="5" fill="#111"/>
+  <circle cx="237" cy="132" r="4" fill="#111"/>
+  <circle cx="237" cy="360" r="4" fill="#111"/>
+  <circle cx="490" cy="246" r="3" fill="#111"/>
+  <circle cx="120" cy="246" r="3" fill="#111"/>
+  <circle cx="370" cy="96" r="3" fill="#111"/>
+  <circle cx="370" cy="396" r="3" fill="#111"/>
+  <circle cx="220" cy="135" r="3" fill="#111"/>
+
+  <!-- labels -->
+  <text class="label" x="370" y="27" text-anchor="middle">90°</text>
+  <text class="small" x="381" y="48">(-0, 1)</text>
+  <text class="label" x="238" y="120" text-anchor="middle">60°</text>
+  <text class="label" x="344" y="103">30°</text>
+  <text class="label" x="334" y="182">45°</text>
+  <text class="label" x="328" y="304">45°</text>
+  <text class="small" x="92" y="266">(-1,0)</text>
+  <text class="small" x="528" y="266">(1,0)</text>
+  <text class="small" x="355" y="424">(0,-1)</text>
+  <text class="small" x="182" y="124">(-1/2, √3/2)</text>
+  <text class="small" x="205" y="158">(-√2/2, √2/2)</text>
+  <text class="small" x="218" y="255">-1/2</text>
+  <text class="small" x="386" y="266">1/2</text>
+  <text class="small" x="194" y="395">-√3/2</text>
+</svg>
