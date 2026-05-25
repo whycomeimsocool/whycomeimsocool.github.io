@@ -404,3 +404,425 @@
       .footer-mark { width: 44px; height: 44px; margin-bottom: 12px; }
     }
 
+    /* ── Doc Pages ──────────────────────────────────────────── */
+
+    body.doc-page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 40px 96px;
+    }
+
+    body.doc-page h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -0.012em;
+      margin: 0 0 18px;
+      color: var(--ink);
+    }
+
+    body.doc-page h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 1.2;
+      letter-spacing: -0.008em;
+      margin: 56px 0 14px;
+      color: var(--ink);
+    }
+
+    body.doc-page h3 {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 28px 0 10px;
+    }
+
+    body.doc-page p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #3a3a3a;
+      margin: 0 0 16px;
+    }
+
+    body.doc-page p:last-child { margin-bottom: 0; }
+
+    body.doc-page em { font-style: italic; }
+
+    body.doc-page hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 48px 0;
+    }
+
+    body.doc-page hr.thin {
+      border-top-width: 0.5px;
+      margin: 32px 0;
+    }
+
+    body.doc-page code {
+      font-family: "Inconsolata", "Courier New", monospace;
+      font-size: 13px;
+      background: #f3f2ee;
+      padding: 1px 5px;
+      border-radius: 2px;
+      color: var(--ink-2);
+    }
+
+    /* Navigation */
+    .back {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: color 0.15s ease;
+    }
+
+    .back:hover { color: var(--ink); }
+
+    /* Doc header labels */
+    .doc-label {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--ink-2);
+      margin-bottom: 20px;
+    }
+
+    .meta {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .status-line {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+
+    .status-line span { color: var(--ink-2); }
+
+    /* Feature lists */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 20px;
+    }
+
+    .feature-list li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #3a3a3a;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .feature-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--muted-2);
+      font-size: 0.9em;
+    }
+
+    /* Milestone list */
+    .milestone-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 20px;
+      counter-reset: milestone;
+    }
+
+    .milestone-list li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #3a3a3a;
+      padding-left: 32px;
+      position: relative;
+      margin-bottom: 10px;
+      counter-increment: milestone;
+    }
+
+    .milestone-list li::before {
+      content: counter(milestone, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      font-family: "Inconsolata", "Courier New", monospace;
+      font-size: 11px;
+      color: var(--muted);
+      top: 0.25em;
+    }
+
+    .milestone-list li strong { font-weight: 500; color: var(--ink); }
+
+    /* Tables */
+    .stack-table,
+    .files-table,
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+    }
+
+    .stack-table td,
+    .files-table td,
+    .doc-table td,
+    .doc-table th {
+      font-size: 13.5px;
+      line-height: 1.5;
+      padding: 10px 16px 10px 0;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+      color: var(--ink-2);
+    }
+
+    .stack-table td:first-child,
+    .doc-table td:first-child {
+      color: var(--muted);
+      white-space: nowrap;
+      width: 30%;
+      font-size: 13px;
+    }
+
+    .files-table td:first-child {
+      font-family: "Inconsolata", "Courier New", monospace;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      width: 42%;
+      padding-right: 20px;
+    }
+
+    .doc-table th {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      text-align: left;
+    }
+
+    /* Code blocks */
+    .code-block {
+      background: #f3f2ee;
+      border-left: 2px solid var(--rule);
+      padding: 16px 20px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      font-family: "Inconsolata", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--ink);
+      white-space: pre;
+    }
+
+    .code-caption {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: -8px;
+      margin-bottom: 16px;
+      padding-left: 20px;
+    }
+
+    /* Architecture diagram */
+    .arch-diagram {
+      background: #f3f2ee;
+      border-left: 2px solid var(--rule);
+      padding: 20px 24px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+
+    .arch-diagram pre {
+      font-family: "Inconsolata", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.75;
+      color: var(--muted);
+      white-space: pre;
+    }
+
+    /* Callout notes */
+    .origin-note,
+    .context-note,
+    .constraint-note,
+    .status-note,
+    .principle-note {
+      border-left: 2px solid var(--rule);
+      padding: 14px 20px;
+      margin: 24px 0;
+    }
+
+    .origin-note p,
+    .context-note p,
+    .constraint-note p,
+    .status-note p,
+    .principle-note p {
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    /* Contrast columns */
+    .contrast-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 16px 0 24px;
+    }
+
+    .contrast-col h4 {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .contrast-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .contrast-col li {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #3a3a3a;
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .contrast-col li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--muted-2);
+      font-size: 0.9em;
+    }
+
+    /* Project links */
+    .project-links {
+      margin-top: 16px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .project-links a {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .project-links a:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    /* Credits and sources */
+    .credits,
+    .sources {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 20px;
+    }
+
+    .credits li,
+    .sources li {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #3a3a3a;
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .credits li::before,
+    .sources li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--muted-2);
+    }
+
+    .credits a,
+    .sources a,
+    body.doc-page p a {
+      color: var(--ink-2);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .credits a:hover,
+    .sources a:hover,
+    body.doc-page p a:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    /* Footer */
+    body.doc-page footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+    }
+
+    body.doc-page footer p {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    body.doc-page footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    body.doc-page footer a:hover { color: var(--ink); }
+
+    /* Doc page responsive */
+    @media (max-width: 640px) {
+      body.doc-page {
+        padding: 40px 20px 72px;
+      }
+      body.doc-page h1 { font-size: clamp(28px, 7vw, 40px); }
+      body.doc-page h2 { font-size: 22px; margin: 40px 0 12px; }
+      .contrast-columns { grid-template-columns: 1fr; gap: 24px; }
+    }
+
