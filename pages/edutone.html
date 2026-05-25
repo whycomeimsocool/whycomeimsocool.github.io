@@ -1,49 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EduToneBox — Ray Reich</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_resources/css/home.css">
-</head>
-<body class="doc-page">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>EduToneBox — Ray Reich</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../_resources/css/style.css" />
+    </head>
+    <body class="doc-page">
+        <a class="back" href="../index.html">← Portfolio</a>
 
-<a class="back" href="../index.html">← Portfolio</a>
+        <p class="doc-label">Technical Documentation</p>
+        <h1>EduToneBox</h1>
+        <p class="subtitle">
+            Real-time educational synthesizer — C++17 DSP engine, Qt6/QML interface, Raspberry Pi deployment
+        </p>
 
-<p class="doc-label">Technical Documentation</p>
-<h1>EduToneBox</h1>
-<p class="subtitle">Real-time educational synthesizer — C++17 DSP engine, Qt6/QML interface, Raspberry Pi deployment</p>
+        <p class="meta">C++17 · Qt6/QML · CoreAudio · ALSA · FFTW3 · OSC/UDP · CMake &nbsp;·&nbsp; In development</p>
 
-<p class="meta">C++17 · Qt6/QML · CoreAudio · ALSA · FFTW3 · OSC/UDP · CMake &nbsp;·&nbsp; In development</p>
+        <hr />
 
-<hr>
+        <h2>Overview</h2>
 
-<h2>Overview</h2>
+        <p>
+            EduToneBox is a real-time educational synthesizer prototype built around a C++17 DSP engine, a Qt6/QML
+            control surface, and OSC-over-UDP communication. The goal is to make core sound synthesis concepts visible
+            and playable: waveform shape, frequency, amplitude, modulation, envelopes, filtering, effects, and spectrum
+            content.
+        </p>
 
-<p>
-  EduToneBox is a real-time educational synthesizer prototype built around a C++17 DSP engine, a Qt6/QML control surface, and OSC-over-UDP communication. The goal is to make core sound synthesis concepts visible and playable: waveform shape, frequency, amplitude, modulation, envelopes, filtering, effects, and spectrum content.
-</p>
+        <p>
+            The project is structured as a portfolio-grade systems project rather than a single demo script. It includes
+            platform-specific audio backends, reusable DSP modules, a desktop and Raspberry Pi UI, automated tests, and
+            deployment scripts for both macOS and Raspberry Pi.
+        </p>
 
-<p>
-  The project is structured as a portfolio-grade systems project rather than a single demo script. It includes platform-specific audio backends, reusable DSP modules, a desktop and Raspberry Pi UI, automated tests, and deployment scripts for both macOS and Raspberry Pi.
-</p>
+        <div class="status-note">
+            <p>
+                This project is actively in development. Current test status: 33 of 34 CTest tests pass. The single
+                known failure predates PolyBLEP band-limiting implementation and expects hard-edge waveform samples —
+                the fix is understood and queued. The roadmap below describes near-term engineering work and longer-term
+                product direction.
+            </p>
+        </div>
 
-<div class="status-note">
-  <p>This project is actively in development. Current test status: 33 of 34 CTest tests pass. The single known failure predates PolyBLEP band-limiting implementation and expects hard-edge waveform samples — the fix is understood and queued. The roadmap below describes near-term engineering work and longer-term product direction.</p>
-</div>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Architecture</h2>
 
-<h2>Architecture</h2>
+        <p>
+            The audio engine and UI are deliberately separate processes, connected by OSC over UDP on localhost. This
+            keeps UI crashes and graphics performance isolated from audio generation, makes the DSP modules
+            independently testable, and leaves the door open for future hardware control sources.
+        </p>
 
-<p>
-  The audio engine and UI are deliberately separate processes, connected by OSC over UDP on localhost. This keeps UI crashes and graphics performance isolated from audio generation, makes the DSP modules independently testable, and leaves the door open for future hardware control sources.
-</p>
-
-<div class="arch-diagram"><pre>+---------------------------------------------+
+        <div class="arch-diagram">
+            <pre>
++---------------------------------------------+
 | Qt6/QML UI Process                          |
 | Controls, visualizations, theme, pages      |
 +----------------------+----------------------+
@@ -57,20 +75,28 @@
 +----------------------v----------------------+
 | Platform Audio Backend                      |
 | CoreAudio on macOS · ALSA on Linux/Pi       |
-+---------------------------------------------+</pre></div>
++---------------------------------------------+</pre
+            >
+        </div>
 
-<h3>Signal flow</h3>
+        <h3>Signal flow</h3>
 
-<div class="arch-diagram"><pre>Oscillator
+        <div class="arch-diagram">
+            <pre>
+Oscillator
   → ADSR envelope
   → FilterBank (optional)
   → EffectsProcessor (optional)
   → output safety handling
-  → CoreAudio or ALSA device</pre></div>
+  → CoreAudio or ALSA device</pre
+            >
+        </div>
 
-<h3>Control and visualization flow</h3>
+        <h3>Control and visualization flow</h3>
 
-<div class="arch-diagram"><pre>QML control change
+        <div class="arch-diagram">
+            <pre>
+QML control change
   → OSCClient
   → UDP OSC message
   → OSCServer handler
@@ -79,83 +105,119 @@
 Audio buffer
   → FFT analysis
   → /spectrum/bin OSC messages
-  → UI spectrum visualization</pre></div>
+  → UI spectrum visualization</pre
+            >
+        </div>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Audio Engine Capabilities</h2>
+        <h2>Audio Engine Capabilities</h2>
 
-<p>Real-time mono synthesis at 44.1 kHz with a default 512-sample buffer.</p>
+        <p>Real-time mono synthesis at 44.1 kHz with a default 512-sample buffer.</p>
 
-<h3>Oscillator</h3>
-<ul class="feature-list">
-  <li>Waveforms: Sine, Triangle, Saw, Square, Pulse, and custom wavetable buffer</li>
-  <li>PolyBLEP band-limiting on Saw, Square, Pulse, and Triangle waveforms, reducing aliasing at discontinuities</li>
-</ul>
+        <h3>Oscillator</h3>
+        <ul class="feature-list">
+            <li>Waveforms: Sine, Triangle, Saw, Square, Pulse, and custom wavetable buffer</li>
+            <li>
+                PolyBLEP band-limiting on Saw, Square, Pulse, and Triangle waveforms, reducing aliasing at
+                discontinuities
+            </li>
+        </ul>
 
-<h3>Modulation</h3>
-<ul class="feature-list">
-  <li>ADSR envelope with linear and exponential curve support</li>
-  <li>LFO with Sine, Triangle, Saw, and Square waveforms</li>
-  <li>LFO routing targets: frequency, amplitude, and filter cutoff</li>
-</ul>
+        <h3>Modulation</h3>
+        <ul class="feature-list">
+            <li>ADSR envelope with linear and exponential curve support</li>
+            <li>LFO with Sine, Triangle, Saw, and Square waveforms</li>
+            <li>LFO routing targets: frequency, amplitude, and filter cutoff</li>
+        </ul>
 
-<h3>Filter bank</h3>
-<ul class="feature-list">
-  <li>State variable filter</li>
-  <li>Butterworth low-pass</li>
-  <li>Virtual analog low-pass</li>
-  <li>Modal resonator</li>
-</ul>
+        <h3>Filter bank</h3>
+        <ul class="feature-list">
+            <li>State variable filter</li>
+            <li>Butterworth low-pass</li>
+            <li>Virtual analog low-pass</li>
+            <li>Modal resonator</li>
+        </ul>
 
-<h3>Effects processor</h3>
-<ul class="feature-list">
-  <li>Reverb, Delay, Chorus, Flanger, Distortion, Bit crusher</li>
-</ul>
+        <h3>Effects processor</h3>
+        <ul class="feature-list">
+            <li>Reverb, Delay, Chorus, Flanger, Distortion, Bit crusher</li>
+        </ul>
 
-<h3>Spectrum analysis</h3>
-<ul class="feature-list">
-  <li>FFT-based, using Accelerate/vDSP on macOS and FFTW3 on Linux/Raspberry Pi</li>
-  <li>Spectrum bin data sent over OSC to UI for live visualization</li>
-</ul>
+        <h3>Spectrum analysis</h3>
+        <ul class="feature-list">
+            <li>FFT-based, using Accelerate/vDSP on macOS and FFTW3 on Linux/Raspberry Pi</li>
+            <li>Spectrum bin data sent over OSC to UI for live visualization</li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>User Interface</h2>
+        <h2>User Interface</h2>
 
-<p>
-  The Qt6/QML application presents a multi-page synthesizer interface intentionally designed as a fixed-aspect hardware-style instrument panel rather than a generic desktop form. Large controls, fixed 4:3 scaling, and pages organized by synthesis concept make it suitable for teaching rather than just operation.
-</p>
+        <p>
+            The Qt6/QML application presents a multi-page synthesizer interface intentionally designed as a fixed-aspect
+            hardware-style instrument panel rather than a generic desktop form. Large controls, fixed 4:3 scaling, and
+            pages organized by synthesis concept make it suitable for teaching rather than just operation.
+        </p>
 
-<ul class="feature-list">
-  <li>Pages for visualization, oscillator and filter control, modulation, and effects</li>
-  <li>Live oscilloscope and harmonic spectrum views</li>
-  <li>Touch-friendly knob controls with hardware-inspired visual styling</li>
-  <li>Light and dark theme toggle</li>
-  <li>OSC client for sending control messages and receiving spectrum data</li>
-</ul>
+        <ul class="feature-list">
+            <li>Pages for visualization, oscillator and filter control, modulation, and effects</li>
+            <li>Live oscilloscope and harmonic spectrum views</li>
+            <li>Touch-friendly knob controls with hardware-inspired visual styling</li>
+            <li>Light and dark theme toggle</li>
+            <li>OSC client for sending control messages and receiving spectrum data</li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Tech Stack</h2>
+        <h2>Tech Stack</h2>
 
-<table class="stack-table">
-  <tr><td>Language</td><td>C++17</td></tr>
-  <tr><td>Build</td><td>CMake 3.20+</td></tr>
-  <tr><td>UI</td><td>Qt6, QML, Qt Quick Controls</td></tr>
-  <tr><td>Tests</td><td>Catch2, CTest</td></tr>
-  <tr><td>macOS audio</td><td>CoreAudio, AudioToolbox, Accelerate/vDSP</td></tr>
-  <tr><td>Linux/Pi audio</td><td>ALSA</td></tr>
-  <tr><td>Linux/Pi FFT</td><td>FFTW3</td></tr>
-  <tr><td>IPC</td><td>OSC-style UDP messages</td></tr>
-  <tr><td>DSP support</td><td>Local sndkit-derived modules for filters, effects, and helpers</td></tr>
-</table>
+        <table class="stack-table">
+            <tr>
+                <td>Language</td>
+                <td>C++17</td>
+            </tr>
+            <tr>
+                <td>Build</td>
+                <td>CMake 3.20+</td>
+            </tr>
+            <tr>
+                <td>UI</td>
+                <td>Qt6, QML, Qt Quick Controls</td>
+            </tr>
+            <tr>
+                <td>Tests</td>
+                <td>Catch2, CTest</td>
+            </tr>
+            <tr>
+                <td>macOS audio</td>
+                <td>CoreAudio, AudioToolbox, Accelerate/vDSP</td>
+            </tr>
+            <tr>
+                <td>Linux/Pi audio</td>
+                <td>ALSA</td>
+            </tr>
+            <tr>
+                <td>Linux/Pi FFT</td>
+                <td>FFTW3</td>
+            </tr>
+            <tr>
+                <td>IPC</td>
+                <td>OSC-style UDP messages</td>
+            </tr>
+            <tr>
+                <td>DSP support</td>
+                <td>Local sndkit-derived modules for filters, effects, and helpers</td>
+            </tr>
+        </table>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Repository Layout</h2>
+        <h2>Repository Layout</h2>
 
-<div class="code-block"><pre>AUDIO_BOX/
+        <div class="code-block">
+            <pre>
+AUDIO_BOX/
 ├── CMakeLists.txt
 ├── README.md
 ├── commands/
@@ -184,137 +246,287 @@ Audio buffer
     ├── test_oscillator.cpp
     ├── test_lfo.cpp
     ├── test_adsr.cpp
-    └── test_svfilter.cpp</pre></div>
+    └── test_svfilter.cpp</pre
+            >
+        </div>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>OSC Control API</h2>
+        <h2>OSC Control API</h2>
 
-<p>The audio engine listens on <code>localhost:4559</code>. All control messages follow the OSC address pattern below.</p>
+        <p>
+            The audio engine listens on
+            <code>localhost:4559</code>
+            . All control messages follow the OSC address pattern below.
+        </p>
 
-<h3>Oscillator</h3>
-<table class="doc-table">
-  <tr><th>Address</th><th>Value</th><th>Meaning</th></tr>
-  <tr><td>/osc/frequency</td><td>float</td><td class="meaning">Frequency in Hz</td></tr>
-  <tr><td>/osc/amplitude</td><td>float</td><td class="meaning">Output amplitude, 0.0 to 1.0</td></tr>
-  <tr><td>/osc/waveform</td><td>int as float</td><td class="meaning">0 Sine · 1 Triangle · 2 Saw · 3 Square · 4 Pulse · 5 Custom</td></tr>
-</table>
+        <h3>Oscillator</h3>
+        <table class="doc-table">
+            <tr>
+                <th>Address</th>
+                <th>Value</th>
+                <th>Meaning</th>
+            </tr>
+            <tr>
+                <td>/osc/frequency</td>
+                <td>float</td>
+                <td class="meaning">Frequency in Hz</td>
+            </tr>
+            <tr>
+                <td>/osc/amplitude</td>
+                <td>float</td>
+                <td class="meaning">Output amplitude, 0.0 to 1.0</td>
+            </tr>
+            <tr>
+                <td>/osc/waveform</td>
+                <td>int as float</td>
+                <td class="meaning">0 Sine · 1 Triangle · 2 Saw · 3 Square · 4 Pulse · 5 Custom</td>
+            </tr>
+        </table>
 
-<h3>LFO</h3>
-<table class="doc-table">
-  <tr><th>Address</th><th>Value</th><th>Meaning</th></tr>
-  <tr><td>/osc/lfo/frequency</td><td>float</td><td class="meaning">LFO rate</td></tr>
-  <tr><td>/osc/lfo/amplitude</td><td>float</td><td class="meaning">LFO depth</td></tr>
-  <tr><td>/osc/lfo/waveform</td><td>int as float</td><td class="meaning">0 Sine · 1 Triangle · 2 Saw · 3 Square</td></tr>
-  <tr><td>/osc/lfo/target</td><td>int as float</td><td class="meaning">0 None · 1 Frequency · 2 Amplitude · 3 Filter</td></tr>
-</table>
+        <h3>LFO</h3>
+        <table class="doc-table">
+            <tr>
+                <th>Address</th>
+                <th>Value</th>
+                <th>Meaning</th>
+            </tr>
+            <tr>
+                <td>/osc/lfo/frequency</td>
+                <td>float</td>
+                <td class="meaning">LFO rate</td>
+            </tr>
+            <tr>
+                <td>/osc/lfo/amplitude</td>
+                <td>float</td>
+                <td class="meaning">LFO depth</td>
+            </tr>
+            <tr>
+                <td>/osc/lfo/waveform</td>
+                <td>int as float</td>
+                <td class="meaning">0 Sine · 1 Triangle · 2 Saw · 3 Square</td>
+            </tr>
+            <tr>
+                <td>/osc/lfo/target</td>
+                <td>int as float</td>
+                <td class="meaning">0 None · 1 Frequency · 2 Amplitude · 3 Filter</td>
+            </tr>
+        </table>
 
-<h3>ADSR</h3>
-<table class="doc-table">
-  <tr><th>Address</th><th>Value</th><th>Meaning</th></tr>
-  <tr><td>/osc/adsr/attack</td><td>float</td><td class="meaning">Attack time in ms</td></tr>
-  <tr><td>/osc/adsr/decay</td><td>float</td><td class="meaning">Decay time in ms</td></tr>
-  <tr><td>/osc/adsr/sustain</td><td>float</td><td class="meaning">Sustain level, 0.0 to 1.0</td></tr>
-  <tr><td>/osc/adsr/release</td><td>float</td><td class="meaning">Release time in ms</td></tr>
-  <tr><td>/osc/adsr/noteon</td><td>—</td><td class="meaning">Trigger envelope</td></tr>
-  <tr><td>/osc/adsr/noteoff</td><td>—</td><td class="meaning">Release envelope</td></tr>
-</table>
+        <h3>ADSR</h3>
+        <table class="doc-table">
+            <tr>
+                <th>Address</th>
+                <th>Value</th>
+                <th>Meaning</th>
+            </tr>
+            <tr>
+                <td>/osc/adsr/attack</td>
+                <td>float</td>
+                <td class="meaning">Attack time in ms</td>
+            </tr>
+            <tr>
+                <td>/osc/adsr/decay</td>
+                <td>float</td>
+                <td class="meaning">Decay time in ms</td>
+            </tr>
+            <tr>
+                <td>/osc/adsr/sustain</td>
+                <td>float</td>
+                <td class="meaning">Sustain level, 0.0 to 1.0</td>
+            </tr>
+            <tr>
+                <td>/osc/adsr/release</td>
+                <td>float</td>
+                <td class="meaning">Release time in ms</td>
+            </tr>
+            <tr>
+                <td>/osc/adsr/noteon</td>
+                <td>—</td>
+                <td class="meaning">Trigger envelope</td>
+            </tr>
+            <tr>
+                <td>/osc/adsr/noteoff</td>
+                <td>—</td>
+                <td class="meaning">Release envelope</td>
+            </tr>
+        </table>
 
-<h3>Filter</h3>
-<table class="doc-table">
-  <tr><th>Address</th><th>Value</th><th>Meaning</th></tr>
-  <tr><td>/osc/filter/cutoff</td><td>float</td><td class="meaning">Cutoff frequency in Hz</td></tr>
-  <tr><td>/osc/filter/resonance</td><td>float</td><td class="meaning">Resonance/Q</td></tr>
-  <tr><td>/osc/filter/type</td><td>int as float</td><td class="meaning">0 LowPass · 1 HighPass · 2 BandPass · 3 Notch</td></tr>
-  <tr><td>/osc/filter/enabled</td><td>float</td><td class="meaning">0 off · 1 on</td></tr>
-  <tr><td>/osc/filter/algorithm</td><td>int as float</td><td class="meaning">0 StateVariable · 1 Butterworth · 2 VirtualAnalog · 3 ModalResonator</td></tr>
-</table>
+        <h3>Filter</h3>
+        <table class="doc-table">
+            <tr>
+                <th>Address</th>
+                <th>Value</th>
+                <th>Meaning</th>
+            </tr>
+            <tr>
+                <td>/osc/filter/cutoff</td>
+                <td>float</td>
+                <td class="meaning">Cutoff frequency in Hz</td>
+            </tr>
+            <tr>
+                <td>/osc/filter/resonance</td>
+                <td>float</td>
+                <td class="meaning">Resonance/Q</td>
+            </tr>
+            <tr>
+                <td>/osc/filter/type</td>
+                <td>int as float</td>
+                <td class="meaning">0 LowPass · 1 HighPass · 2 BandPass · 3 Notch</td>
+            </tr>
+            <tr>
+                <td>/osc/filter/enabled</td>
+                <td>float</td>
+                <td class="meaning">0 off · 1 on</td>
+            </tr>
+            <tr>
+                <td>/osc/filter/algorithm</td>
+                <td>int as float</td>
+                <td class="meaning">0 StateVariable · 1 Butterworth · 2 VirtualAnalog · 3 ModalResonator</td>
+            </tr>
+        </table>
 
-<h3>Effects</h3>
-<table class="doc-table">
-  <tr><th>Address</th><th>Value</th><th>Meaning</th></tr>
-  <tr><td>/osc/effect/type</td><td>int as float</td><td class="meaning">0 None · 1 Reverb · 2 Delay · 3 Chorus · 4 Flanger · 5 Distortion · 6 BitCrusher</td></tr>
-  <tr><td>/osc/effect/mix</td><td>float</td><td class="meaning">Dry/wet mix</td></tr>
-  <tr><td>/osc/effect/param1</td><td>float</td><td class="meaning">Effect-specific normalized parameter</td></tr>
-  <tr><td>/osc/effect/param2</td><td>float</td><td class="meaning">Effect-specific normalized parameter</td></tr>
-</table>
+        <h3>Effects</h3>
+        <table class="doc-table">
+            <tr>
+                <th>Address</th>
+                <th>Value</th>
+                <th>Meaning</th>
+            </tr>
+            <tr>
+                <td>/osc/effect/type</td>
+                <td>int as float</td>
+                <td class="meaning">
+                    0 None · 1 Reverb · 2 Delay · 3 Chorus · 4 Flanger · 5 Distortion · 6 BitCrusher
+                </td>
+            </tr>
+            <tr>
+                <td>/osc/effect/mix</td>
+                <td>float</td>
+                <td class="meaning">Dry/wet mix</td>
+            </tr>
+            <tr>
+                <td>/osc/effect/param1</td>
+                <td>float</td>
+                <td class="meaning">Effect-specific normalized parameter</td>
+            </tr>
+            <tr>
+                <td>/osc/effect/param2</td>
+                <td>float</td>
+                <td class="meaning">Effect-specific normalized parameter</td>
+            </tr>
+        </table>
 
-<h3>Visualization feedback</h3>
-<table class="doc-table">
-  <tr><th>Address</th><th>Values</th><th>Meaning</th></tr>
-  <tr><td>/spectrum/bin</td><td>bin index, magnitude</td><td class="meaning">FFT spectrum bin sent from engine to UI</td></tr>
-</table>
+        <h3>Visualization feedback</h3>
+        <table class="doc-table">
+            <tr>
+                <th>Address</th>
+                <th>Values</th>
+                <th>Meaning</th>
+            </tr>
+            <tr>
+                <td>/spectrum/bin</td>
+                <td>bin index, magnitude</td>
+                <td class="meaning">FFT spectrum bin sent from engine to UI</td>
+            </tr>
+        </table>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Test Coverage</h2>
+        <h2>Test Coverage</h2>
 
-<p>Unit tests are written in Catch2 and run via CTest. Current coverage:</p>
+        <p>Unit tests are written in Catch2 and run via CTest. Current coverage:</p>
 
-<ul class="feature-list">
-  <li>Oscillator: initialization, parameter clamping, sample rates, waveform generation, custom buffers, amplitude scaling, and phase reset</li>
-  <li>LFO: ranges, waveform generation, frequency accuracy, amplitude scaling, and reset behavior</li>
-  <li>ADSR: state transitions, attack/decay/sustain/release phases, full-cycle behavior, and retriggering</li>
-  <li>State variable filter: parameter validation, stability, frequency response, DC blocking, resonance behavior, and reset</li>
-</ul>
+        <ul class="feature-list">
+            <li>
+                Oscillator: initialization, parameter clamping, sample rates, waveform generation, custom buffers,
+                amplitude scaling, and phase reset
+            </li>
+            <li>LFO: ranges, waveform generation, frequency accuracy, amplitude scaling, and reset behavior</li>
+            <li>ADSR: state transitions, attack/decay/sustain/release phases, full-cycle behavior, and retriggering</li>
+            <li>
+                State variable filter: parameter validation, stability, frequency response, DC blocking, resonance
+                behavior, and reset
+            </li>
+        </ul>
 
-<p>Not yet covered: OSC parser, full engine integration, effects, filter-bank algorithms, and UI behavior. These are listed in the near-term roadmap.</p>
+        <p>
+            Not yet covered: OSC parser, full engine integration, effects, filter-bank algorithms, and UI behavior.
+            These are listed in the near-term roadmap.
+        </p>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Roadmap</h2>
+        <h2>Roadmap</h2>
 
-<h3>Near-term engineering</h3>
-<ul class="feature-list">
-  <li>Align remaining UI OSC controls with engine handlers (pulse width, ADSR curve type, LFO range)</li>
-  <li>Add tests for OSC parsing, message dispatch, effects, and filter-bank algorithms</li>
-  <li>Move FFT and OSC visualization feedback off the real-time audio path onto a lock-free queue</li>
-  <li>Add integration tests for engine parameter changes</li>
-  <li>Add CI for configure, build, and CTest</li>
-  <li>Add packaging for Raspberry Pi deployment</li>
-</ul>
+        <h3>Near-term engineering</h3>
+        <ul class="feature-list">
+            <li>Align remaining UI OSC controls with engine handlers (pulse width, ADSR curve type, LFO range)</li>
+            <li>Add tests for OSC parsing, message dispatch, effects, and filter-bank algorithms</li>
+            <li>Move FFT and OSC visualization feedback off the real-time audio path onto a lock-free queue</li>
+            <li>Add integration tests for engine parameter changes</li>
+            <li>Add CI for configure, build, and CTest</li>
+            <li>Add packaging for Raspberry Pi deployment</li>
+        </ul>
 
-<h3>Product and hardware</h3>
-<ul class="feature-list">
-  <li>MIDI input</li>
-  <li>Preset storage</li>
-  <li>Hardware encoder and button mapping</li>
-  <li>Guided lesson modes: waveform, harmonics, modulation, filtering</li>
-  <li>Sampler or wavetable recording flow</li>
-</ul>
+        <h3>Product and hardware</h3>
+        <ul class="feature-list">
+            <li>MIDI input</li>
+            <li>Preset storage</li>
+            <li>Hardware encoder and button mapping</li>
+            <li>Guided lesson modes: waveform, harmonics, modulation, filtering</li>
+            <li>Sampler or wavetable recording flow</li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Known Limitations</h2>
+        <h2>Known Limitations</h2>
 
-<ul class="feature-list">
-  <li>Some QML controls emit OSC addresses without matching engine handlers, including <code>/osc/pulsewidth</code> and <code>/osc/adsr/curvetype</code></li>
-  <li>The LFO range selector appears in the UI but has no matching OSC endpoint wired into the engine</li>
-  <li>Spectrum analysis and OSC feedback currently run close to the audio path — a production hardening pass should move this work onto a non-real-time thread</li>
-  <li>No packaging target yet for an installable macOS app bundle or Debian package</li>
-</ul>
+        <ul class="feature-list">
+            <li>
+                Some QML controls emit OSC addresses without matching engine handlers, including
+                <code>/osc/pulsewidth</code>
+                and
+                <code>/osc/adsr/curvetype</code>
+            </li>
+            <li>The LFO range selector appears in the UI but has no matching OSC endpoint wired into the engine</li>
+            <li>
+                Spectrum analysis and OSC feedback currently run close to the audio path — a production hardening pass
+                should move this work onto a non-real-time thread
+            </li>
+            <li>No packaging target yet for an installable macOS app bundle or Debian package</li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Design Notes</h2>
+        <h2>Design Notes</h2>
 
-<p>
-  The split-process architecture keeps UI crashes and graphics performance separate from audio generation. OSC is simple enough to inspect manually, portable across languages, and a natural fit for future hardware control sources.
-</p>
+        <p>
+            The split-process architecture keeps UI crashes and graphics performance separate from audio generation. OSC
+            is simple enough to inspect manually, portable across languages, and a natural fit for future hardware
+            control sources.
+        </p>
 
-<p>
-  DSP modules are kept as plain C++ classes with explicit state and parameter setters — straightforward to unit test, reuse, and eventually move into a plugin or embedded target. The UI is intentionally instrument-like: large controls, fixed 4:3 scaling, pages organized by synthesis concept, and visual feedback designed for teaching rather than decoration.
-</p>
+        <p>
+            DSP modules are kept as plain C++ classes with explicit state and parameter setters — straightforward to
+            unit test, reuse, and eventually move into a plugin or embedded target. The UI is intentionally
+            instrument-like: large controls, fixed 4:3 scaling, pages organized by synthesis concept, and visual
+            feedback designed for teaching rather than decoration.
+        </p>
 
-<p>
-  The interesting aspect of this project is not only that it produces sound — it is that the codebase is organized to grow from a desktop prototype into a physical educational instrument.
-</p>
+        <p>
+            The interesting aspect of this project is not only that it produces sound — it is that the codebase is
+            organized to grow from a desktop prototype into a physical educational instrument.
+        </p>
 
-<hr>
+        <hr />
 
-<footer>
-  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; Documentation and code available upon request</p>
-</footer>
-
-</body>
+        <footer>
+            <p>
+                ←
+                <a href="../index.html">Return to portfolio</a>
+                &nbsp;·&nbsp; Documentation and code available upon request
+            </p>
+        </footer>
+    </body>
 </html>

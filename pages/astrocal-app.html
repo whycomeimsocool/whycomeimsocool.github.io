@@ -1,112 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Astronomical Calendar App — Ray Reich</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_resources/css/home.css">
-</head>
-<body class="doc-page">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Astronomical Calendar App — Ray Reich</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../_resources/css/style.css" />
+    </head>
+    <body class="doc-page">
+        <a class="back" href="../index.html">← Portfolio</a>
 
-<a class="back" href="../index.html">← Portfolio</a>
+        <p class="doc-label">Technical Documentation</p>
+        <h1>Astronomical Calendar</h1>
+        <p class="subtitle">
+            A cross-platform React Native app for exploring astronomical events, photography light windows, and halachic
+            Zmanim by date and location
+        </p>
 
-<p class="doc-label">Technical Documentation</p>
-<h1>Astronomical Calendar</h1>
-<p class="subtitle">A cross-platform React Native app for exploring astronomical events, photography light windows, and halachic Zmanim by date and location</p>
+        <p class="meta">
+            React Native · TypeScript · Zustand · Luxon · Astronomy Engine · Hebcal &nbsp;·&nbsp; iOS &amp; Android
+        </p>
 
-<p class="meta">React Native · TypeScript · Zustand · Luxon · Astronomy Engine · Hebcal &nbsp;·&nbsp; iOS &amp; Android</p>
+        <hr />
 
-<hr>
+        <h2>Overview</h2>
 
-<h2>Overview</h2>
+        <p>
+            This app adapts the calculation and interaction model from
+            <a href="https://bachtogauss.com/calendar" target="_blank">bachtogauss.com/calendar</a>
+            into a native mobile experience. It is designed as a practical celestial calendar: select a day, change
+            location, review sun and moon data, inspect moon phases and eclipses on the calendar grid, and toggle the
+            supporting systems that matter to you.
+        </p>
 
-<p>
-  This app adapts the calculation and interaction model from <a href="https://bachtogauss.com/calendar" target="_blank">bachtogauss.com/calendar</a> into a native mobile experience. It is designed as a practical celestial calendar: select a day, change location, review sun and moon data, inspect moon phases and eclipses on the calendar grid, and toggle the supporting systems that matter to you.
-</p>
+        <div class="context-note">
+            <p>
+                The most interesting engineering work is in separating astronomical calculations, halachic calculations,
+                moon phase data, eclipse data, and UI state into clear independent modules — then running them in
+                parallel while preserving partial results if one source fails. The web calendar was the reference
+                implementation; this project is the native re-architecture.
+            </p>
+        </div>
 
-<div class="context-note">
-  <p>The most interesting engineering work is in separating astronomical calculations, halachic calculations, moon phase data, eclipse data, and UI state into clear independent modules — then running them in parallel while preserving partial results if one source fails. The web calendar was the reference implementation; this project is the native re-architecture.</p>
-</div>
+        <p>
+            The app coordinates multiple calculation domains, location input paths, timezone formatting, user settings,
+            custom iconography, and native mobile concerns behind one interface. Each domain is isolated so that a
+            failure in one — say, a geocoding timeout — does not degrade the others.
+        </p>
 
-<p>
-  The app coordinates multiple calculation domains, location input paths, timezone formatting, user settings, custom iconography, and native mobile concerns behind one interface. Each domain is isolated so that a failure in one — say, a geocoding timeout — does not degrade the others.
-</p>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Features</h2>
 
-<h2>Features</h2>
+        <h3>Calendar</h3>
+        <ul class="feature-list">
+            <li>Interactive month grid with day, month, and year navigation</li>
+            <li>Moon phase symbols rendered directly in calendar cells</li>
+            <li>Solar and lunar eclipse markers for the selected month</li>
+            <li>Calendar rows fixed at six weeks to prevent layout jumps between months</li>
+            <li>Legend screen with toggles controlling which symbols appear on the grid</li>
+        </ul>
 
-<h3>Calendar</h3>
-<ul class="feature-list">
-  <li>Interactive month grid with day, month, and year navigation</li>
-  <li>Moon phase symbols rendered directly in calendar cells</li>
-  <li>Solar and lunar eclipse markers for the selected month</li>
-  <li>Calendar rows fixed at six weeks to prevent layout jumps between months</li>
-  <li>Legend screen with toggles controlling which symbols appear on the grid</li>
-</ul>
+        <h3>Sun and moon dashboard</h3>
+        <ul class="feature-list">
+            <li>Sunrise and sunset</li>
+            <li>Moonrise and moonset</li>
+            <li>Moon illumination percentage</li>
+            <li>Moon age in days</li>
+            <li>Waxing and waning direction</li>
+        </ul>
 
-<h3>Sun and moon dashboard</h3>
-<ul class="feature-list">
-  <li>Sunrise and sunset</li>
-  <li>Moonrise and moonset</li>
-  <li>Moon illumination percentage</li>
-  <li>Moon age in days</li>
-  <li>Waxing and waning direction</li>
-</ul>
+        <h3>Photography windows</h3>
+        <ul class="feature-list">
+            <li>Morning and evening blue hour</li>
+            <li>Morning and evening golden hour</li>
+            <li>Calculated from solar altitude thresholds via Astronomy Engine</li>
+        </ul>
 
-<h3>Photography windows</h3>
-<ul class="feature-list">
-  <li>Morning and evening blue hour</li>
-  <li>Morning and evening golden hour</li>
-  <li>Calculated from solar altitude thresholds via Astronomy Engine</li>
-</ul>
+        <h3>Upcoming events</h3>
+        <ul class="feature-list">
+            <li>New moons, full moons, lunar eclipses, solar eclipses — browsable in a swipeable view</li>
+        </ul>
 
-<h3>Upcoming events</h3>
-<ul class="feature-list">
-  <li>New moons, full moons, lunar eclipses, solar eclipses — browsable in a swipeable view</li>
-</ul>
+        <h3>Halachic Zmanim</h3>
+        <ul class="feature-list">
+            <li>Alot HaShachar (halachic dawn)</li>
+            <li>Tzeit Hakochavim (nightfall)</li>
+            <li>Chatzot (midday and midnight)</li>
+            <li>Sof Zman Shma</li>
+            <li>Sof Zman Tfilla</li>
+            <li>GRA and MGA system selection</li>
+        </ul>
 
-<h3>Halachic Zmanim</h3>
-<ul class="feature-list">
-  <li>Alot HaShachar (halachic dawn)</li>
-  <li>Tzeit Hakochavim (nightfall)</li>
-  <li>Chatzot (midday and midnight)</li>
-  <li>Sof Zman Shma</li>
-  <li>Sof Zman Tfilla</li>
-  <li>GRA and MGA system selection</li>
-</ul>
+        <h3>Location</h3>
+        <ul class="feature-list">
+            <li>GPS-based precise location via device geolocation</li>
+            <li>Manual entry: city name, ZIP/postal code, decimal coordinates</li>
+            <li>
+                OpenStreetMap Nominatim geocoding with search ranking by region, OSM importance, exact-name matching,
+                and major-city handling
+            </li>
+            <li>Reverse geocoding for display names</li>
+            <li>Coordinate display with source metadata</li>
+            <li>Default location of New York City before user input</li>
+        </ul>
 
-<h3>Location</h3>
-<ul class="feature-list">
-  <li>GPS-based precise location via device geolocation</li>
-  <li>Manual entry: city name, ZIP/postal code, decimal coordinates</li>
-  <li>OpenStreetMap Nominatim geocoding with search ranking by region, OSM importance, exact-name matching, and major-city handling</li>
-  <li>Reverse geocoding for display names</li>
-  <li>Coordinate display with source metadata</li>
-  <li>Default location of New York City before user input</li>
-</ul>
+        <h3>Settings</h3>
+        <ul class="feature-list">
+            <li>Sunday or Monday week start</li>
+            <li>12-hour or 24-hour time format</li>
+            <li>Photography section visibility toggle</li>
+            <li>Zmanim section visibility toggle</li>
+            <li>GRA/MGA Zmanim system selection</li>
+        </ul>
 
-<h3>Settings</h3>
-<ul class="feature-list">
-  <li>Sunday or Monday week start</li>
-  <li>12-hour or 24-hour time format</li>
-  <li>Photography section visibility toggle</li>
-  <li>Zmanim section visibility toggle</li>
-  <li>GRA/MGA Zmanim system selection</li>
-</ul>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Architecture</h2>
 
-<h2>Architecture</h2>
+        <p>
+            The app is organized around calculation services, UI components, and a small global state store. Calculation
+            domains are kept strictly independent — astronomical and halachic data are fetched in parallel and merged
+            only after each path completes.
+        </p>
 
-<p>
-  The app is organized around calculation services, UI components, and a small global state store. Calculation domains are kept strictly independent — astronomical and halachic data are fetched in parallel and merged only after each path completes.
-</p>
-
-<div class="code-block"><pre>src/
+        <div class="code-block">
+            <pre>
+src/
   components/          Reusable UI: calendar grid, legend, location input, cards
   components/icons/    Bottom tab icons
   components/symbols/  Moon phase and eclipse SVG symbols
@@ -117,137 +142,274 @@
   store/               Zustand calendar and settings store
   styles/              Shared theme, colors, typography, spacing
   types/               Shared TypeScript interfaces
-  utils/               Astronomy, halachic, eclipse, moon phase, and time helpers</pre></div>
+  utils/               Astronomy, halachic, eclipse, moon phase, and time helpers</pre
+            >
+        </div>
 
-<h3>Calculation pipeline</h3>
+        <h3>Calculation pipeline</h3>
 
-<p>
-  The pipeline is designed so that each domain operates independently and the UI degrades gracefully when any value is unavailable — returning <code>null</code> for that value rather than blocking the whole view.
-</p>
+        <p>
+            The pipeline is designed so that each domain operates independently and the UI degrades gracefully when any
+            value is unavailable — returning
+            <code>null</code>
+            for that value rather than blocking the whole view.
+        </p>
 
-<ul class="feature-list">
-  <li><code>CalendarScreen</code> reacts to changes in selected date, current month, location, and hemisphere</li>
-  <li><code>moonDataService</code> calculates moon phases, eclipses, age, and illumination for the visible month in a single pass</li>
-  <li><code>timeService.fetchAllTimes()</code> fetches astronomy and halachic data in parallel</li>
-  <li>The astronomy path uses Astronomy Engine for rise/set events and solar altitude thresholds</li>
-  <li>The halachic path uses Hebcal <code>GeoLocation</code> and <code>Zmanim</code></li>
-  <li>Results merge into a <code>MergedTimes</code> object rendered by <code>SunMoonBar</code> and <code>ZmanimCard</code></li>
-</ul>
+        <ul class="feature-list">
+            <li>
+                <code>CalendarScreen</code>
+                reacts to changes in selected date, current month, location, and hemisphere
+            </li>
+            <li>
+                <code>moonDataService</code>
+                calculates moon phases, eclipses, age, and illumination for the visible month in a single pass
+            </li>
+            <li>
+                <code>timeService.fetchAllTimes()</code>
+                fetches astronomy and halachic data in parallel
+            </li>
+            <li>The astronomy path uses Astronomy Engine for rise/set events and solar altitude thresholds</li>
+            <li>
+                The halachic path uses Hebcal
+                <code>GeoLocation</code>
+                and
+                <code>Zmanim</code>
+            </li>
+            <li>
+                Results merge into a
+                <code>MergedTimes</code>
+                object rendered by
+                <code>SunMoonBar</code>
+                and
+                <code>ZmanimCard</code>
+            </li>
+        </ul>
 
-<h3>Key files</h3>
+        <h3>Key files</h3>
 
-<table class="files-table">
-  <tr><td>CalendarScreen.tsx</td><td>Main composition layer: calendar, pager, moon data loading, time loading</td></tr>
-  <tr><td>CalendarGrid.tsx</td><td>Fixed-height month grid, date navigation, phase and eclipse markers</td></tr>
-  <tr><td>timeService.ts</td><td>Parallel orchestration of astronomy and halachic calculations with fault-tolerant fallbacks</td></tr>
-  <tr><td>moonDataService.ts</td><td>Unified moon phase, eclipse, illumination, and age pipeline</td></tr>
-  <tr><td>astronomyUtils.ts</td><td>Sunrise, sunset, moonrise, moonset, blue hour, golden hour, illumination, moon direction</td></tr>
-  <tr><td>halachicUtils.ts</td><td>Hebcal-backed Zmanim with per-value error isolation</td></tr>
-  <tr><td>eclipseUtils.ts</td><td>Solar and lunar eclipse searches and symbol mapping</td></tr>
-  <tr><td>geocodingService.ts</td><td>Location parsing, search ranking, geocoding, reverse geocoding, coordinate formatting</td></tr>
-  <tr><td>LocationField.tsx</td><td>Debounced manual search, GPS flow, dropdown selection, location status display</td></tr>
-  <tr><td>calendarStore.ts</td><td>Centralized date, location, display preference, and feature-toggle state via Zustand</td></tr>
-</table>
+        <table class="files-table">
+            <tr>
+                <td>CalendarScreen.tsx</td>
+                <td>Main composition layer: calendar, pager, moon data loading, time loading</td>
+            </tr>
+            <tr>
+                <td>CalendarGrid.tsx</td>
+                <td>Fixed-height month grid, date navigation, phase and eclipse markers</td>
+            </tr>
+            <tr>
+                <td>timeService.ts</td>
+                <td>Parallel orchestration of astronomy and halachic calculations with fault-tolerant fallbacks</td>
+            </tr>
+            <tr>
+                <td>moonDataService.ts</td>
+                <td>Unified moon phase, eclipse, illumination, and age pipeline</td>
+            </tr>
+            <tr>
+                <td>astronomyUtils.ts</td>
+                <td>Sunrise, sunset, moonrise, moonset, blue hour, golden hour, illumination, moon direction</td>
+            </tr>
+            <tr>
+                <td>halachicUtils.ts</td>
+                <td>Hebcal-backed Zmanim with per-value error isolation</td>
+            </tr>
+            <tr>
+                <td>eclipseUtils.ts</td>
+                <td>Solar and lunar eclipse searches and symbol mapping</td>
+            </tr>
+            <tr>
+                <td>geocodingService.ts</td>
+                <td>Location parsing, search ranking, geocoding, reverse geocoding, coordinate formatting</td>
+            </tr>
+            <tr>
+                <td>LocationField.tsx</td>
+                <td>Debounced manual search, GPS flow, dropdown selection, location status display</td>
+            </tr>
+            <tr>
+                <td>calendarStore.ts</td>
+                <td>Centralized date, location, display preference, and feature-toggle state via Zustand</td>
+            </tr>
+        </table>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Tech Stack</h2>
+        <h2>Tech Stack</h2>
 
-<table class="stack-table">
-  <tr><td>Mobile framework</td><td>React Native 0.81</td></tr>
-  <tr><td>Language</td><td>TypeScript</td></tr>
-  <tr><td>UI foundation</td><td>React Native Paper, custom styles, custom fonts</td></tr>
-  <tr><td>Navigation</td><td>React Navigation bottom tabs</td></tr>
-  <tr><td>State management</td><td>Zustand</td></tr>
-  <tr><td>Date/time handling</td><td>Luxon</td></tr>
-  <tr><td>Astronomy calculations</td><td>astronomy-engine</td></tr>
-  <tr><td>Halachic calculations</td><td>@hebcal/core</td></tr>
-  <tr><td>Location</td><td>@react-native-community/geolocation</td></tr>
-  <tr><td>Geocoding</td><td>OpenStreetMap Nominatim</td></tr>
-  <tr><td>Testing</td><td>Jest, React Test Renderer, standalone calculation scripts</td></tr>
-</table>
+        <table class="stack-table">
+            <tr>
+                <td>Mobile framework</td>
+                <td>React Native 0.81</td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>TypeScript</td>
+            </tr>
+            <tr>
+                <td>UI foundation</td>
+                <td>React Native Paper, custom styles, custom fonts</td>
+            </tr>
+            <tr>
+                <td>Navigation</td>
+                <td>React Navigation bottom tabs</td>
+            </tr>
+            <tr>
+                <td>State management</td>
+                <td>Zustand</td>
+            </tr>
+            <tr>
+                <td>Date/time handling</td>
+                <td>Luxon</td>
+            </tr>
+            <tr>
+                <td>Astronomy calculations</td>
+                <td>astronomy-engine</td>
+            </tr>
+            <tr>
+                <td>Halachic calculations</td>
+                <td>@hebcal/core</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>@react-native-community/geolocation</td>
+            </tr>
+            <tr>
+                <td>Geocoding</td>
+                <td>OpenStreetMap Nominatim</td>
+            </tr>
+            <tr>
+                <td>Testing</td>
+                <td>Jest, React Test Renderer, standalone calculation scripts</td>
+            </tr>
+        </table>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Engineering Decisions</h2>
+        <h2>Engineering Decisions</h2>
 
-<h3>Fault-tolerant data merging</h3>
-<p>
-  Astronomy and halachic data are fetched separately and merged only after each path completes. A failure in one domain does not erase the other domain's usable results. Individual Zmanim values are each wrapped in per-value error isolation — a single bad calculation does not blank the entire Zmanim card.
-</p>
+        <h3>Fault-tolerant data merging</h3>
+        <p>
+            Astronomy and halachic data are fetched separately and merged only after each path completes. A failure in
+            one domain does not erase the other domain's usable results. Individual Zmanim values are each wrapped in
+            per-value error isolation — a single bad calculation does not blank the entire Zmanim card.
+        </p>
 
-<h3>Unified moon data source</h3>
-<p>
-  Moon phases, current moon age, current illumination, and eclipse markers are all calculated through <code>moonDataService</code> in a single pass. This ensures the calendar grid and detail cards always agree on the selected month and date — no possibility of the grid showing a different phase than the dashboard.
-</p>
+        <h3>Unified moon data source</h3>
+        <p>
+            Moon phases, current moon age, current illumination, and eclipse markers are all calculated through
+            <code>moonDataService</code>
+            in a single pass. This ensures the calendar grid and detail cards always agree on the selected month and
+            date — no possibility of the grid showing a different phase than the dashboard.
+        </p>
 
-<h3>Platform-aware layout</h3>
-<p>
-  The calendar grid uses explicit percentage widths and a fixed six-row structure to avoid platform-specific flexbox inconsistencies and month-to-month height changes. Northern and southern hemisphere orientation is handled explicitly for first and last quarter moon symbols, which appear mirrored depending on hemisphere.
-</p>
+        <h3>Platform-aware layout</h3>
+        <p>
+            The calendar grid uses explicit percentage widths and a fixed six-row structure to avoid platform-specific
+            flexbox inconsistencies and month-to-month height changes. Northern and southern hemisphere orientation is
+            handled explicitly for first and last quarter moon symbols, which appear mirrored depending on hemisphere.
+        </p>
 
-<h3>Small global store</h3>
-<p>
-  Zustand stores only app-level state shared across screens: selected date, visible month, location, loading and error state, hemisphere, time format, feature toggles, and Zmanim system. Component-local state stays local.
-</p>
+        <h3>Small global store</h3>
+        <p>
+            Zustand stores only app-level state shared across screens: selected date, visible month, location, loading
+            and error state, hemisphere, time format, feature toggles, and Zmanim system. Component-local state stays
+            local.
+        </p>
 
-<h3>Native-friendly migration from web</h3>
-<p>
-  A <code>web_reference/</code> directory preserves source material from the original browser implementation. The React Native code keeps the calculation intent while replacing DOM-oriented patterns with native navigation, gesture paging, React Native Paper controls, and platform font registration.
-</p>
+        <h3>Native-friendly migration from web</h3>
+        <p>
+            A
+            <code>web_reference/</code>
+            directory preserves source material from the original browser implementation. The React Native code keeps
+            the calculation intent while replacing DOM-oriented patterns with native navigation, gesture paging, React
+            Native Paper controls, and platform font registration.
+        </p>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Testing and Verification</h2>
+        <h2>Testing and Verification</h2>
 
-<p>The repository includes both React Native test coverage and calculation-focused Node scripts that can be run independently of the full app build:</p>
+        <p>
+            The repository includes both React Native test coverage and calculation-focused Node scripts that can be run
+            independently of the full app build:
+        </p>
 
-<ul class="feature-list">
-  <li><code>App.test.tsx</code> — verifies the app tree renders</li>
-  <li><code>test_calculations.js</code> — checks real astronomy and halachic calculations for the default location</li>
-  <li><code>test_edge_cases.js</code> — runs calculations across representative cities and seasonal dates including high-latitude cases</li>
-  <li><code>test_simple_celestial.js</code> — validates basic astronomy-engine API usage for moon phase and eclipse lookup</li>
-</ul>
+        <ul class="feature-list">
+            <li>
+                <code>App.test.tsx</code>
+                — verifies the app tree renders
+            </li>
+            <li>
+                <code>test_calculations.js</code>
+                — checks real astronomy and halachic calculations for the default location
+            </li>
+            <li>
+                <code>test_edge_cases.js</code>
+                — runs calculations across representative cities and seasonal dates including high-latitude cases
+            </li>
+            <li>
+                <code>test_simple_celestial.js</code>
+                — validates basic astronomy-engine API usage for moon phase and eclipse lookup
+            </li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Known Limitations</h2>
+        <h2>Known Limitations</h2>
 
-<ul class="feature-list">
-  <li>Geocoding requires network access and depends on Nominatim availability and rate limits</li>
-  <li>Timezone handling currently uses app/user offset formatting rather than a complete timezone database per searched location</li>
-  <li>Elevation is fixed at 0 in all astronomy and halachic calculations</li>
-  <li>Persistent storage not yet implemented for settings and saved locations</li>
-  <li>Automated coverage is strongest around smoke/render checks and standalone calculation scripts — component-level tests for settings, geocoding UI, and calendar interactions are planned</li>
-</ul>
+        <ul class="feature-list">
+            <li>Geocoding requires network access and depends on Nominatim availability and rate limits</li>
+            <li>
+                Timezone handling currently uses app/user offset formatting rather than a complete timezone database per
+                searched location
+            </li>
+            <li>Elevation is fixed at 0 in all astronomy and halachic calculations</li>
+            <li>Persistent storage not yet implemented for settings and saved locations</li>
+            <li>
+                Automated coverage is strongest around smoke/render checks and standalone calculation scripts —
+                component-level tests for settings, geocoding UI, and calendar interactions are planned
+            </li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Roadmap</h2>
+        <h2>Roadmap</h2>
 
-<ul class="feature-list">
-  <li>Persist user settings and last selected location</li>
-  <li>Improve timezone handling for manually searched locations</li>
-  <li>Deepen Jest and component-level test coverage</li>
-  <li>Add production geocoding strategy with request throttling</li>
-  <li>App Store and Play Store release packaging</li>
-</ul>
+        <ul class="feature-list">
+            <li>Persist user settings and last selected location</li>
+            <li>Improve timezone handling for manually searched locations</li>
+            <li>Deepen Jest and component-level test coverage</li>
+            <li>Add production geocoding strategy with request throttling</li>
+            <li>App Store and Play Store release packaging</li>
+        </ul>
 
-<hr>
+        <hr />
 
-<h2>Attribution</h2>
+        <h2>Attribution</h2>
 
-<ul class="credits">
-  <li><a href="https://github.com/cosinekitty/astronomy" target="_blank">Astronomy Engine</a> by <a href="http://cosinekitty.com/" target="_blank">Don Cross</a> — astronomical calculations including rise/set events, solar altitude, and eclipse detection</li>
-  <li><a href="https://github.com/hebcal/hebcal-es6" target="_blank">Hebcal Core</a> — halachic Zmanim calculations</li>
-  <li><a href="https://bachtogauss.com/calendar" target="_blank">bachtogauss.com/calendar</a> — original web reference implementation</li>
-</ul>
+        <ul class="credits">
+            <li>
+                <a href="https://github.com/cosinekitty/astronomy" target="_blank">Astronomy Engine</a>
+                by
+                <a href="http://cosinekitty.com/" target="_blank">Don Cross</a>
+                — astronomical calculations including rise/set events, solar altitude, and eclipse detection
+            </li>
+            <li>
+                <a href="https://github.com/hebcal/hebcal-es6" target="_blank">Hebcal Core</a>
+                — halachic Zmanim calculations
+            </li>
+            <li>
+                <a href="https://bachtogauss.com/calendar" target="_blank">bachtogauss.com/calendar</a>
+                — original web reference implementation
+            </li>
+        </ul>
 
-<hr>
+        <hr />
 
-<footer>
-  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; Documentation and code available upon request</p>
-</footer>
-
-</body>
+        <footer>
+            <p>
+                ←
+                <a href="../index.html">Return to portfolio</a>
+                &nbsp;·&nbsp; Documentation and code available upon request
+            </p>
+        </footer>
+    </body>
 </html>

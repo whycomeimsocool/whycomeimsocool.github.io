@@ -1,88 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Musical Interval Typography System — Ray Reich</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_resources/css/home.css">
-</head>
-<body class="doc-page">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Musical Interval Typography System — Ray Reich</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../_resources/css/style.css" />
+    </head>
+    <body class="doc-page">
+        <a class="back" href="../index.html">← Portfolio</a>
 
-<a class="back" href="../index.html">← Portfolio</a>
+        <p class="doc-label">Technical Documentation</p>
+        <h1>Musical Interval Typography System</h1>
+        <p class="subtitle">A type scale derived from the intervals of a musical scale</p>
 
-<p class="doc-label">Technical Documentation</p>
-<h1>Musical Interval Typography System</h1>
-<p class="subtitle">A type scale derived from the intervals of a musical scale</p>
+        <p class="meta">HTML · CSS custom properties · Zero dependencies &nbsp;·&nbsp; License: CC BY-NC 4.0</p>
 
-<p class="meta">HTML · CSS custom properties · Zero dependencies &nbsp;·&nbsp; License: CC BY-NC 4.0</p>
+        <hr />
 
-<hr>
+        <h2>Summary</h2>
 
-<h2>Summary</h2>
+        <p>
+            As a musician exploring various design philosophies, this system was born out of a simple question: can the
+            notes of a musical scale, rather than numerical values, be used to set font sizes? Although just a few lines
+            of code, it was a complicated and time-consuming process to arrive there. Into the end result went many
+            hours of experimentation, trial and error, mental problem-solving, and consultation with designer and
+            developer Ian Venskus, without whom this project would not have been possible.
+        </p>
 
-<p>
-  As a musician exploring various design philosophies, this system was born out of a simple question: can the notes of a musical scale, rather than numerical values, be used to set font sizes? Although just a few lines of code, it was a complicated and time-consuming process to arrive there. Into the end result went many hours of experimentation, trial and error, mental problem-solving, and consultation with designer and developer Ian Venskus, without whom this project would not have been possible.
-</p>
+        <p>
+            The underlying design system is essentially one of math and variables, using only HTML and CSS. It takes
+            inputs for a ratio (ideally a musical interval), a minimum font size (set to 16px for accessibility), and a
+            scaling factor which determines how everything grows in accordance with the viewport width. To best
+            accommodate text-only content, the body width is set to 50% — notice how the padding fluidly expands to fill
+            the screen in the margins as the viewport width is adjusted, while keeping all sizing and spacing related
+            and within bounds.
+        </p>
 
-<p>
-  The underlying design system is essentially one of math and variables, using only HTML and CSS. It takes inputs for a ratio (ideally a musical interval), a minimum font size (set to 16px for accessibility), and a scaling factor which determines how everything grows in accordance with the viewport width. To best accommodate text-only content, the body width is set to 50% — notice how the padding fluidly expands to fill the screen in the margins as the viewport width is adjusted, while keeping all sizing and spacing related and within bounds.
-</p>
+        <p>
+            An interesting aspect of this fluid responsiveness is that there are practically no media queries involved.
+            In truth, there are precisely two in use: one changes the text from justified to left-aligned on small
+            screen sizes for improved aesthetics and legibility; the other sets the viewport width at which point the
+            side margins start to shrink, maintaining a correct and balanced look on all device sizes.
+        </p>
 
-<p>
-  An interesting aspect of this fluid responsiveness is that there are practically no media queries involved. In truth, there are precisely two in use: one changes the text from justified to left-aligned on small screen sizes for improved aesthetics and legibility; the other sets the viewport width at which point the side margins start to shrink, maintaining a correct and balanced look on all device sizes.
-</p>
+        <p>
+            The system is not limited to determining font sizes. Musical intervals are employed wherever possible, so
+            that margins, padding, line heights, header and paragraph spacing (vertical rhythm), and anything else to do
+            with size and space are all based on the one fundamental musical interval.
+        </p>
 
-<p>
-  The system is not limited to determining font sizes. Musical intervals are employed wherever possible, so that margins, padding, line heights, header and paragraph spacing (vertical rhythm), and anything else to do with size and space are all based on the one fundamental musical interval.
-</p>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>The Code</h2>
 
-<h2>The Code</h2>
+        <h3>The ratio</h3>
 
-<h3>The ratio</h3>
+        <div class="code-block"><pre>--fontRatio: calc(32 / 27);</pre></div>
+        <p class="code-caption">
+            Sets the Font Ratio variable — the basis for the entire system. Preferably a musical interval, though any
+            numerical value in any form will do.
+        </p>
 
-<div class="code-block"><pre>--fontRatio: calc(32 / 27);</pre></div>
-<p class="code-caption">Sets the Font Ratio variable — the basis for the entire system. Preferably a musical interval, though any numerical value in any form will do.</p>
+        <h3>Minimum font size</h3>
 
-<h3>Minimum font size</h3>
+        <div class="code-block"><pre>--minFontSize: calc((16 / var(--fontRatio)) * 1px);</pre></div>
+        <p class="code-caption">
+            Defines the Minimum Font Size variable, to be used in conjunction with Note 00. Starts at 16px for
+            accessibility.
+        </p>
 
-<div class="code-block"><pre>--minFontSize: calc((16 / var(--fontRatio)) * 1px);</pre></div>
-<p class="code-caption">Defines the Minimum Font Size variable, to be used in conjunction with Note 00. Starts at 16px for accessibility.</p>
+        <h3>Note 00 — the root</h3>
 
-<h3>Note 00 — the root</h3>
+        <div class="code-block"><pre>--note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);</pre></div>
+        <p class="code-caption">
+            Defines the Note 00 variable — the starting point for all other Notes — scaling all the way up to infinity
+            (1 billion pixels, to be precise).
+        </p>
 
-<div class="code-block"><pre>--note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);</pre></div>
-<p class="code-caption">Defines the Note 00 variable — the starting point for all other Notes — scaling all the way up to infinity (1 billion pixels, to be precise).</p>
+        <h3>The scale</h3>
 
-<h3>The scale</h3>
-
-<div class="code-block"><pre>--note01: calc(var(--note00) * var(--fontRatio));
+        <div class="code-block">
+            <pre>
+--note01: calc(var(--note00) * var(--fontRatio));
 --note02: calc(var(--note01) * var(--fontRatio));
 --note03: calc(var(--note02) * var(--fontRatio));
---note04: calc(var(--note03) * var(--fontRatio));</pre></div>
-<p class="code-caption">Each subsequent Note is defined by multiplying the immediately previous Note by the Font Ratio. These Notes are used to size everything. More can be added as needed.</p>
+--note04: calc(var(--note03) * var(--fontRatio));</pre
+            >
+        </div>
+        <p class="code-caption">
+            Each subsequent Note is defined by multiplying the immediately previous Note by the Font Ratio. These Notes
+            are used to size everything. More can be added as needed.
+        </p>
 
-<h3>The viewport-width track</h3>
+        <h3>The viewport-width track</h3>
 
-<p>
-  The Note system's unit is tied to pixels. In order to adjust how the body and page margins grow and shrink according to viewport width, a parallel system with <code>vw</code> units is required.
-</p>
+        <p>
+            The Note system's unit is tied to pixels. In order to adjust how the body and page margins grow and shrink
+            according to viewport width, a parallel system with
+            <code>vw</code>
+            units is required.
+        </p>
 
-<div class="code-block"><pre>--minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
+        <div class="code-block">
+            <pre>
+--minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
 --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
 --note01VW: calc(var(--note00VW) * var(--fontRatio));
 --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
 --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
---fontSizeGrow: 1vw;</pre></div>
-<p class="code-caption">The vw-unit track mirrors the px track and is used exclusively for body and margin proportions.</p>
+--fontSizeGrow: 1vw;</pre
+            >
+        </div>
+        <p class="code-caption">
+            The vw-unit track mirrors the px track and is used exclusively for body and margin proportions.
+        </p>
 
-<h3>Body sizing</h3>
+        <h3>Body sizing</h3>
 
-<div class="code-block"><pre>body {
+        <div class="code-block">
+            <pre>
+body {
   width: 50vw;
   min-width: var(--bodyMinWidth);
   margin: auto;
@@ -93,12 +136,19 @@
     min-width: inherit;
     width: calc(var(--bodyMinWidthVW) / 767 * 100);
   }
-}</pre></div>
-<p class="code-caption">The only media query concerned with sizing and responsiveness. At 767px the body sizes down using vw-based variables.</p>
+}</pre
+            >
+        </div>
+        <p class="code-caption">
+            The only media query concerned with sizing and responsiveness. At 767px the body sizes down using vw-based
+            variables.
+        </p>
 
-<h3>The complete block</h3>
+        <h3>The complete block</h3>
 
-<div class="code-block"><pre>/*
+        <div class="code-block">
+            <pre>
+/*
   The following musical interval system and its associated code,
   created by Raymond Reich for bachtogauss.com,
   is licensed under the CC BY-NC 4.0 Deed License.
@@ -140,39 +190,94 @@ body {
     min-width: inherit;
     width: calc(var(--bodyMinWidthVW) / 767 * 100);
   }
-}</pre></div>
-<p class="code-caption">The complete block. Free to use with credit, under CC BY-NC 4.0.</p>
+}</pre
+            >
+        </div>
+        <p class="code-caption">The complete block. Free to use with credit, under CC BY-NC 4.0.</p>
 
-<h3>Example usage</h3>
+        <h3>Example usage</h3>
 
-<div class="code-block"><pre>font-size: var(--note03);
+        <div class="code-block">
+            <pre>
+font-size: var(--note03);
 line-height: var(--note06);
-margin-top: var(--note08);</pre></div>
-<p class="code-caption">How the system's implementation looks for a few properties — in this case, body text on this very page.</p>
+margin-top: var(--note08);</pre
+            >
+        </div>
+        <p class="code-caption">
+            How the system's implementation looks for a few properties — in this case, body text on this very page.
+        </p>
 
-<hr>
+        <hr />
 
-<h2>Sources &amp; Inspiration</h2>
+        <h2>Sources &amp; Inspiration</h2>
 
-<p>A significant amount was learned, and much inspiration taken, from the following works — upon which this system builds:</p>
+        <p>
+            A significant amount was learned, and much inspiration taken, from the following works — upon which this
+            system builds:
+        </p>
 
-<ul class="sources">
-  <li><a href="https://alistapart.com/article/more-meaningful-typography/" target="_blank">More Meaningful Typography — Tim Brown</a></li>
-  <li><a href="https://practicaltypography.com/" target="_blank">Practical Typography — Matthew Butterick</a></li>
-  <li><a href="https://medium.com/@jordan.foster/typographic-scales-979272e0ad08" target="_blank">Typographic Scaling — Fozzie Foster</a></li>
-  <li><a href="https://www.modularscale.com/" target="_blank">Modular Scale Calculator — Scott Kellum &amp; Tim Brown</a></li>
-  <li><a href="https://spencermortensen.com/articles/typographic-scale/" target="_blank">Typographic Scale — Spencer Mortensen</a></li>
-  <li><a href="https://medium.com/sketch-app-sources/exploring-responsive-type-scales-cf1da541be54" target="_blank">Exploring Responsive Type Scales — Joseph Mueller</a></li>
-  <li><a href="https://pairfonts.eu/articles/typographic-scale.php" target="_blank">The Typographic Scale — G.P.</a></li>
-  <li><a href="https://8thlight.com/insights/vertical-rhythm-in-typography" target="_blank">Vertical Rhythm in Typography — Chris Peak</a></li>
-  <li><a href="https://www.codementor.io/@ricardozea/100-responsive-typography-system-using-a-modular-scale-s5rhft58g" target="_blank">100% Responsive Typography System using a Modular Scale — Ricardo Zea</a></li>
-</ul>
+        <ul class="sources">
+            <li>
+                <a href="https://alistapart.com/article/more-meaningful-typography/" target="_blank">
+                    More Meaningful Typography — Tim Brown
+                </a>
+            </li>
+            <li>
+                <a href="https://practicaltypography.com/" target="_blank">Practical Typography — Matthew Butterick</a>
+            </li>
+            <li>
+                <a href="https://medium.com/@jordan.foster/typographic-scales-979272e0ad08" target="_blank">
+                    Typographic Scaling — Fozzie Foster
+                </a>
+            </li>
+            <li>
+                <a href="https://www.modularscale.com/" target="_blank">
+                    Modular Scale Calculator — Scott Kellum &amp; Tim Brown
+                </a>
+            </li>
+            <li>
+                <a href="https://spencermortensen.com/articles/typographic-scale/" target="_blank">
+                    Typographic Scale — Spencer Mortensen
+                </a>
+            </li>
+            <li>
+                <a
+                    href="https://medium.com/sketch-app-sources/exploring-responsive-type-scales-cf1da541be54"
+                    target="_blank"
+                >
+                    Exploring Responsive Type Scales — Joseph Mueller
+                </a>
+            </li>
+            <li>
+                <a href="https://pairfonts.eu/articles/typographic-scale.php" target="_blank">
+                    The Typographic Scale — G.P.
+                </a>
+            </li>
+            <li>
+                <a href="https://8thlight.com/insights/vertical-rhythm-in-typography" target="_blank">
+                    Vertical Rhythm in Typography — Chris Peak
+                </a>
+            </li>
+            <li>
+                <a
+                    href="https://www.codementor.io/@ricardozea/100-responsive-typography-system-using-a-modular-scale-s5rhft58g"
+                    target="_blank"
+                >
+                    100% Responsive Typography System using a Modular Scale — Ricardo Zea
+                </a>
+            </li>
+        </ul>
 
-<hr>
+        <hr />
 
-<footer>
-  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; <a href="https://bachtogauss.com/about/#about-site" target="_blank">See it live at bachtogauss.com</a></p>
-</footer>
-
-</body>
+        <footer>
+            <p>
+                ←
+                <a href="../index.html">Return to portfolio</a>
+                &nbsp;·&nbsp;
+                <a href="https://bachtogauss.com/about/#about-site" target="_blank">See it live at bachtogauss.com</a>
+            </p>
+        </footer>
+    </body>
 </html>

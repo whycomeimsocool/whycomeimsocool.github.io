@@ -1,146 +1,223 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AstroCal — Ray Reich</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_resources/css/home.css">
-</head>
-<body class="doc-page">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AstroCal — Ray Reich</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../_resources/css/style.css" />
+    </head>
+    <body class="doc-page">
+        <a class="back" href="../index.html">← Portfolio</a>
 
-<a class="back" href="../index.html">← Portfolio</a>
+        <p class="doc-label">Technical Documentation</p>
+        <h1>AstroCal</h1>
+        <p class="subtitle">
+            An astronomical calendar with lunar phases, solar and lunar eclipses, hemisphere awareness, timezone
+            support, and Zmanim — built from scratch in vanilla JavaScript
+        </p>
 
-<p class="doc-label">Technical Documentation</p>
-<h1>AstroCal</h1>
-<p class="subtitle">An astronomical calendar with lunar phases, solar and lunar eclipses, hemisphere awareness, timezone support, and Zmanim — built from scratch in vanilla JavaScript</p>
+        <p class="meta">JavaScript · Astronomy Engine · Hebcal · SVG · CSS &nbsp;·&nbsp; Live</p>
 
-<p class="meta">JavaScript · Astronomy Engine · Hebcal · SVG · CSS &nbsp;·&nbsp; Live</p>
+        <div class="project-links">
+            <a href="https://bachtogauss.com/calendar/" target="_blank">Open the live calendar →</a>
+        </div>
 
-<div class="project-links">
-  <a href="https://bachtogauss.com/calendar/" target="_blank">Open the live calendar →</a>
-</div>
+        <hr />
 
-<hr>
+        <h2>Origin</h2>
 
-<h2>Origin</h2>
+        <div class="origin-note">
+            <p>
+                This calendar started out as a table in Microsoft Word — initially created as a more aesthetically
+                pleasing option than the printable calendars available online. Moon phase symbols came next. Having to
+                retype the calendar every month, the decision was made to turn it into a dynamic website. What followed
+                was a years-long process of layering in precision: date navigation, hemispheres, eclipses, timezones,
+                Zmanim. Each feature integrated into the existing architecture rather than bolted on.
+            </p>
+        </div>
 
-<div class="origin-note">
-  <p>This calendar started out as a table in Microsoft Word — initially created as a more aesthetically pleasing option than the printable calendars available online. Moon phase symbols came next. Having to retype the calendar every month, the decision was made to turn it into a dynamic website. What followed was a years-long process of layering in precision: date navigation, hemispheres, eclipses, timezones, Zmanim. Each feature integrated into the existing architecture rather than bolted on.</p>
-</div>
+        <p>
+            The project is a good illustration of how software grows when driven by genuine need rather than
+            specification. No feature was added for its own sake — each one existed because the calendar was being used
+            and something was missing from it. The result is a system with considerable depth that nonetheless started
+            as a Word document.
+        </p>
 
-<p>
-  The project is a good illustration of how software grows when driven by genuine need rather than specification. No feature was added for its own sake — each one existed because the calendar was being used and something was missing from it. The result is a system with considerable depth that nonetheless started as a Word document.
-</p>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Features</h2>
 
-<h2>Features</h2>
+        <h3>Lunar phases</h3>
+        <ul class="feature-list">
+            <li>All eight principal moon phases rendered per day across the month</li>
+            <li>
+                Phase calculations performed using Don Cross's Astronomy Engine — chosen specifically for mathematical
+                accuracy
+            </li>
+            <li>All phase symbols are Unicode icons converted to hand-crafted SVGs, aligned to the pixel</li>
+            <li>
+                Hemisphere toggle adjusts icon orientation accordingly — northern and southern hemisphere rendering
+                differ
+            </li>
+        </ul>
 
-<h3>Lunar phases</h3>
-<ul class="feature-list">
-  <li>All eight principal moon phases rendered per day across the month</li>
-  <li>Phase calculations performed using Don Cross's Astronomy Engine — chosen specifically for mathematical accuracy</li>
-  <li>All phase symbols are Unicode icons converted to hand-crafted SVGs, aligned to the pixel</li>
-  <li>Hemisphere toggle adjusts icon orientation accordingly — northern and southern hemisphere rendering differ</li>
-</ul>
+        <h3>Eclipses</h3>
+        <ul class="feature-list">
+            <li>Both lunar and solar eclipses detected and displayed for the current month</li>
+            <li>
+                Eclipse data computed via Astronomy Engine alongside phase data — same calculation pass, no separate
+                lookup
+            </li>
+            <li>Eclipse indicators rendered inline within the calendar grid</li>
+        </ul>
 
-<h3>Eclipses</h3>
-<ul class="feature-list">
-  <li>Both lunar and solar eclipses detected and displayed for the current month</li>
-  <li>Eclipse data computed via Astronomy Engine alongside phase data — same calculation pass, no separate lookup</li>
-  <li>Eclipse indicators rendered inline within the calendar grid</li>
-</ul>
+        <h3>Timezone support</h3>
+        <ul class="feature-list">
+            <li>Full timezone selection with precise UTC offset conversion</li>
+            <li>
+                All astronomical times — phase transitions, eclipse moments, Zmanim — displayed in the selected timezone
+            </li>
+            <li>Timezone state persists across navigation</li>
+        </ul>
 
-<h3>Timezone support</h3>
-<ul class="feature-list">
-  <li>Full timezone selection with precise UTC offset conversion</li>
-  <li>All astronomical times — phase transitions, eclipse moments, Zmanim — displayed in the selected timezone</li>
-  <li>Timezone state persists across navigation</li>
-</ul>
+        <h3>Zmanim — Dawn and Midnight</h3>
+        <ul class="feature-list">
+            <li>
+                Halachic dawn and astronomical midnight calculated via the
+                <a href="https://hebcal.github.io/api/core/classes/Zmanim.html" target="_blank">
+                    Hebcal Zmanim library
+                </a>
+            </li>
+            <li>Times displayed per day when Zmanim mode is active</li>
+            <li>Geolocation-aware: calculations use the observer's coordinates</li>
+        </ul>
 
-<h3>Zmanim — Dawn and Midnight</h3>
-<ul class="feature-list">
-  <li>Halachic dawn and astronomical midnight calculated via the <a href="https://hebcal.github.io/api/core/classes/Zmanim.html" target="_blank">Hebcal Zmanim library</a></li>
-  <li>Times displayed per day when Zmanim mode is active</li>
-  <li>Geolocation-aware: calculations use the observer's coordinates</li>
-</ul>
+        <h3>Interactive legend</h3>
+        <ul class="feature-list">
+            <li>Fully interactive legend explaining all symbols used in the calendar</li>
+            <li>Toggle controls for showing and hiding individual data layers</li>
+        </ul>
 
-<h3>Interactive legend</h3>
-<ul class="feature-list">
-  <li>Fully interactive legend explaining all symbols used in the calendar</li>
-  <li>Toggle controls for showing and hiding individual data layers</li>
-</ul>
+        <h3>Date navigation</h3>
+        <ul class="feature-list">
+            <li>Forward and backward month navigation with full recalculation on each view</li>
+            <li>Jumps to any month and year</li>
+            <li>Current day highlighted automatically</li>
+        </ul>
 
-<h3>Date navigation</h3>
-<ul class="feature-list">
-  <li>Forward and backward month navigation with full recalculation on each view</li>
-  <li>Jumps to any month and year</li>
-  <li>Current day highlighted automatically</li>
-</ul>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Technical Approach</h2>
 
-<h2>Technical Approach</h2>
+        <p>
+            The calendar is built entirely in vanilla JavaScript — no framework, no build step, no bundler. The decision
+            to avoid dependencies was deliberate: the Astronomy Engine and Hebcal libraries are the two exceptions, both
+            chosen for domain-specific accuracy rather than convenience.
+        </p>
 
-<p>
-  The calendar is built entirely in vanilla JavaScript — no framework, no build step, no bundler. The decision to avoid dependencies was deliberate: the Astronomy Engine and Hebcal libraries are the two exceptions, both chosen for domain-specific accuracy rather than convenience.
-</p>
+        <p>
+            Astronomical calculations are performed client-side on each render. Phase and eclipse data for the visible
+            month is computed in a single pass using the Astronomy Engine, which provides the mathematical precision
+            required for reliable eclipse detection. Zmanim calculations are layered on top via Hebcal, using the
+            observer's geolocation when available.
+        </p>
 
-<p>
-  Astronomical calculations are performed client-side on each render. Phase and eclipse data for the visible month is computed in a single pass using the Astronomy Engine, which provides the mathematical precision required for reliable eclipse detection. Zmanim calculations are layered on top via Hebcal, using the observer's geolocation when available.
-</p>
+        <p>
+            The SVG icon system was built by hand: each moon phase symbol started as a Unicode character, was traced and
+            refined into a clean SVG path, and then tuned for visual consistency across the full phase cycle.
+            Hemisphere-awareness required a separate set of orientations for southern-hemisphere rendering, where the
+            crescent and gibbous phases appear mirrored.
+        </p>
 
-<p>
-  The SVG icon system was built by hand: each moon phase symbol started as a Unicode character, was traced and refined into a clean SVG path, and then tuned for visual consistency across the full phase cycle. Hemisphere-awareness required a separate set of orientations for southern-hemisphere rendering, where the crescent and gibbous phases appear mirrored.
-</p>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Tech Stack</h2>
 
-<h2>Tech Stack</h2>
+        <table class="stack-table">
+            <tr>
+                <td>Language</td>
+                <td>Vanilla JavaScript — no framework, no build step</td>
+            </tr>
+            <tr>
+                <td>Astronomical calculations</td>
+                <td>Astronomy Engine by Don Cross</td>
+            </tr>
+            <tr>
+                <td>Zmanim calculations</td>
+                <td>Hebcal Core (Zmanim class)</td>
+            </tr>
+            <tr>
+                <td>Icons</td>
+                <td>Unicode characters converted to hand-authored SVGs</td>
+            </tr>
+            <tr>
+                <td>Styling</td>
+                <td>Hand-authored CSS using the Musical Interval Typography System</td>
+            </tr>
+            <tr>
+                <td>Hosting</td>
+                <td>Static site, served via PHP host</td>
+            </tr>
+        </table>
 
-<table class="stack-table">
-  <tr><td>Language</td><td>Vanilla JavaScript — no framework, no build step</td></tr>
-  <tr><td>Astronomical calculations</td><td>Astronomy Engine by Don Cross</td></tr>
-  <tr><td>Zmanim calculations</td><td>Hebcal Core (Zmanim class)</td></tr>
-  <tr><td>Icons</td><td>Unicode characters converted to hand-authored SVGs</td></tr>
-  <tr><td>Styling</td><td>Hand-authored CSS using the Musical Interval Typography System</td></tr>
-  <tr><td>Hosting</td><td>Static site, served via PHP host</td></tr>
-</table>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Design Notes</h2>
 
-<h2>Design Notes</h2>
+        <p>
+            The calendar was conceived as something beautiful before it was conceived as something functional. The
+            original Word table prioritized aesthetics — readable type, clean grid, considered spacing — and that
+            priority carried through every subsequent version. The SVG icons were aligned to the pixel not because it
+            was required but because misalignment was noticeable and unacceptable.
+        </p>
 
-<p>
-  The calendar was conceived as something beautiful before it was conceived as something functional. The original Word table prioritized aesthetics — readable type, clean grid, considered spacing — and that priority carried through every subsequent version. The SVG icons were aligned to the pixel not because it was required but because misalignment was noticeable and unacceptable.
-</p>
+        <p>
+            The same Musical Interval Typography System that governs bachtogauss.com governs the calendar's layout — the
+            same ratio, the same note variables, the same two media queries. The calendar is not a separate design
+            artifact; it is part of the same document.
+        </p>
 
-<p>
-  The same Musical Interval Typography System that governs bachtogauss.com governs the calendar's layout — the same ratio, the same note variables, the same two media queries. The calendar is not a separate design artifact; it is part of the same document.
-</p>
+        <p>
+            A native app version of the calendar extends this work to mobile, preserving the same calculation engine and
+            visual language in an application context.
+        </p>
 
-<p>
-  A native app version of the calendar extends this work to mobile, preserving the same calculation engine and visual language in an application context.
-</p>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Credits</h2>
 
-<h2>Credits</h2>
+        <ul class="credits">
+            <li>
+                <a href="https://github.com/cosinekitty/astronomy" target="_blank">Astronomy Engine</a>
+                by
+                <a href="http://cosinekitty.com/" target="_blank">Don Cross</a>
+                — astronomical calculations including lunar phases and eclipse detection
+            </li>
+            <li>
+                <a href="https://hebcal.github.io/api/core/classes/Zmanim.html" target="_blank">Hebcal Core / Zmanim</a>
+                — halachic and astronomical time calculations
+            </li>
+            <li>
+                <a href="https://www.ianvenskus.com" target="_blank">Ian Venskus</a>
+                — pixel-level design alignment and consultation
+            </li>
+        </ul>
 
-<ul class="credits">
-  <li><a href="https://github.com/cosinekitty/astronomy" target="_blank">Astronomy Engine</a> by <a href="http://cosinekitty.com/" target="_blank">Don Cross</a> — astronomical calculations including lunar phases and eclipse detection</li>
-  <li><a href="https://hebcal.github.io/api/core/classes/Zmanim.html" target="_blank">Hebcal Core / Zmanim</a> — halachic and astronomical time calculations</li>
-  <li><a href="https://www.ianvenskus.com" target="_blank">Ian Venskus</a> — pixel-level design alignment and consultation</li>
-</ul>
+        <hr />
 
-<hr>
-
-<footer>
-  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; <a href="https://bachtogauss.com/calendar/" target="_blank">Open the live calendar</a></p>
-</footer>
-
-</body>
+        <footer>
+            <p>
+                ←
+                <a href="../index.html">Return to portfolio</a>
+                &nbsp;·&nbsp;
+                <a href="https://bachtogauss.com/calendar/" target="_blank">Open the live calendar</a>
+            </p>
+        </footer>
+    </body>
 </html>

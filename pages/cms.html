@@ -1,45 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Custom CMS & Admin Panel — Ray Reich</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_resources/css/home.css">
-</head>
-<body class="doc-page">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Custom CMS & Admin Panel — Ray Reich</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../_resources/css/style.css" />
+    </head>
+    <body class="doc-page">
+        <a class="back" href="../index.html">← Portfolio</a>
 
-<a class="back" href="../index.html">← Portfolio</a>
+        <p class="doc-label">Technical Documentation</p>
+        <h1>Custom CMS &amp; Admin Panel</h1>
+        <p class="subtitle">
+            A bespoke full-stack content management system built from scratch — public PHP site, local Python admin
+            backend, dual-mode storage
+        </p>
 
-<p class="doc-label">Technical Documentation</p>
-<h1>Custom CMS &amp; Admin Panel</h1>
-<p class="subtitle">A bespoke full-stack content management system built from scratch — public PHP site, local Python admin backend, dual-mode storage</p>
+        <p class="meta">Python · SQLite · PHP · vanilla JS · ES modules · Jest · pytest &nbsp;·&nbsp; Live</p>
 
-<p class="meta">Python · SQLite · PHP · vanilla JS · ES modules · Jest · pytest &nbsp;·&nbsp; Live</p>
+        <hr />
 
-<hr>
+        <h2>Overview</h2>
 
-<h2>Overview</h2>
+        <p>
+            This is a purpose-built content management system designed around a specific operational constraint: a
+            single operator managing a public-facing website entirely from a local machine, with no cloud CMS, no
+            third-party admin interface, and no unnecessary dependencies. Every part of the system — from the storage
+            layer to the publish workflow — was designed to serve that constraint precisely.
+        </p>
 
-<p>
-  This is a purpose-built content management system designed around a specific operational constraint: a single operator managing a public-facing website entirely from a local machine, with no cloud CMS, no third-party admin interface, and no unnecessary dependencies. Every part of the system — from the storage layer to the publish workflow — was designed to serve that constraint precisely.
-</p>
+        <p>
+            The public site is intentionally lightweight: PHP, JSON, and vanilla JavaScript. The local admin panel is a
+            browser UI backed by a Python standard-library HTTP server with modular handlers, a dual-mode SQLite/JSON
+            storage adapter, and an extensive suite of utility scripts covering post ingestion, media backup, QR
+            tracking, access log analytics, resource management, and publishing.
+        </p>
 
-<p>
-  The public site is intentionally lightweight: PHP, JSON, and vanilla JavaScript. The local admin panel is a browser UI backed by a Python standard-library HTTP server with modular handlers, a dual-mode SQLite/JSON storage adapter, and an extensive suite of utility scripts covering post ingestion, media backup, QR tracking, access log analytics, resource management, and publishing.
-</p>
+        <div class="constraint-note">
+            <p>
+                The architecture was shaped by a deliberate choice to avoid external dependencies wherever possible. The
+                Python backend uses only the standard library. The public site consumes static JSON files. The admin
+                panel runs locally and publishes to a remote PHP host — a workflow that influenced every design decision
+                in the system.
+            </p>
+        </div>
 
-<div class="constraint-note">
-  <p>The architecture was shaped by a deliberate choice to avoid external dependencies wherever possible. The Python backend uses only the standard library. The public site consumes static JSON files. The admin panel runs locally and publishes to a remote PHP host — a workflow that influenced every design decision in the system.</p>
-</div>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Project Map</h2>
 
-<h2>Project Map</h2>
-
-<div class="code-block"><pre>site/                          Public website
+        <div class="code-block">
+            <pre>
+site/                          Public website
 site/posts.json                Published posts data
 site/action/action-items.json  Published action artwork and download data
 site/resources/resources.json  Published resources sections and cards
@@ -54,180 +72,267 @@ admin-panel/_resources/data/   SQLite database and QR history data
 _commands/                     macOS command launchers, test helpers, migrations
 _config/                       Templates and local configuration examples
 _assets/docs/                  Current docs and historical plans and reports
-_production_logs/              Local synced access log input</pre></div>
+_production_logs/              Local synced access log input</pre
+            >
+        </div>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Storage Model</h2>
+        <h2>Storage Model</h2>
 
-<p>
-  The backend uses a dual-mode storage adapter that supports both SQLite and JSON, selectable via configuration. Active admin operations prefer SQLite; the public site consumes JSON files under <code>site/</code>. Handlers that mutate SQLite state sync back to JSON as part of the publish workflow.
-</p>
+        <p>
+            The backend uses a dual-mode storage adapter that supports both SQLite and JSON, selectable via
+            configuration. Active admin operations prefer SQLite; the public site consumes JSON files under
+            <code>site/</code>
+            . Handlers that mutate SQLite state sync back to JSON as part of the publish workflow.
+        </p>
 
-<ul class="feature-list">
-  <li><code>db_adapter.py</code> is the public data access layer for all handlers, abstracting the storage mode from handler logic</li>
-  <li><code>config.json</code> controls the active storage mode via <code>"migration": { "use_database": true }</code></li>
-  <li>Legacy JSON mode remains available for migration, parity testing, and fallback</li>
-  <li>SQLite schema migrations run automatically via <code>db_layer.py</code> when the database is opened — no manual migration steps required</li>
-</ul>
+        <ul class="feature-list">
+            <li>
+                <code>db_adapter.py</code>
+                is the public data access layer for all handlers, abstracting the storage mode from handler logic
+            </li>
+            <li>
+                <code>config.json</code>
+                controls the active storage mode via
+                <code>"migration": { "use_database": true }</code>
+            </li>
+            <li>Legacy JSON mode remains available for migration, parity testing, and fallback</li>
+            <li>
+                SQLite schema migrations run automatically via
+                <code>db_layer.py</code>
+                when the database is opened — no manual migration steps required
+            </li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Admin Panel Capabilities</h2>
+        <h2>Admin Panel Capabilities</h2>
 
-<h3>Posts</h3>
-<ul class="feature-list">
-  <li>Add, edit, batch edit, search, sort, select, archive, restore, delete</li>
-  <li>Duplicate checking across active, archived, and deleted records</li>
-  <li>Link checking, media backup, thumbnail sync</li>
-  <li>Upload-date backfill and duration extraction workflow</li>
-</ul>
+        <h3>Posts</h3>
+        <ul class="feature-list">
+            <li>Add, edit, batch edit, search, sort, select, archive, restore, delete</li>
+            <li>Duplicate checking across active, archived, and deleted records</li>
+            <li>Link checking, media backup, thumbnail sync</li>
+            <li>Upload-date backfill and duration extraction workflow</li>
+        </ul>
 
-<h3>Post ingestion pipeline</h3>
-<p>
-  The ingestion pipeline handles the full lifecycle of bringing a new post into the system. Each step is automated where possible and logged where not:
-</p>
-<ul class="feature-list">
-  <li>URL normalization and tracking-parameter removal</li>
-  <li>Platform and media-type detection</li>
-  <li>Duplicate checking across active, archived, and deleted posts</li>
-  <li>Upload date and duration extraction</li>
-  <li>Thumbnail extraction and generation</li>
-  <li>Article archiving and article thumbnail generation</li>
-  <li>Persistence to both JSON and SQLite</li>
-</ul>
+        <h3>Post ingestion pipeline</h3>
+        <p>
+            The ingestion pipeline handles the full lifecycle of bringing a new post into the system. Each step is
+            automated where possible and logged where not:
+        </p>
+        <ul class="feature-list">
+            <li>URL normalization and tracking-parameter removal</li>
+            <li>Platform and media-type detection</li>
+            <li>Duplicate checking across active, archived, and deleted posts</li>
+            <li>Upload date and duration extraction</li>
+            <li>Thumbnail extraction and generation</li>
+            <li>Article archiving and article thumbnail generation</li>
+            <li>Persistence to both JSON and SQLite</li>
+        </ul>
 
-<h3>Action items</h3>
-<ul class="feature-list">
-  <li>Category and artwork item management</li>
-  <li>PDF and image uploads with print-size detection and preview generation</li>
-  <li>Download metadata, variants, archive and restore</li>
-  <li>QR code assignment per item</li>
-</ul>
+        <h3>Action items</h3>
+        <ul class="feature-list">
+            <li>Category and artwork item management</li>
+            <li>PDF and image uploads with print-size detection and preview generation</li>
+            <li>Download metadata, variants, archive and restore</li>
+            <li>QR code assignment per item</li>
+        </ul>
 
-<h3>QR system</h3>
-<ul class="feature-list">
-  <li>Structured QR ID generation and QR image generation UI</li>
-  <li>Server-side QR history with link and unlink state</li>
-  <li>Scan-log sync, analytics endpoints, and redirect handling</li>
-</ul>
+        <h3>QR system</h3>
+        <ul class="feature-list">
+            <li>Structured QR ID generation and QR image generation UI</li>
+            <li>Server-side QR history with link and unlink state</li>
+            <li>Scan-log sync, analytics endpoints, and redirect handling</li>
+        </ul>
 
-<h3>Resources</h3>
-<ul class="feature-list">
-  <li>Sections and resource cards</li>
-  <li>Logo upload, favicon and logo fetching, direct logo download</li>
-  <li>Social link fields per resource</li>
-</ul>
+        <h3>Resources</h3>
+        <ul class="feature-list">
+            <li>Sections and resource cards</li>
+            <li>Logo upload, favicon and logo fetching, direct logo download</li>
+            <li>Social link fields per resource</li>
+        </ul>
 
-<h3>Access log analytics</h3>
-<ul class="feature-list">
-  <li>SFTP sync of Apache logs from the production server</li>
-  <li>Apache log parsing with persistent parse-error tracking</li>
-  <li>SQLite storage with grouped visitor views, filters, stats, and charts</li>
-  <li>Geolocation cache for visitor IP resolution</li>
-</ul>
+        <h3>Access log analytics</h3>
+        <ul class="feature-list">
+            <li>SFTP sync of Apache logs from the production server</li>
+            <li>Apache log parsing with persistent parse-error tracking</li>
+            <li>SQLite storage with grouped visitor views, filters, stats, and charts</li>
+            <li>Geolocation cache for visitor IP resolution</li>
+        </ul>
 
-<h3>Wikipedia tracker</h3>
-<ul class="feature-list">
-  <li>Admin article configuration with reorder, update, and delete</li>
-  <li>Cache status and cache-clear controls</li>
-  <li>Public stale-while-revalidate API for the live site</li>
-</ul>
+        <h3>Wikipedia tracker</h3>
+        <ul class="feature-list">
+            <li>Admin article configuration with reorder, update, and delete</li>
+            <li>Cache status and cache-clear controls</li>
+            <li>Public stale-while-revalidate API for the live site</li>
+        </ul>
 
-<h3>Publishing and export</h3>
-<ul class="feature-list">
-  <li>Sync current SQLite-backed data to public JSON files</li>
-  <li>Create export packages for deployment</li>
-</ul>
+        <h3>Publishing and export</h3>
+        <ul class="feature-list">
+            <li>Sync current SQLite-backed data to public JSON files</li>
+            <li>Create export packages for deployment</li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Tech Stack</h2>
+        <h2>Tech Stack</h2>
 
-<table class="stack-table">
-  <tr><td>Public site</td><td>PHP, JSON, vanilla JavaScript</td></tr>
-  <tr><td>Admin UI</td><td>HTML, CSS, ES modules (vanilla JS)</td></tr>
-  <tr><td>Admin backend</td><td>Python 3, standard library HTTP server</td></tr>
-  <tr><td>Storage</td><td>SQLite (primary), JSON (legacy / public consumption)</td></tr>
-  <tr><td>Frontend tests</td><td>Jest</td></tr>
-  <tr><td>Backend tests</td><td>pytest</td></tr>
-  <tr><td>Platform</td><td>macOS (local admin), Apache (production host)</td></tr>
-</table>
+        <table class="stack-table">
+            <tr>
+                <td>Public site</td>
+                <td>PHP, JSON, vanilla JavaScript</td>
+            </tr>
+            <tr>
+                <td>Admin UI</td>
+                <td>HTML, CSS, ES modules (vanilla JS)</td>
+            </tr>
+            <tr>
+                <td>Admin backend</td>
+                <td>Python 3, standard library HTTP server</td>
+            </tr>
+            <tr>
+                <td>Storage</td>
+                <td>SQLite (primary), JSON (legacy / public consumption)</td>
+            </tr>
+            <tr>
+                <td>Frontend tests</td>
+                <td>Jest</td>
+            </tr>
+            <tr>
+                <td>Backend tests</td>
+                <td>pytest</td>
+            </tr>
+            <tr>
+                <td>Platform</td>
+                <td>macOS (local admin), Apache (production host)</td>
+            </tr>
+        </table>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Backend Architecture</h2>
+        <h2>Backend Architecture</h2>
 
-<p>
-  The Python backend is built entirely on the standard library — no Flask, no Django, no third-party web framework. The HTTP server dispatches requests to modular handlers, each responsible for a discrete feature area. This architecture makes it straightforward to add, test, or remove handlers independently.
-</p>
+        <p>
+            The Python backend is built entirely on the standard library — no Flask, no Django, no third-party web
+            framework. The HTTP server dispatches requests to modular handlers, each responsible for a discrete feature
+            area. This architecture makes it straightforward to add, test, or remove handlers independently.
+        </p>
 
-<h3>Starting the backend</h3>
+        <h3>Starting the backend</h3>
 
-<div class="code-block"><pre>cd admin-panel/_resources/python
+        <div class="code-block">
+            <pre>
+cd admin-panel/_resources/python
 ./setup_venv.sh
-python3 simple_server.py</pre></div>
-<p class="code-caption">The configured admin start port is 5500, with up to 10 attempts for the next free port.</p>
+python3 simple_server.py</pre
+            >
+        </div>
+        <p class="code-caption">
+            The configured admin start port is 5500, with up to 10 attempts for the next free port.
+        </p>
 
-<h3>Starting the public site</h3>
+        <h3>Starting the public site</h3>
 
-<div class="code-block"><pre>open "_commands/ports_and_servers/servers/launch_PHP.command"</pre></div>
+        <div class="code-block"><pre>open "_commands/ports_and_servers/servers/launch_PHP.command"</pre></div>
 
-<h3>Combined launcher</h3>
+        <h3>Combined launcher</h3>
 
-<div class="code-block"><pre>open "_commands/CLEAN+LAUNCH.command"</pre></div>
+        <div class="code-block"><pre>open "_commands/CLEAN+LAUNCH.command"</pre></div>
 
-<h3>Running tests</h3>
+        <h3>Running tests</h3>
 
-<div class="code-block"><pre># Python backend tests
+        <div class="code-block">
+            <pre>
+# Python backend tests
 cd admin-panel/_resources/python
 python3 -m pytest
 
 # Frontend tests
 cd admin-panel/_resources/js
-npm test</pre></div>
+npm test</pre
+            >
+        </div>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Documentation Structure</h2>
+        <h2>Documentation Structure</h2>
 
-<p>The project maintains a layered documentation system covering current state, historical decisions, and operational procedures:</p>
+        <p>
+            The project maintains a layered documentation system covering current state, historical decisions, and
+            operational procedures:
+        </p>
 
-<ul class="feature-list">
-  <li><code>_assets/docs/README.md</code> — documentation index and status of every Markdown file</li>
-  <li><code>CURRENT_SYSTEM_REFERENCE.md</code> — current feature and architecture reference</li>
-  <li><code>ADMIN_PANEL_WORKFLOWS.md</code> — detailed admin UI and feature workflows</li>
-  <li><code>OPERATIONS_AND_MAINTENANCE.md</code> — testing, deployment, backup, link-checking, and maintenance procedures</li>
-  <li><code>admin-panel/_resources/python/README.md</code> — Python backend reference</li>
-  <li><code>CONFIG_REFERENCE.md</code> — full configuration reference</li>
-  <li><code>README-DURATION.md</code> — duration extraction feature notes</li>
-  <li><code>_commands/_commands_analysis.md</code> — command launcher inventory</li>
-  <li><code>_assets/docs/history/</code> — completed code-review records, audits, migration notes, and superseded implementation summaries</li>
-</ul>
+        <ul class="feature-list">
+            <li>
+                <code>_assets/docs/README.md</code>
+                — documentation index and status of every Markdown file
+            </li>
+            <li>
+                <code>CURRENT_SYSTEM_REFERENCE.md</code>
+                — current feature and architecture reference
+            </li>
+            <li>
+                <code>ADMIN_PANEL_WORKFLOWS.md</code>
+                — detailed admin UI and feature workflows
+            </li>
+            <li>
+                <code>OPERATIONS_AND_MAINTENANCE.md</code>
+                — testing, deployment, backup, link-checking, and maintenance procedures
+            </li>
+            <li>
+                <code>admin-panel/_resources/python/README.md</code>
+                — Python backend reference
+            </li>
+            <li>
+                <code>CONFIG_REFERENCE.md</code>
+                — full configuration reference
+            </li>
+            <li>
+                <code>README-DURATION.md</code>
+                — duration extraction feature notes
+            </li>
+            <li>
+                <code>_commands/_commands_analysis.md</code>
+                — command launcher inventory
+            </li>
+            <li>
+                <code>_assets/docs/history/</code>
+                — completed code-review records, audits, migration notes, and superseded implementation summaries
+            </li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Security Baseline</h2>
+        <h2>Security Baseline</h2>
 
-<p>
-  The admin panel is designed to run locally or behind trusted network controls. A code review identified the absence of active admin authentication in <code>simple_server.py</code>. The following are documented as required before any public or network exposure:
-</p>
+        <p>
+            The admin panel is designed to run locally or behind trusted network controls. A code review identified the
+            absence of active admin authentication in
+            <code>simple_server.py</code>
+            . The following are documented as required before any public or network exposure:
+        </p>
 
-<ul class="feature-list">
-  <li>Admin authentication layer</li>
-  <li>CSRF protection for state-changing browser workflows</li>
-  <li>Stricter SSRF and download limits</li>
-</ul>
+        <ul class="feature-list">
+            <li>Admin authentication layer</li>
+            <li>CSRF protection for state-changing browser workflows</li>
+            <li>Stricter SSRF and download limits</li>
+        </ul>
 
-<p>
-  None of these represent an architectural constraint — they are known gaps, deliberately deferred given the local-only operational model, and clearly documented for any future deployment that changes that assumption.
-</p>
+        <p>
+            None of these represent an architectural constraint — they are known gaps, deliberately deferred given the
+            local-only operational model, and clearly documented for any future deployment that changes that assumption.
+        </p>
 
-<hr>
+        <hr />
 
-<footer>
-  <p>← <a href="../index.html">Return to portfolio</a> &nbsp;·&nbsp; Full documentation and code available upon request</p>
-</footer>
-
-</body>
+        <footer>
+            <p>
+                ←
+                <a href="../index.html">Return to portfolio</a>
+                &nbsp;·&nbsp; Full documentation and code available upon request
+            </p>
+        </footer>
+    </body>
 </html>
