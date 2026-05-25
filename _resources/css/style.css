@@ -193,6 +193,12 @@
       margin-top: 18px;
       line-height: 1.6;
     }
+    .proj-icon {
+      display: block;
+      width: 48px;
+      margin-top: 18px;
+      opacity: 0.85;
+    }
     .proj-body { padding-top: 4px; }
     .proj-title {
       font-family: var(--serif);
