@@ -107,7 +107,8 @@
             A printed QR code keeps working even when the creator changes the audio behind it. Each Piece has a stable
             public share key embedded in the QR at generation time. New audio versions are encrypted so the same printed
             paper decrypts the current assigned content. The creator's encrypted key set retains the Piece key so
-            updates remain possible indefinitely.
+            updates remain possible indefinitely. A printed QR can be updated to play different audio at any time
+            without reprinting — the paper stays the same.
         </p>
 
         <h3>Key management</h3>
@@ -249,6 +250,15 @@
         <p>
             86 unit tests pass. 32 of 32 Playwright acceptance tests pass against local MinIO. Remaining: M7 admin
             acceptance, M9 Stripe billing acceptance, mobile QR LAN testing.
+        </p>
+
+        <p>
+            In summary: Auth.js v5 with PBKDF2 key derivation and IndexedDB non-extractable trusted-device keys;
+            encrypted audio upload to S3-compatible object storage; dynamic QR generation with stable fragment share
+            keys; browser-side decryption with one-tap playback; six listener themes; privacy-friendly analytics with
+            no raw IP retention; abuse reporting and DMCA intake with admin moderation UI; expiration, play limits, and
+            Pass-gated listening; Stripe billing and plan enforcement; and printable PDF, card, and sticker layouts for
+            physical QR artifacts.
         </p>
 
         <hr class="thin" />

@@ -39,6 +39,8 @@
             The project is structured as a portfolio-grade systems project rather than a single demo script. It includes
             platform-specific audio backends, reusable DSP modules, a desktop and Raspberry Pi UI, automated tests, and
             deployment scripts for both macOS and Raspberry Pi.
+            The Raspberry Pi build path adds ALSA, FFTW3, and ARM/NEON optimization hooks with full deploy and
+            audio-test scripts.
         </p>
 
         <div class="status-note">
@@ -256,7 +258,7 @@ AUDIO_BOX/
         <h2>OSC Control API</h2>
 
         <p>
-            The audio engine listens on
+            The OSC control API is fully documented. The audio engine listens on
             <code>localhost:4559</code>
             . All control messages follow the OSC address pattern below.
         </p>
