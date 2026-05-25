@@ -254,7 +254,8 @@
       place-items: center;
     }
     .img-edutonebox { background: #0d0d0f; }
-    .img-calendar    { background: #0a0a0c; }
+    .img-calendar        { background: #0a0a0c; }
+    .img-astrocal-app   { background: #0a0a0c; }
     .img-cms         { background: #fdfdfd; border: 1px solid var(--rule); }
     .img-typography  { background: #fff; border: 1px solid var(--rule); padding: 22px 28px; }
 
