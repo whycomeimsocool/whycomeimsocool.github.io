@@ -31,11 +31,11 @@
         <h2>Overview</h2>
 
         <p>
-            This app adapts the calculation and interaction model from
+            This cross-platform mobile app adapts the calculation engine and interaction model from
             <a href="https://bachtogauss.com/calendar" target="_blank">bachtogauss.com/calendar</a>
-            into a native mobile experience. It is designed as a practical celestial calendar: select a day, change
-            location, review sun and moon data, inspect moon phases and eclipses on the calendar grid, and toggle the
-            supporting systems that matter to you.
+            into a native iOS and Android experience. It is designed as a practical celestial calendar: select a day,
+            change location, review sun and moon data, inspect moon phases and eclipses on the calendar grid, and toggle
+            the supporting systems that matter to you.
         </p>
 
         <div class="context-note">
@@ -48,9 +48,11 @@
         </div>
 
         <p>
-            The app coordinates multiple calculation domains, location input paths, timezone formatting, user settings,
-            custom iconography, and native mobile concerns behind one interface. Each domain is isolated so that a
-            failure in one — say, a geocoding timeout — does not degrade the others.
+            The app coordinates multiple independent calculation domains (astronomical rise/set events, photography
+            light windows, moon phases, eclipse detection, and halachic Zmanim), location input paths, timezone
+            formatting, user settings, custom iconography, and native mobile concerns behind one interface. Each
+            isolated domain is run in parallel with fault-tolerant merging so that a failure in one domain does not
+            degrade the others.
         </p>
 
         <hr class="thin" />

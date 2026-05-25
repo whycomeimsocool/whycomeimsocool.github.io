@@ -13,233 +13,326 @@
         <link rel="stylesheet" href="../_resources/css/style.css" />
     </head>
     <body class="doc-page">
+        <a class="back" href="../">← Portfolio</a>
 
-<a class="back" href="../">← Portfolio</a>
+        <p class="doc-label">Technical Documentation</p>
+        <h1>Sound in Paper</h1>
+        <p class="subtitle">
+            Put sound into paper — a privacy-first, QR-based audio sharing system built for artists who want to share
+            sound as an intimate physical object
+        </p>
 
-<p class="doc-label">Technical Documentation</p>
-<h1>Sound in Paper</h1>
-<p class="subtitle">Put sound into paper — a privacy-first, QR-based audio sharing system built for artists who want to share sound as an intimate physical object</p>
+        <p class="meta">Next.js 15 · TypeScript · Postgres · Prisma · Web Crypto API · MinIO/R2 · Stripe</p>
+        <p class="status-line">
+            Pre-launch &nbsp;·&nbsp;
+            <span>All 10 milestones code-complete · 86 unit tests · 32/32 Playwright tests</span>
+        </p>
 
-<p class="meta">Next.js 15 · TypeScript · Postgres · Prisma · Web Crypto API · MinIO/R2 · Stripe</p>
-<p class="status-line">Pre-launch &nbsp;·&nbsp; <span>All 10 milestones code-complete · 86 unit tests · 32/32 Playwright tests</span></p>
+        <hr />
 
-<hr>
+        <h2>The Idea</h2>
 
-<h2>The Idea</h2>
+        <p>
+            A musician hands someone a small printed card. They scan it. A private song plays. No app to install, no
+            account to create, no social profile to navigate. Just sound, unlocked by paper.
+        </p>
 
-<p>
-  A musician hands someone a small printed card. They scan it. A private song plays. No app to install, no account to create, no social profile to navigate. Just sound, unlocked by paper.
-</p>
+        <p>
+            Sound in Paper is built around the premise that the physical artifact is the product — not the platform
+            behind it. The QR code is not a link to a streaming service. It is the listening object itself. The service
+            should make the creator feel like they are preparing a piece of paper that contains sound, not publishing
+            content to a cloud platform.
+        </p>
 
-<p>
-  Sound in Paper is built around the premise that the physical artifact is the product — not the platform behind it. The QR code is not a link to a streaming profile. It is the listening object itself. The service should make the creator feel like they are preparing a piece of paper that contains sound, not publishing content to a cloud platform.
-</p>
+        <div class="principle-note">
+            <p>Control the paper = control the song.</p>
+        </div>
 
-<div class="principle-note">
-  <p>Control the paper = control the song.</p>
-</div>
+        <h2>What It Should Feel Like</h2>
 
-<h2>What It Should Feel Like</h2>
+        <div class="contrast-columns">
+            <div class="contrast-col">
+                <h4>It should feel like</h4>
+                <ul>
+                    <li>a message passed by hand</li>
+                    <li>a small art object</li>
+                    <li>a secret song container</li>
+                    <li>a minimalist music player</li>
+                    <li>a physical-world sound object</li>
+                </ul>
+            </div>
+            <div class="contrast-col">
+                <h4>It should not feel like</h4>
+                <ul>
+                    <li>a promo landing page</li>
+                    <li>a streaming smart link</li>
+                    <li>a social profile</li>
+                    <li>a CRM or marketing dashboard</li>
+                    <li>a generic QR generator</li>
+                </ul>
+            </div>
+        </div>
 
-<div class="contrast-columns">
-  <div class="contrast-col">
-    <h4>It should feel like</h4>
-    <ul>
-      <li>a message passed by hand</li>
-      <li>a small art object</li>
-      <li>a secret song container</li>
-      <li>a minimalist music player</li>
-      <li>a physical-world sound object</li>
-    </ul>
-  </div>
-  <div class="contrast-col">
-    <h4>It should not feel like</h4>
-    <ul>
-      <li>a promo landing page</li>
-      <li>a streaming smart link</li>
-      <li>a social profile</li>
-      <li>a CRM or marketing dashboard</li>
-      <li>a generic QR generator</li>
-    </ul>
-  </div>
-</div>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Privacy Architecture</h2>
 
-<h2>Privacy Architecture</h2>
+        <p>
+            The privacy model is architectural. The server hosts encrypted sound objects and is deliberately designed so
+            it cannot listen to them.
+        </p>
 
-<p>
-  The privacy model is architectural, not merely a policy. The server hosts encrypted sound objects and is deliberately designed so it cannot listen to them.
-</p>
+        <h3>Client-side encryption</h3>
+        <p>
+            Audio, artwork, title, and message are encrypted in the browser before upload using AES-GCM via the Web
+            Crypto API. The server stores only encrypted files, encrypted metadata, non-sensitive routing metadata, and
+            aggregate event records. It never receives plaintext audio, titles, messages, or artwork.
+        </p>
 
-<h3>Client-side encryption</h3>
-<p>
-  Audio, artwork, title, and message are encrypted in the browser before upload using AES-GCM via the Web Crypto API. The server stores only encrypted files, encrypted metadata, non-sensitive routing metadata, and aggregate event records. It never receives plaintext audio, titles, messages, or artwork.
-</p>
+        <h3>URL fragment key</h3>
+        <p>The QR code points to a URL shaped like:</p>
 
-<h3>URL fragment key</h3>
-<p>
-  The QR code points to a URL shaped like:
-</p>
+        <div class="code-block"><pre>https://soundinpaper.com/p/quiet-river-17#k=PUBLIC_SHARE_KEY</pre></div>
+        <p class="code-caption">
+            The slug
+            <code>quiet-river-17</code>
+            is sent to the server. The fragment — everything after
+            <code>#</code>
+            — is never sent in normal HTTP requests. The browser uses it locally to decrypt the Piece. The server can
+            serve the encrypted manifest without ever knowing the decryption key.
+        </p>
 
-<div class="code-block"><pre>https://soundinpaper.com/p/quiet-river-17#k=PUBLIC_SHARE_KEY</pre></div>
-<p class="code-caption">The slug <code>quiet-river-17</code> is sent to the server. The fragment — everything after <code>#</code> — is never sent in normal HTTP requests. The browser uses it locally to decrypt the Piece. The server can serve the encrypted manifest without ever knowing the decryption key.</p>
+        <h3>Dynamic QR</h3>
+        <p>
+            A printed QR code keeps working even when the creator changes the audio behind it. Each Piece has a stable
+            public share key embedded in the QR at generation time. New audio versions are encrypted so the same printed
+            paper decrypts the current assigned content. The creator's encrypted key set retains the Piece key so
+            updates remain possible indefinitely.
+        </p>
 
-<h3>Dynamic QR</h3>
-<p>
-  A printed QR code keeps working even when the creator changes the audio behind it. Each Piece has a stable public share key embedded in the QR at generation time. New audio versions are encrypted so the same printed paper decrypts the current assigned content. The creator's encrypted key set retains the Piece key so updates remain possible indefinitely.
-</p>
+        <h3>Key management</h3>
+        <p>
+            On account creation, a creator master key is generated in the browser. A recovery phrase — shown exactly
+            once — can unlock it. Only encrypted key material is stored server-side. Trusted-device keys are stored as
+            non-extractable
+            <code>CryptoKey</code>
+            objects in IndexedDB. If a creator loses their recovery phrase and has no trusted device, the company cannot
+            recover their encrypted content. This is explained during setup in plain language without making the product
+            feel like a security bunker.
+        </p>
 
-<h3>Key management</h3>
-<p>
-  On account creation, a creator master key is generated in the browser. A recovery phrase — shown exactly once — can unlock it. Only encrypted key material is stored server-side. Trusted-device keys are stored as non-extractable <code>CryptoKey</code> objects in IndexedDB. If a creator loses their recovery phrase and has no trusted device, the company cannot recover their encrypted content. This is explained during setup in plain language without making the product feel like a security bunker.
-</p>
+        <h3>Practical limits</h3>
+        <p>
+            The user-facing privacy promise is intimate and private — not magically impossible to copy. Client-side
+            encryption prevents the company from reading stored content by default. It does not prevent a listener from
+            recording audio from their device, sharing the QR link, or submitting the key during an abuse report. The
+            product is honest about this distinction.
+        </p>
 
-<h3>Practical limits</h3>
-<p>
-  The user-facing privacy promise is intimate and private — not magically impossible to copy. Client-side encryption prevents the company from reading stored content by default. It does not prevent a listener from recording audio from their device, sharing the QR link, or submitting the key during an abuse report. The product is honest about this distinction.
-</p>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>The Listener Experience</h2>
 
-<h2>The Listener Experience</h2>
+        <p>
+            The listener page shows almost nothing by default: a large play button, an optional progress bar, optional
+            title, optional short message, optional artwork. No creator identity, no promotional links, no social
+            mechanics, no engagement bait.
+        </p>
 
-<p>
-  The listener page shows almost nothing by default: a large play button, an optional progress bar, optional title, optional short message, optional artwork. No creator identity, no promotional links, no social mechanics, no engagement bait.
-</p>
+        <p>
+            A quiet response control — present like a small folded corner of paper — can reveal lightweight actions: a
+            heart and a report. It is secondary to listening in every sense. Six themes — Plain Paper, Blank, Night
+            Paper, Signal, Blue Hour, Red Room — provide restrained visual expression that feels like paper stocks, not
+            decorative skins.
+        </p>
 
-<p>
-  A quiet response control — present like a small folded corner of paper — can reveal lightweight actions: a heart and a report. It is secondary to listening in every sense. Six themes — Plain Paper, Blank, Night Paper, Signal, Blue Hour, Red Room — provide restrained visual expression that feels like paper stocks, not decorative skins.
-</p>
+        <h3>Playback pipeline</h3>
+        <ul class="feature-list">
+            <li>Listener browser shows staged loading messages: "Opening…", "Preparing sound…", "Almost ready…"</li>
+            <li>Fetches encrypted Piece manifest by slug</li>
+            <li>Reads share key from URL fragment — never sent to server</li>
+            <li>Decrypts manifest locally with Web Crypto</li>
+            <li>Fetches encrypted audio blob from object storage</li>
+            <li>Decrypts full audio blob in browser</li>
+            <li>Creates temporary object URL and plays via HTML audio element</li>
+            <li>In-flight fetches use AbortController for clean teardown</li>
+        </ul>
 
-<h3>Playback pipeline</h3>
-<ul class="feature-list">
-  <li>Listener browser shows staged loading messages: "Opening…", "Preparing sound…", "Almost ready…"</li>
-  <li>Fetches encrypted Piece manifest by slug</li>
-  <li>Reads share key from URL fragment — never sent to server</li>
-  <li>Decrypts manifest locally with Web Crypto</li>
-  <li>Fetches encrypted audio blob from object storage</li>
-  <li>Decrypts full audio blob in browser</li>
-  <li>Creates temporary object URL and plays via HTML audio element</li>
-  <li>In-flight fetches use AbortController for clean teardown</li>
-</ul>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Build Status</h2>
 
-<h2>Build Status</h2>
+        <p>
+            The project is built in testable milestones — not because AI can't accelerate coding, but because the
+            product has high-risk promises that must be validated incrementally. Each milestone leaves behind a working
+            slice that is tested before more complexity is added.
+        </p>
 
-<p>
-  The project is built in testable milestones — not because AI can't accelerate coding, but because the product has high-risk promises that must be validated incrementally. Each milestone leaves behind a working slice that is tested before more complexity is added.
-</p>
+        <table class="milestone-table">
+            <tr>
+                <td>0</td>
+                <td>Repo and App Foundation</td>
+                <td class="accepted">Complete</td>
+                <td>Next.js 15, TypeScript strict, Tailwind v4, Prisma, Vitest, Playwright</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Auth and Private Key Setup</td>
+                <td class="accepted">Complete</td>
+                <td>Auth.js v5, PBKDF2 key derivation, IndexedDB non-extractable device keys, recovery phrase flow</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Encrypted Audio Upload</td>
+                <td class="accepted">Playwright accepted</td>
+                <td>AES-GCM browser encryption, presigned S3 upload, MP3/M4A validation, 3 min/10 MB limits</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Piece Creation and Dynamic QR</td>
+                <td class="accepted">Playwright accepted</td>
+                <td>Encrypted manifest, stable share keys, SVG/PNG QR export, word-word-NN slugs</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Listener Playback</td>
+                <td class="accepted">Playwright accepted</td>
+                <td>Browser-side decryption, one-tap playback, graceful errors for missing/invalid/wrong key</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Themes and Listener Response</td>
+                <td class="accepted">Playwright accepted</td>
+                <td>Six themes, heart toggle, report flow with key-sharing confirmation</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Privacy-Friendly Analytics</td>
+                <td class="accepted">Playwright accepted</td>
+                <td>Scan, play, completion events — no raw IP, no fingerprinting, no third-party scripts</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Reporting, Copyright, Enforcement</td>
+                <td class="pending">Code complete</td>
+                <td>
+                    Abuse reports, DMCA/counter-notice intake, admin moderation UI, enforcement logging — acceptance
+                    pending admin account setup
+                </td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Access Controls</td>
+                <td class="accepted">Playwright accepted</td>
+                <td>Expiration, play limits, Pass-required Pieces, one-time and expiring Passes</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Billing and Entitlements</td>
+                <td class="pending">Code complete</td>
+                <td>
+                    Stripe checkout/portal/webhook, plan-limit enforcement on Pieces and storage — acceptance pending
+                    Stripe test credentials
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Print and Physical Artifact Tools</td>
+                <td class="accepted">Playwright accepted</td>
+                <td>
+                    Sheet (A4), Card (85×54 mm), and Sticker (60×60 mm) print layouts, PDF export, optional URL beneath
+                    QR
+                </td>
+            </tr>
+        </table>
 
-<table class="milestone-table">
-  <tr>
-    <td>0</td>
-    <td>Repo and App Foundation</td>
-    <td class="accepted">Complete</td>
-    <td>Next.js 15, TypeScript strict, Tailwind v4, Prisma, Vitest, Playwright</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Auth and Private Key Setup</td>
-    <td class="accepted">Complete</td>
-    <td>Auth.js v5, PBKDF2 key derivation, IndexedDB non-extractable device keys, recovery phrase flow</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Encrypted Audio Upload</td>
-    <td class="accepted">Playwright accepted</td>
-    <td>AES-GCM browser encryption, presigned S3 upload, MP3/M4A validation, 3 min/10 MB limits</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Piece Creation and Dynamic QR</td>
-    <td class="accepted">Playwright accepted</td>
-    <td>Encrypted manifest, stable share keys, SVG/PNG QR export, word-word-NN slugs</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Listener Playback</td>
-    <td class="accepted">Playwright accepted</td>
-    <td>Browser-side decryption, one-tap playback, graceful errors for missing/invalid/wrong key</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Themes and Listener Response</td>
-    <td class="accepted">Playwright accepted</td>
-    <td>Six themes, heart toggle, report flow with key-sharing confirmation</td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td>Privacy-Friendly Analytics</td>
-    <td class="accepted">Playwright accepted</td>
-    <td>Scan, play, completion events — no raw IP, no fingerprinting, no third-party scripts</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>Reporting, Copyright, Enforcement</td>
-    <td class="pending">Code complete</td>
-    <td>Abuse reports, DMCA/counter-notice intake, admin moderation UI, enforcement logging — acceptance pending admin account setup</td>
-  </tr>
-  <tr>
-    <td>8</td>
-    <td>Access Controls</td>
-    <td class="accepted">Playwright accepted</td>
-    <td>Expiration, play limits, Pass-required Pieces, one-time and expiring Passes</td>
-  </tr>
-  <tr>
-    <td>9</td>
-    <td>Billing and Entitlements</td>
-    <td class="pending">Code complete</td>
-    <td>Stripe checkout/portal/webhook, plan-limit enforcement on Pieces and storage — acceptance pending Stripe test credentials</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td>Print and Physical Artifact Tools</td>
-    <td class="accepted">Playwright accepted</td>
-    <td>Sheet (A4), Card (85×54 mm), and Sticker (60×60 mm) print layouts, PDF export, optional URL beneath QR</td>
-  </tr>
-</table>
+        <p>
+            86 unit tests pass. 32 of 32 Playwright acceptance tests pass against local MinIO. Remaining: M7 admin
+            acceptance, M9 Stripe billing acceptance, mobile QR LAN testing.
+        </p>
 
-<p>86 unit tests pass. 32 of 32 Playwright acceptance tests pass against local MinIO. Remaining: M7 admin acceptance, M9 Stripe billing acceptance, mobile QR LAN testing.</p>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Tech Stack</h2>
 
-<h2>Tech Stack</h2>
+        <table class="stack-table">
+            <tr>
+                <td>Framework</td>
+                <td>Next.js 15 App Router</td>
+            </tr>
+            <tr>
+                <td>Language</td>
+                <td>TypeScript (strict mode)</td>
+            </tr>
+            <tr>
+                <td>Styling</td>
+                <td>Tailwind CSS v4</td>
+            </tr>
+            <tr>
+                <td>Database</td>
+                <td>Postgres · Prisma ORM</td>
+            </tr>
+            <tr>
+                <td>Object storage</td>
+                <td>MinIO (local) · Cloudflare R2 / S3-compatible (production)</td>
+            </tr>
+            <tr>
+                <td>Browser encryption</td>
+                <td>Web Crypto API · AES-GCM · PBKDF2</td>
+            </tr>
+            <tr>
+                <td>Trusted device keys</td>
+                <td>IndexedDB · non-extractable AES-KW CryptoKey objects</td>
+            </tr>
+            <tr>
+                <td>Auth</td>
+                <td>Auth.js v5 credentials</td>
+            </tr>
+            <tr>
+                <td>Billing</td>
+                <td>Stripe checkout, portal, and webhook</td>
+            </tr>
+            <tr>
+                <td>QR generation</td>
+                <td>SVG and PNG export · error correction level H for sticker layout</td>
+            </tr>
+            <tr>
+                <td>Unit tests</td>
+                <td>Vitest · 86 passing</td>
+            </tr>
+            <tr>
+                <td>Acceptance tests</td>
+                <td>Playwright · 32/32 passing against local MinIO</td>
+            </tr>
+            <tr>
+                <td>Runtime target</td>
+                <td>Node 22 (.nvmrc + package.json engines)</td>
+            </tr>
+        </table>
 
-<table class="stack-table">
-  <tr><td>Framework</td><td>Next.js 15 App Router</td></tr>
-  <tr><td>Language</td><td>TypeScript (strict mode)</td></tr>
-  <tr><td>Styling</td><td>Tailwind CSS v4</td></tr>
-  <tr><td>Database</td><td>Postgres · Prisma ORM</td></tr>
-  <tr><td>Object storage</td><td>MinIO (local) · Cloudflare R2 / S3-compatible (production)</td></tr>
-  <tr><td>Browser encryption</td><td>Web Crypto API · AES-GCM · PBKDF2</td></tr>
-  <tr><td>Trusted device keys</td><td>IndexedDB · non-extractable AES-KW CryptoKey objects</td></tr>
-  <tr><td>Auth</td><td>Auth.js v5 credentials</td></tr>
-  <tr><td>Billing</td><td>Stripe checkout, portal, and webhook</td></tr>
-  <tr><td>QR generation</td><td>SVG and PNG export · error correction level H for sticker layout</td></tr>
-  <tr><td>Unit tests</td><td>Vitest · 86 passing</td></tr>
-  <tr><td>Acceptance tests</td><td>Playwright · 32/32 passing against local MinIO</td></tr>
-  <tr><td>Runtime target</td><td>Node 22 (.nvmrc + package.json engines)</td></tr>
-</table>
+        <hr class="thin" />
 
-<hr class="thin">
+        <h2>Architecture</h2>
 
-<h2>Architecture</h2>
+        <h3>Route structure</h3>
 
-<h3>Route structure</h3>
-
-<div class="code-block"><pre>app/
+        <div class="code-block">
+            <pre>
+app/
   (auth)/         signup, login, setup, unlock
   (creator)/      dashboard, audio, pieces, print, settings
   (listener)/p/   [slug] — public listener route
   (legal)/        copyright, privacy, terms, DMCA, counter-notice
   admin/          reports, copyright, enforcement
-  api/            auth, key-vault, audio, pieces, public, admin, legal</pre></div>
+  api/            auth, key-vault, audio, pieces, public, admin, legal</pre
+            >
+        </div>
 
-<h3>Source structure</h3>
+        <h3>Source structure</h3>
 
-<div class="code-block"><pre>src/
+        <div class="code-block">
+            <pre>
+src/
   crypto/
     browser-crypto.ts      key generation, wrapping, unwrapping
     key-derivation.ts      PBKDF2 derivation from recovery phrase
@@ -256,68 +349,89 @@
     slug.ts                word-word-NN slug generation
     storage.ts             S3-compatible object storage abstraction
     themes.ts              listener theme token definitions
-    validation.ts          locked audio constraints (MP3/M4A, 10 MB, 3 min)</pre></div>
+    validation.ts          locked audio constraints (MP3/M4A, 10 MB, 3 min)</pre
+            >
+        </div>
 
-<h3>Prisma models</h3>
-<ul class="feature-list">
-  <li>User · CreatorProfile · KeyVault</li>
-  <li>AudioAsset — plaintext: mimeType, sizeBytes; encrypted: name, durationMs</li>
-  <li>Piece — publicSlug, encryptedManifestBlob, encryptedPieceKeyForCreator, status, access controls</li>
-  <li>Pass — pieceId, code, maxUses, usesCount, expiresAt, status</li>
-  <li>PieceEvent — scan, play, play_complete, download; no raw IP stored</li>
-  <li>AbuseReport · CopyrightNotice · EnforcementAction</li>
-  <li>Subscription — plan, status, Stripe provider fields</li>
-</ul>
+        <h3>Prisma models</h3>
+        <ul class="feature-list">
+            <li>User · CreatorProfile · KeyVault</li>
+            <li>AudioAsset — plaintext: mimeType, sizeBytes; encrypted: name, durationMs</li>
+            <li>Piece — publicSlug, encryptedManifestBlob, encryptedPieceKeyForCreator, status, access controls</li>
+            <li>Pass — pieceId, code, maxUses, usesCount, expiresAt, status</li>
+            <li>PieceEvent — scan, play, play_complete, download; no raw IP stored</li>
+            <li>AbuseReport · CopyrightNotice · EnforcementAction</li>
+            <li>Subscription — plan, status, Stripe provider fields</li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Security Decisions</h2>
+        <h2>Security Decisions</h2>
 
-<ul class="feature-list">
-  <li>Audio encrypted with AES-GCM before leaving the browser — server never sees plaintext</li>
-  <li>Recovery phrase never sent to server — PBKDF2 derivation is browser-only</li>
-  <li>Trusted-device keys stored as non-extractable <code>CryptoKey</code> objects in IndexedDB — cannot be exported or read by JavaScript after creation</li>
-  <li>Share key kept in URL fragment — not sent in HTTP requests, not logged server-side</li>
-  <li>Two-phase setup flow — local trusted-device key is verified before the server vault is written, preventing an unrecoverable first-run state</li>
-  <li>Pass consumption uses conditional atomic increment — concurrent requests cannot exceed maxUses</li>
-  <li><code>importShareKey</code> validates decoded key is exactly 32 bytes before passing to Web Crypto — deterministic error for malformed keys</li>
-  <li>Suspended users cannot sign in</li>
-  <li>Non-active Piece IDs injected into print preview query string are rejected server-side</li>
-</ul>
+        <ul class="feature-list">
+            <li>Audio encrypted with AES-GCM before leaving the browser — server never sees plaintext</li>
+            <li>Recovery phrase never sent to server — PBKDF2 derivation is browser-only</li>
+            <li>
+                Trusted-device keys stored as non-extractable
+                <code>CryptoKey</code>
+                objects in IndexedDB — cannot be exported or read by JavaScript after creation
+            </li>
+            <li>Share key kept in URL fragment — not sent in HTTP requests, not logged server-side</li>
+            <li>
+                Two-phase setup flow — local trusted-device key is verified before the server vault is written,
+                preventing an unrecoverable first-run state
+            </li>
+            <li>Pass consumption uses conditional atomic increment — concurrent requests cannot exceed maxUses</li>
+            <li>
+                <code>importShareKey</code>
+                validates decoded key is exactly 32 bytes before passing to Web Crypto — deterministic error for
+                malformed keys
+            </li>
+            <li>Suspended users cannot sign in</li>
+            <li>Non-active Piece IDs injected into print preview query string are rejected server-side</li>
+        </ul>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Moderation and Safety</h2>
+        <h2>Moderation and Safety</h2>
 
-<p>
-  The privacy model creates a real tension with safety. The product does not pretend otherwise. The principle: no surveillance, clear safety boundaries, human review only when someone with access reports abuse.
-</p>
+        <p>
+            The privacy model creates a real tension with safety. The product does not pretend otherwise. The principle:
+            no surveillance, clear safety boundaries, human review only when someone with access reports abuse.
+        </p>
 
-<p>
-  When a listener files a report, the flow explains that submitting it shares the full Piece URL — including the fragment key — with moderation. This is an explicit, informed action. Moderators can decrypt and review reported Pieces, disable Piece routes, record copyright notices, and log enforcement actions against accounts. DMCA notice and counter-notice intake is built into the legal pages. Repeat-infringer tracking is modeled in the data schema.
-</p>
+        <p>
+            When a listener files a report, the flow explains that submitting it shares the full Piece URL — including
+            the fragment key — with moderation. This is an explicit, informed action. Moderators can decrypt and review
+            reported Pieces, disable Piece routes, record copyright notices, and log enforcement actions against
+            accounts. DMCA notice and counter-notice intake is built into the legal pages. Repeat-infringer tracking is
+            modeled in the data schema.
+        </p>
 
-<hr class="thin">
+        <hr class="thin" />
 
-<h2>Product Guardrails</h2>
+        <h2>Product Guardrails</h2>
 
-<ul class="feature-list">
-  <li>Do not turn this into a link-in-bio product</li>
-  <li>Do not add external music service links in the MVP</li>
-  <li>Do not upload plaintext audio to the server</li>
-  <li>Do not store plaintext titles, messages, artwork, or audio</li>
-  <li>Do not use magic-link-only login</li>
-  <li>Do not add ads or social mechanics to listener pages</li>
-  <li>Do not add per-upload copyright checkboxes</li>
-  <li>Do not promise guaranteed autoplay</li>
-  <li>Do not add proactive copyright scanning of encrypted audio</li>
-</ul>
+        <ul class="feature-list">
+            <li>Do not turn this into a link-in-bio product</li>
+            <li>Do not add external music service links in the MVP</li>
+            <li>Do not upload plaintext audio to the server</li>
+            <li>Do not store plaintext titles, messages, artwork, or audio</li>
+            <li>Do not use magic-link-only login</li>
+            <li>Do not add ads or social mechanics to listener pages</li>
+            <li>Do not add per-upload copyright checkboxes</li>
+            <li>Do not promise guaranteed autoplay</li>
+            <li>Do not add proactive copyright scanning of encrypted audio</li>
+        </ul>
 
-<hr>
+        <hr />
 
-<footer>
-  <p>← <a href="../">Return to portfolio</a> &nbsp;·&nbsp; Documentation and code available upon request</p>
-</footer>
-
+        <footer>
+            <p>
+                ←
+                <a href="../">Return to portfolio</a>
+                &nbsp;·&nbsp; Documentation and code available upon request
+            </p>
+        </footer>
     </body>
 </html>
