@@ -628,6 +628,51 @@
       text-align: left;
     }
 
+    .milestone-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+    }
+
+    .milestone-table td {
+      font-size: 13.5px;
+      line-height: 1.5;
+      padding: 10px 16px 10px 0;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+      color: var(--ink-2);
+    }
+
+    .milestone-table td:first-child {
+      font-family: "Inconsolata", "Courier New", monospace;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      width: 4%;
+      padding-right: 16px;
+    }
+
+    .milestone-table td:nth-child(2) {
+      font-weight: 500;
+      color: var(--ink);
+      width: 30%;
+    }
+
+    .milestone-table td:nth-child(3) {
+      font-size: 12px;
+      white-space: nowrap;
+      width: 16%;
+      padding-right: 16px;
+    }
+
+    .milestone-table td:last-child {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .accepted { color: var(--ink-2) !important; }
+    .pending  { color: var(--muted-2) !important; }
+
     /* Code blocks */
     .code-block {
       background: #f3f2ee;
