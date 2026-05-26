@@ -472,14 +472,14 @@
 
     .page-images {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-direction: row;
+      justify-content: center;
       gap: 16px;
       margin: 32px 0;
     }
 
     .page-images img {
-      width: 100%;
+      width: 45%;
       height: auto;
       border-radius: 6px;
     }
