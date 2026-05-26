@@ -203,7 +203,7 @@
     .proj-title {
       font-family: var(--serif);
       font-weight: 400;
-      font-size: 26px;
+      font-size: 38px;
       line-height: 1.15;
       letter-spacing: -0.012em;
       margin: 0 0 12px;
@@ -397,7 +397,7 @@
       }
       .proj-index { font-size: 30px; }
       .proj-cat { font-size: 10px; }
-      .proj-title { font-size: 22px; }
+      .proj-title { font-size: 30px; }
       .proj-tag { font-size: 13.5px; }
       .proj-desc { font-size: 13px; }
       .tag { font-size: 11px; padding: 4px 10px; }
