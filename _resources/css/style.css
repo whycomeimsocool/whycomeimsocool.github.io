@@ -341,7 +341,7 @@
       }
       .proj > div:first-child {
         display: flex;
-        align-items: baseline;
+        align-items: center;
         gap: 18px;
       }
       .proj-cat { margin-top: 0; }
