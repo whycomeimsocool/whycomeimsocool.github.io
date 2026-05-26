@@ -344,6 +344,7 @@
         align-items: center;
         gap: 18px;
       }
+      .proj-icon { margin-top: 0; }
       .proj-cat { margin-top: 0; }
       .proj-cat br { display: none; }
       .proj-cat::before { content: ""; }
