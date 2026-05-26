@@ -254,7 +254,7 @@
     }
 
     /* ── Project image mocks (SVG-driven) ───────────────────────── */
-    .img-sound-in-paper {
+    .img-sound-on-paper {
       background: linear-gradient(135deg, #d8d6cf 0%, #c9c6bd 100%);
       display: grid;
       place-items: center;
