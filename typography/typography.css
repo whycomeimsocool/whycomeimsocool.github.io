@@ -1,0 +1,267 @@
+body.typography-page {
+    --fontRatio: calc(32 / 27);
+    --rootPx: 16;
+    --minFontSize: calc((var(--rootPx) / var(--fontRatio)) * 1px);
+    --fontSizeGrow: 1vw;
+    --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
+    --note01: calc(var(--note00) * var(--fontRatio));
+    --note02: calc(var(--note01) * var(--fontRatio));
+    --note03: calc(var(--note02) * var(--fontRatio));
+    --note04: calc(var(--note03) * var(--fontRatio));
+    --note05: calc(var(--note04) * var(--fontRatio));
+    --note06: calc(var(--note05) * var(--fontRatio));
+    --note07: calc(var(--note06) * var(--fontRatio));
+    --note08: calc(var(--note07) * var(--fontRatio));
+    --note09: calc(var(--note08) * var(--fontRatio));
+    --note10: calc(var(--note09) * var(--fontRatio));
+    --note11: calc(var(--note10) * var(--fontRatio));
+    --note12: calc(var(--note11) * var(--fontRatio));
+    --note13: calc(var(--note12) * var(--fontRatio));
+    --note14: calc(var(--note13) * var(--fontRatio));
+    --note15: calc(var(--note14) * var(--fontRatio));
+    --note16: calc(var(--note15) * var(--fontRatio));
+    --minFontSizeVW: calc((var(--rootPx) / var(--fontRatio)) * 1vw);
+    --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
+    --note01VW: calc(var(--note00VW) * var(--fontRatio));
+    --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
+    --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
+    --type-small: clamp(10px, calc(var(--note00) * 0.82), 13px);
+    --type-caption: clamp(11px, calc(var(--note00) * 0.9), 14px);
+
+    width: 50vw;
+    min-width: var(--bodyMinWidth);
+    max-width: 720px;
+    padding: var(--note09) var(--note07) var(--note11);
+}
+
+body.typography-page .back {
+    font-size: var(--type-small);
+    margin-bottom: var(--note07);
+}
+
+body.typography-page .doc-label {
+    font-size: var(--type-small);
+    margin-bottom: var(--note00);
+}
+
+body.typography-page h1 {
+    font-size: clamp(var(--note05), 4vw, var(--note08));
+    margin: 0 0 var(--note01);
+}
+
+body.typography-page h2 {
+    font-size: var(--note04);
+    margin: var(--note08) 0 var(--note01);
+}
+
+body.typography-page h3 {
+    font-size: var(--type-small);
+    margin: var(--note04) 0 var(--note00);
+}
+
+body.typography-page p {
+    font-size: var(--note01);
+    line-height: var(--note04);
+    margin: 0 0 var(--note01);
+}
+
+body.typography-page .subtitle {
+    font-size: var(--note02);
+    line-height: var(--note04);
+    margin-bottom: var(--note02);
+}
+
+body.typography-page .meta,
+body.typography-page .status-line {
+    font-size: var(--type-caption);
+    margin-bottom: var(--note02);
+}
+
+body.typography-page .project-links {
+    gap: var(--note03);
+    margin-top: var(--note01);
+}
+
+body.typography-page .project-links a {
+    font-size: var(--type-caption);
+}
+
+body.typography-page hr {
+    margin: var(--note08) 0;
+}
+
+body.typography-page hr.thin {
+    margin: var(--note05) 0;
+}
+
+body.typography-page code {
+    font-size: var(--type-caption);
+    padding: calc(var(--note00) * 0.08) calc(var(--note00) * 0.36);
+}
+
+body.typography-page .code-block {
+    padding: var(--note01) var(--note02);
+    margin: var(--note01) 0;
+}
+
+body.typography-page .code-block pre {
+    font-size: var(--type-caption);
+    line-height: var(--note02);
+}
+
+body.typography-page .code-caption {
+    font-size: var(--type-caption);
+    margin-top: calc(var(--note00) * -0.55);
+    margin-bottom: var(--note01);
+    padding-left: var(--note02);
+}
+
+body.typography-page .sources {
+    margin: var(--note00) 0 var(--note02);
+}
+
+body.typography-page .sources li {
+    font-size: var(--type-caption);
+    line-height: var(--note02);
+    padding-left: var(--note02);
+    margin-bottom: calc(var(--note00) * 0.45);
+}
+
+body.typography-page footer {
+    margin-top: var(--note08);
+    padding-top: var(--note03);
+}
+
+body.typography-page footer p {
+    font-size: var(--type-caption);
+}
+
+body.typography-page .type-controls {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: var(--note04) 0 var(--note06);
+    padding: var(--note02) 0 var(--note03);
+}
+
+body.typography-page .type-controls-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--note01);
+    margin-bottom: var(--note01);
+}
+
+body.typography-page .type-controls h2 {
+    font-family: var(--sans);
+    font-size: var(--type-small);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+}
+
+body.typography-page .type-reset {
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+    font-size: var(--type-small);
+    letter-spacing: 0.14em;
+    line-height: 1;
+    padding: calc(var(--note00) * 0.6) var(--note01);
+    text-transform: uppercase;
+    transition:
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+body.typography-page .type-reset:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+}
+
+body.typography-page .type-control-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--note03);
+}
+
+body.typography-page .type-control {
+    display: grid;
+    gap: calc(var(--note00) * 0.55);
+    min-width: 0;
+}
+
+body.typography-page .type-control-label,
+body.typography-page .type-control-value {
+    font-size: var(--type-caption);
+    line-height: var(--note02);
+}
+
+body.typography-page .type-control-label {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+body.typography-page .type-control-value {
+    color: var(--muted);
+    font-family: "Inconsolata", "Courier New", monospace;
+}
+
+body.typography-page .type-control input[type="range"] {
+    accent-color: var(--ink);
+    width: 100%;
+}
+
+body.typography-page .note-readout {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--note00);
+    margin-top: var(--note02);
+}
+
+body.typography-page .note-readout span {
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-family: "Inconsolata", "Courier New", monospace;
+    font-size: var(--type-caption);
+    line-height: var(--note02);
+    padding-top: calc(var(--note00) * 0.55);
+}
+
+body.typography-page .note-readout strong {
+    color: var(--ink-2);
+    display: block;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 767px) {
+    body.typography-page {
+        min-width: inherit;
+        width: calc(var(--bodyMinWidthVW) / 767 * 100);
+        max-width: none;
+    }
+}
+
+@media (max-width: 640px) {
+    body.typography-page {
+        padding: var(--note06) var(--note02) var(--note09);
+    }
+
+    body.typography-page h1 {
+        font-size: clamp(var(--note04), 7vw, var(--note07));
+    }
+
+    body.typography-page h2 {
+        font-size: var(--note03);
+        margin: var(--note07) 0 var(--note01);
+    }
+
+    body.typography-page .type-control-grid,
+    body.typography-page .note-readout {
+        grid-template-columns: 1fr;
+    }
+}

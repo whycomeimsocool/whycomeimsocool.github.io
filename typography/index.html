@@ -11,8 +11,10 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="../_resources/css/style.css" />
+        <link rel="stylesheet" href="typography.css" />
+        <script src="typography.js" defer></script>
     </head>
-    <body class="doc-page">
+    <body class="doc-page typography-page">
         <a class="back" href="../">← Portfolio</a>
 
         <p class="doc-label">Technical Documentation</p>
@@ -24,6 +26,34 @@
         <div class="project-links">
             <a href="https://bachtogauss.com/about/#about-site" target="_blank">See it live →</a>
         </div>
+
+        <section class="type-controls" aria-labelledby="type-controls-title">
+            <div class="type-controls-head">
+                <h2 id="type-controls-title">Live system controls</h2>
+                <button class="type-reset" type="button" data-type-reset>Reset</button>
+            </div>
+
+            <div class="type-control-grid">
+                <label class="type-control" for="interval-control">
+                    <span class="type-control-label">Interval</span>
+                    <input id="interval-control" type="range" min="0" max="9" step="1" value="2" />
+                    <span class="type-control-value" data-interval-output>Minor third · 32/27</span>
+                </label>
+
+                <label class="type-control" for="root-control">
+                    <span class="type-control-label">Root anchor</span>
+                    <input id="root-control" type="range" min="12" max="22" step="0.5" value="16" />
+                    <span class="type-control-value" data-root-output>16px</span>
+                </label>
+            </div>
+
+            <div class="note-readout" aria-label="Current note scale">
+                <span><strong>note00</strong> <output data-note-output="0">13.50px</output></span>
+                <span><strong>note01</strong> <output data-note-output="1">16.00px</output></span>
+                <span><strong>note02</strong> <output data-note-output="2">18.96px</output></span>
+                <span><strong>note03</strong> <output data-note-output="3">22.47px</output></span>
+            </div>
+        </section>
 
         <hr />
 
@@ -182,6 +212,10 @@ body {
   --note10: calc(var(--note09) * var(--fontRatio));
   --note11: calc(var(--note10) * var(--fontRatio));
   --note12: calc(var(--note11) * var(--fontRatio));
+  --note13: calc(var(--note12) * var(--fontRatio));
+  --note14: calc(var(--note13) * var(--fontRatio));
+  --note15: calc(var(--note14) * var(--fontRatio));
+  --note16: calc(var(--note15) * var(--fontRatio));
   --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
   --note00VW: clamp(var(--minFontSizeVW), 1vw, 1000000000px);
   --note01VW: calc(var(--note00VW) * var(--fontRatio));
