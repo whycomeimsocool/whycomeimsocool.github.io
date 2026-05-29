@@ -1,8 +1,8 @@
 body.typography-page {
     --fontRatio: calc(32 / 27);
-    --rootPx: 16;
+    --rootPx: 9.8;
     --minFontSize: calc((var(--rootPx) / var(--fontRatio)) * 1px);
-    --fontSizeGrow: 1vw;
+    --fontSizeGrow: calc((var(--rootPx) / 9.8) * 0.7vw);
     --note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);
     --note01: calc(var(--note00) * var(--fontRatio));
     --note02: calc(var(--note01) * var(--fontRatio));
@@ -25,135 +25,192 @@ body.typography-page {
     --note01VW: calc(var(--note00VW) * var(--fontRatio));
     --bodyMinWidth: calc(100 / var(--fontRatio) * var(--note01) / 2);
     --bodyMinWidthVW: calc(100 / var(--fontRatio) * var(--note01VW) / 2);
-    --type-small: clamp(10px, calc(var(--note00) * 0.82), 13px);
-    --type-caption: clamp(11px, calc(var(--note00) * 0.9), 14px);
+    --type-small: var(--note00);
+    --type-code: var(--note01);
+    --type-body: var(--note02);
+    --type-subtitle: var(--note01);
+    --type-tertiary: var(--note02);
+    --type-section: var(--note07);
+    --type-title: var(--note07);
+    --rhythm: var(--note06);
+    --type-small-lines: 1;
+    --type-code-lines: 1;
+    --type-body-lines: 1;
+    --type-subtitle-lines: 1;
+    --type-tertiary-lines: 1;
+    --type-section-lines: 2;
+    --type-title-lines: 2;
+    --type-small-line: var(--note03);
+    --type-code-line: var(--note04);
+    --type-body-line: var(--note06);
+    --type-subtitle-line: var(--note00);
+    --type-tertiary-line: var(--note01);
+    --type-section-line: var(--note09);
+    --type-title-line: var(--note10);
+    --space-paragraph-lines: 1;
+    --space-section-lines: 2;
+    --space-rule-lines: 2;
+    --space-page-lines: 3;
+    --space-page-end-lines: 4;
+    --space-code-lines: 1;
+    --space-tight: var(--note01);
+    --space-paragraph: var(--note04);
+    --space-meta: var(--space-paragraph);
+    --space-project: var(--space-paragraph);
+    --space-subsection: var(--space-section);
+    --space-rule-thin: var(--space-rule);
+    --space-section: var(--note10);
+    --space-rule: var(--note10);
+    --space-page: var(--note07);
+    --space-page-end: var(--note08);
+    --space-code: var(--note04);
 
     width: 50vw;
     min-width: var(--bodyMinWidth);
-    max-width: 720px;
-    padding: var(--note09) var(--note07) var(--note11);
+    padding: var(--space-page) 0 var(--space-page-end);
 }
 
 body.typography-page .back {
     font-size: var(--type-small);
+    line-height: var(--type-small-line);
     margin-bottom: var(--note07);
 }
 
 body.typography-page .doc-label {
     font-size: var(--type-small);
-    margin-bottom: var(--note00);
+    line-height: var(--type-small-line);
+    margin-bottom: var(--space-tight);
 }
 
 body.typography-page h1 {
-    font-size: clamp(var(--note05), 4vw, var(--note08));
-    margin: 0 0 var(--note01);
+    font-size: var(--type-title);
+    line-height: var(--type-title-line);
+    margin: 0 0 var(--space-paragraph);
 }
 
 body.typography-page h2 {
-    font-size: var(--note04);
-    margin: var(--note08) 0 var(--note01);
+    font-size: var(--type-section);
+    line-height: var(--type-section-line);
+    margin: var(--space-section) 0 var(--space-paragraph);
 }
 
 body.typography-page h3 {
-    font-size: var(--type-small);
-    margin: var(--note04) 0 var(--note00);
+    font-size: var(--type-tertiary);
+    line-height: var(--type-tertiary-line);
+    margin: var(--space-subsection) 0 var(--space-tight);
 }
 
 body.typography-page p {
-    font-size: var(--note01);
-    line-height: var(--note04);
-    margin: 0 0 var(--note01);
+    font-size: var(--type-body);
+    line-height: var(--type-body-line);
+    margin: 0 0 var(--space-paragraph);
 }
 
 body.typography-page .subtitle {
-    font-size: var(--note02);
-    line-height: var(--note04);
-    margin-bottom: var(--note02);
+    font-size: var(--type-subtitle);
+    line-height: var(--type-subtitle-line);
+    margin-bottom: var(--space-meta);
 }
 
 body.typography-page .meta,
 body.typography-page .status-line {
-    font-size: var(--type-caption);
-    margin-bottom: var(--note02);
+    font-size: var(--type-small);
+    line-height: var(--type-small-line);
+    margin-bottom: var(--space-meta);
 }
 
 body.typography-page .project-links {
-    gap: var(--note03);
-    margin-top: var(--note01);
+    gap: var(--space-project);
+    margin-top: var(--space-paragraph);
 }
 
 body.typography-page .project-links a {
-    font-size: var(--type-caption);
+    font-size: var(--type-small);
+    line-height: var(--type-small-line);
 }
 
 body.typography-page hr {
-    margin: var(--note08) 0;
+    margin: var(--space-rule) 0;
 }
 
 body.typography-page hr.thin {
-    margin: var(--note05) 0;
+    margin: var(--space-rule-thin) 0;
 }
 
 body.typography-page code {
-    font-size: var(--type-caption);
-    padding: calc(var(--note00) * 0.08) calc(var(--note00) * 0.36);
+    font-size: var(--type-code);
+    line-height: var(--type-code-line);
+    padding: calc(var(--type-code) * 0.08) calc(var(--type-code) * 0.36);
 }
 
 body.typography-page .code-block {
-    padding: var(--note01) var(--note02);
-    margin: var(--note01) 0;
+    padding: var(--space-code) calc(var(--space-code) * var(--fontRatio));
+    margin: var(--space-code) 0 var(--space-meta);
 }
 
 body.typography-page .code-block pre {
-    font-size: var(--type-caption);
-    line-height: var(--note02);
+    font-size: var(--type-code);
+    line-height: var(--type-code-line);
+    margin: 0;
 }
 
 body.typography-page .code-caption {
-    font-size: var(--type-caption);
-    margin-top: calc(var(--note00) * -0.55);
-    margin-bottom: var(--note01);
-    padding-left: var(--note02);
+    font-size: var(--type-small);
+    line-height: var(--type-small-line);
+    margin-top: calc(var(--space-tight) * -0.5);
+    margin-bottom: var(--space-paragraph);
+    padding-left: var(--space-meta);
 }
 
 body.typography-page .sources {
-    margin: var(--note00) 0 var(--note02);
+    margin: var(--space-tight) 0 var(--space-meta);
 }
 
 body.typography-page .sources li {
-    font-size: var(--type-caption);
-    line-height: var(--note02);
-    padding-left: var(--note02);
-    margin-bottom: calc(var(--note00) * 0.45);
+    font-size: var(--type-body);
+    line-height: var(--type-body-line);
+    padding-left: var(--space-meta);
+    margin-bottom: var(--space-tight);
 }
 
 body.typography-page footer {
-    margin-top: var(--note08);
-    padding-top: var(--note03);
+    margin-top: var(--space-section);
+    padding-top: var(--space-project);
 }
 
 body.typography-page footer p {
-    font-size: var(--type-caption);
+    font-size: var(--type-small);
+    line-height: var(--type-small-line);
 }
 
 body.typography-page .type-controls {
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    margin: var(--note04) 0 var(--note06);
-    padding: var(--note02) 0 var(--note03);
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 20;
+    width: min(320px, calc(100vw - 48px));
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: rgba(250, 250, 248, 0.96);
+    box-shadow: 0 18px 48px rgba(17, 17, 17, 0.08);
+    margin: 0;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 16px;
+    backdrop-filter: blur(12px);
 }
 
 body.typography-page .type-controls-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--note01);
-    margin-bottom: var(--note01);
+    gap: 12px;
+    margin-bottom: 14px;
 }
 
 body.typography-page .type-controls h2 {
     font-family: var(--sans);
-    font-size: var(--type-small);
+    font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.16em;
     line-height: 1.3;
@@ -168,10 +225,10 @@ body.typography-page .type-reset {
     background: transparent;
     color: var(--ink-2);
     cursor: pointer;
-    font-size: var(--type-small);
+    font-size: 10.5px;
     letter-spacing: 0.14em;
     line-height: 1;
-    padding: calc(var(--note00) * 0.6) var(--note01);
+    padding: 7px 10px;
     text-transform: uppercase;
     transition:
         border-color 0.15s ease,
@@ -183,22 +240,109 @@ body.typography-page .type-reset:hover {
     color: var(--ink);
 }
 
-body.typography-page .type-control-grid {
+body.typography-page .type-mode {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--note03);
+    margin: 0 0 14px;
+    min-width: 0;
+    padding: 2px;
+}
+
+body.typography-page .type-mode-option {
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 1;
+    min-width: 0;
+    position: relative;
+    text-align: center;
+}
+
+body.typography-page .type-mode-option input {
+    opacity: 0;
+    position: absolute;
+}
+
+body.typography-page .type-mode-option span {
+    border-radius: 3px;
+    display: block;
+    padding: 8px 6px;
+}
+
+body.typography-page .type-mode-option input:checked + span {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+body.typography-page .type-mode-option input:focus-visible + span {
+    outline: 1px solid var(--ink);
+    outline-offset: 2px;
+}
+
+body.typography-page .type-control-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+body.typography-page .linked-readouts {
+    border-top: 1px solid var(--rule);
+    display: grid;
+    gap: 6px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 14px;
+    padding-top: 14px;
+}
+
+body.typography-page .linked-readouts span {
+    color: var(--muted);
+    font-family: "Inconsolata", "Courier New", monospace;
+    font-size: 11.5px;
+    line-height: 1.3;
+    min-width: 0;
+}
+
+body.typography-page .free-controls {
+    display: none;
+}
+
+body.typography-page[data-type-mode="free"] .free-controls {
+    display: block;
+}
+
+body.typography-page[data-type-mode="free"] .linked-readouts,
+body.typography-page[data-type-mode="free"] [data-linked-only] {
+    display: none;
+}
+
+body.typography-page .role-controls,
+body.typography-page .line-controls,
+body.typography-page .spacing-controls {
+    border-top: 1px solid var(--rule);
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+}
+
+body.typography-page .role-controls,
+body.typography-page .line-controls,
+body.typography-page .spacing-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 body.typography-page .type-control {
     display: grid;
-    gap: calc(var(--note00) * 0.55);
+    gap: 6px;
     min-width: 0;
 }
 
 body.typography-page .type-control-label,
 body.typography-page .type-control-value {
-    font-size: var(--type-caption);
-    line-height: var(--note02);
+    font-size: 12px;
+    line-height: 1.35;
 }
 
 body.typography-page .type-control-label {
@@ -216,52 +360,37 @@ body.typography-page .type-control input[type="range"] {
     width: 100%;
 }
 
-body.typography-page .note-readout {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--note00);
-    margin-top: var(--note02);
+body.typography-page .type-control.is-linked-dependent {
+    opacity: 0.5;
 }
 
-body.typography-page .note-readout span {
-    border-top: 1px solid var(--rule);
-    color: var(--muted);
-    font-family: "Inconsolata", "Courier New", monospace;
-    font-size: var(--type-caption);
-    line-height: var(--note02);
-    padding-top: calc(var(--note00) * 0.55);
-}
-
-body.typography-page .note-readout strong {
-    color: var(--ink-2);
-    display: block;
-    font-weight: 400;
+body.typography-page .type-control.is-linked-dependent input[type="range"] {
+    cursor: not-allowed;
 }
 
 @media only screen and (max-width: 767px) {
     body.typography-page {
         min-width: inherit;
         width: calc(var(--bodyMinWidthVW) / 767 * 100);
-        max-width: none;
     }
 }
 
 @media (max-width: 640px) {
     body.typography-page {
-        padding: var(--note06) var(--note02) var(--note09);
+        padding: var(--space-page) 0 var(--space-page-end);
     }
 
-    body.typography-page h1 {
-        font-size: clamp(var(--note04), 7vw, var(--note07));
+    body.typography-page .type-controls {
+        top: 12px;
+        right: 12px;
+        width: min(300px, calc(100vw - 24px));
+        padding: 14px;
     }
 
-    body.typography-page h2 {
-        font-size: var(--note03);
-        margin: var(--note07) 0 var(--note01);
-    }
-
-    body.typography-page .type-control-grid,
-    body.typography-page .note-readout {
+    body.typography-page .role-controls,
+    body.typography-page .line-controls,
+    body.typography-page .spacing-controls,
+    body.typography-page .linked-readouts {
         grid-template-columns: 1fr;
     }
 }
