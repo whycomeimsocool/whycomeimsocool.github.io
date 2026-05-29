@@ -15,6 +15,12 @@
 *::after {
     box-sizing: border-box;
 }
+::selection {
+    background: #e2e2e2;
+}
+::-moz-selection {
+    background: #e2e2e2;
+}
 html,
 body {
     margin: 0;
@@ -127,9 +133,17 @@ button {
 
 /* Capabilities (right column) */
 .caps {
+    align-items: center;
+    justify-content: center;
     padding-top: 8px;
     display: flex;
     flex-direction: column;
+}
+.hero-diagram {
+    display: block;
+    width: min(100%, 420px);
+    height: auto;
+    opacity: 0.9;
 }
 .cap {
     display: grid;
@@ -318,7 +332,7 @@ button {
 /* ── Footer ─────────────────────────────────────────────────── */
 .footer {
     display: grid;
-    grid-template-columns: 1.1fr 1fr 1.4fr 0.9fr;
+    grid-template-columns: 1.2fr 1.35fr 0.9fr;
     gap: 48px;
     padding: 60px 0 64px;
     border-top: 1px solid var(--rule);
@@ -354,7 +368,7 @@ button {
 .footer-mark {
     width: 56px;
     height: 56px;
-    margin-bottom: 16px;
+    margin-top: 16px;
     color: var(--ink);
 }
 .email-row {

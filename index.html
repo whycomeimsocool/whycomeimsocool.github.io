@@ -23,7 +23,7 @@
                     <a href="#work" class="active">Work</a>
                     <span>Capabilities</span>
                     <span>About</span>
-                    <span>Notes</span>
+                    <a href="notes/">Notes</a>
                 </nav>
                 <a class="contact-btn" href="mailto:ray@rayemilio.com">
                     Contact
@@ -41,40 +41,17 @@
                         <i>music.</i>
                     </h1>
                     <p class="hero-sub">
-                        I design, architect, and build software and operational systems that are clear, maintainable,
-                        and built to scale. From concept to real-world impact.
+                        Whether it&rsquo;s synthesis, astronomy, publishing, typography, or cryptography, I ask the same
+                        questions: How does this system work? How can it be made more efficient? More beautiful?
                     </p>
                 </div>
 
-                <aside class="caps">
-                    <div class="cap">
-                        <div>
-                            <h3 class="cap-title">Systems Thinking</h3>
-                            <p class="cap-body">I see structure and simplify complexity.</p>
-                        </div>
-                        <span class="arr">→</span>
-                    </div>
-                    <div class="cap">
-                        <div>
-                            <h3 class="cap-title">Product Development</h3>
-                            <p class="cap-body">I design with users, build with precision, and ship with care.</p>
-                        </div>
-                        <span class="arr">→</span>
-                    </div>
-                    <div class="cap">
-                        <div>
-                            <h3 class="cap-title">Architecture</h3>
-                            <p class="cap-body">I create maintainable foundations that adapt and scale.</p>
-                        </div>
-                        <span class="arr">→</span>
-                    </div>
-                    <div class="cap">
-                        <div>
-                            <h3 class="cap-title">Execution</h3>
-                            <p class="cap-body">I write clean code, solve problems, and deliver real value.</p>
-                        </div>
-                        <span class="arr">→</span>
-                    </div>
+                <aside class="caps" aria-label="Geometric systems diagram">
+                    <img
+                        class="hero-diagram"
+                        src="_resources/images/png/transparent_diagram.png"
+                        alt="Transparent geometric systems diagram"
+                    />
                 </aside>
             </section>
 
@@ -83,8 +60,7 @@
                 <div class="section-head">
                     <div class="label">Selected Systems</div>
                     <span class="view-all">
-                        View All Projects
-                        <span>→</span>
+                        <span></span>
                     </span>
                 </div>
 
@@ -96,7 +72,9 @@
                     </div>
                     <div class="proj-body">
                         <h3 class="proj-title"><a href="cms/">Custom CMS</a></h3>
-                        <p class="proj-tag">A publishing system built from scratch.</p>
+                        <p class="proj-tag">
+                            A local-first publishing system built from scratch around a single operator.
+                        </p>
                         <p class="proj-desc">
                             Role-based access, content workflows, analytics, QR generation, and local-first admin.
                         </p>
@@ -209,7 +187,10 @@
                     </div>
                     <div class="proj-body">
                         <h3 class="proj-title"><a href="edutone/">EduToneBox</a></h3>
-                        <p class="proj-tag">A real-time synthesizer for learning sound.</p>
+                        <p class="proj-tag">
+                            A real-time synthesizer for learning sound, by making synthesis visible, understandable, and
+                            interactive.
+                        </p>
                         <p class="proj-desc">
                             Cross-platform synth with C++ DSP engine, Qt/QML interface, OSC, and FFT visualization.
                         </p>
@@ -379,8 +360,8 @@
                         <h3 class="proj-title"><a href="sound-on-paper/">Sound On Paper</a></h3>
                         <p class="proj-tag">Private audio objects for print.</p>
                         <p class="proj-desc">
-                            QR-based audio sharing with end-to-end encryption, updateable printed codes, and no
-                            accounts.
+                            A QR code that carries a private sharing and listening experience. End-to-end encryption,
+                            dynamic, no accounts or platforms.
                         </p>
                         <div class="tags">
                             <span class="tag">TypeScript</span>
@@ -413,8 +394,8 @@
                         </h3>
                         <p class="proj-tag">The calendar, native on iOS and Android.</p>
                         <p class="proj-desc">
-                            Parallel fault-tolerant calculation domains &mdash; moon phases, eclipses, zmanim, and
-                            astronomy events &mdash; in a native cross-platform interface.
+                            Parallel fault-tolerant calculation domains for moon phases, eclipses, and zmanim in a
+                            native cross-platform interface.
                         </p>
                         <div class="tags">
                             <span class="tag">TypeScript</span>
@@ -485,6 +466,10 @@
             <!-- ─────────────────────────────────── Footer -->
             <footer class="footer" data-screen-label="03 Footer">
                 <div class="footer-bio">
+                    <p>
+                        Musician and educator. Self-taught engineer. Drawn to systems, architecture, and the kind of
+                        problems that get more interesting the deeper you look.
+                    </p>
                     <svg class="footer-mark" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="0.6">
                         <circle cx="28" cy="28" r="20" />
                         <circle cx="28" cy="28" r="10" />
@@ -493,29 +478,11 @@
                         <line x1="11" y1="11" x2="45" y2="45" />
                         <line x1="45" y1="11" x2="11" y2="45" />
                     </svg>
-                    <p>
-                        Self-taught engineer with a background in music, systems design, and technical education. I
-                        build systems that last.
-                    </p>
                 </div>
 
                 <div>
-                    <h4>Principles</h4>
-                    <ul>
-                        <li>Correctness over cleverness.</li>
-                        <li>Simplicity is a feature.</li>
-                        <li>Maintainability is respect for the future.</li>
-                        <li>Clear systems enable people.</li>
-                        <li>Small decisions compound.</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4>Let&rsquo;s Build Something Useful</h4>
-                    <p>
-                        Open to senior engineering roles where I can solve meaningful problems and ship high-quality
-                        software.
-                    </p>
+                    <h4>Let&rsquo;s Build Something Beautiful</h4>
+                    <p>Looking for thoughtful teams working on difficult problems.</p>
                     <a class="email-row" href="mailto:ray@rayemilio.com">
                         ray@rayemilio.com
                         <span class="arr">→</span>
