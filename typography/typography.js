@@ -16,63 +16,63 @@
         mode: "linked",
         intervalIndex: 2,
         rootPx: 9.8,
-        bodyNote: 2,
+        bodyNote: 3,
         roles: {
-            small: 0,
-            code: 1,
-            body: 2,
-            subtitle: 1,
+            small: 2,
+            code: 3,
+            body: 3,
+            subtitle: 4,
             h3: 2,
             h2: 7,
-            h1: 7,
-        },
-        lines: {
-            small: 3,
-            code: 4,
-            body: 6,
-            subtitle: 0,
-            h3: 1,
-            h2: 9,
             h1: 10,
         },
+        lines: {
+            small: 4,
+            code: 5,
+            body: 6,
+            subtitle: 7,
+            h3: 4,
+            h2: 8,
+            h1: 11,
+        },
         spacing: {
-            pageTop: 7,
-            pageBottom: 8,
+            pageTop: 13,
+            pageBottom: 14,
             paragraph: 4,
-            section: 10,
+            section: 11,
             rule: 10,
             code: 4,
         },
     };
 
-    const linkedOffsets = {
-        small: -2,
-        code: -1,
+    const linkedRoleOffsets = {
+        small: -1,
+        code: 0,
         body: 0,
-        subtitle: -1,
-        h3: 0,
-        h2: 5,
-        h1: 5,
+        subtitle: 1,
+        h3: -1,
+        h2: 4,
+        h1: 7,
     };
 
     const linkedLineOffsets = {
         small: 1,
         code: 2,
-        body: 4,
-        subtitle: -2,
-        h3: -1,
-        h2: 7,
+        body: 3,
+        subtitle: 4,
+        h3: 1,
+        h2: 5,
         h1: 8,
     };
 
     const linkedSpaceOffsets = {
-        paragraph: 2,
+        pageTop: 10,
+        pageBottom: 11,
+        paragraph: 1,
         section: 8,
-        rule: 8,
-        pageTop: 5,
-        pageBottom: 6,
-        code: 2,
-        tight: -1,
+        rule: 7,
+        code: 1,
+        tight: 0,
     };
 
     const roleConfig = {
@@ -117,7 +117,7 @@
         pageBottom: "--space-page-end",
         paragraph: "--space-paragraph",
         section: "--space-section",
-        rule: ["--space-rule", "--space-rule-thin"],
+        rule: "--space-rule",
         code: "--space-code",
     };
 
@@ -161,7 +161,7 @@
     }
 
     function calculateNotes(rootPx, ratio) {
-        const fontSizeGrow = (window.innerWidth / 100) * 0.7 * (rootPx / defaults.rootPx);
+        const fontSizeGrow = (window.innerWidth / 100) * 0.55 * (rootPx / defaults.rootPx);
         const minFontSize = rootPx / ratio;
         const notes = [Math.max(minFontSize, fontSizeGrow)];
 
@@ -212,7 +212,7 @@
         const rhythmNote = clamp(0, bodyNote + linkedLineOffsets.body, 16);
         const rhythmPx = notes[rhythmNote];
         const roles = Object.fromEntries(
-            Object.entries(linkedOffsets).map(([roleName, offset]) => [
+            Object.entries(linkedRoleOffsets).map(([roleName, offset]) => [
                 roleName,
                 clamp(0, bodyNote + offset, 16),
             ]),

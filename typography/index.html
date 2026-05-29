@@ -18,7 +18,7 @@
         <a class="back" href="../">← Portfolio</a>
 
         <p class="doc-label">Technical Documentation</p>
-        <h1>Musical Interval Typography System</h1>
+        <h1>Musical Interval Typography</h1>
         <p class="subtitle">A type scale derived from the intervals of a musical scale</p>
 
         <p class="meta">HTML · CSS custom properties · Zero dependencies &nbsp;·&nbsp; License: CC BY-NC 4.0</p>
@@ -58,152 +58,318 @@
                 </label>
 
                 <label class="type-control" for="linked-body-control" data-linked-only>
-                    <span class="type-control-label">Body size</span>
-                    <input id="linked-body-control" type="range" min="2" max="7" step="1" value="2" data-linked-body-control />
-                    <span class="type-control-value" data-linked-body-output>note02 · 11.80px</span>
+                    <span class="type-control-label">Body anchor</span>
+                    <input
+                        id="linked-body-control"
+                        type="range"
+                        min="2"
+                        max="7"
+                        step="1"
+                        value="3"
+                        data-linked-body-control
+                    />
+                    <span class="type-control-value" data-linked-body-output>note03 · 13.98px</span>
                 </label>
             </div>
 
             <div class="linked-readouts" data-linked-readouts aria-label="Linked system readouts">
-                <span data-linked-readout="body">Body note02 / leading note06</span>
+                <span data-linked-readout="body">Body note03 / leading note06</span>
                 <span data-linked-readout="rhythm">Body leading note06</span>
-                <span data-linked-readout="h1">H1 note07 / leading note10</span>
-                <span data-linked-readout="h2">H2 note07 / leading note09</span>
-                <span data-linked-readout="h3">H3 note02 / leading note01</span>
-                <span data-linked-readout="subtitle">Subtitle note01 / leading note00</span>
-                <span data-linked-readout="code">Code note01 / leading note04</span>
-                <span data-linked-readout="small">Small note00 / leading note03</span>
+                <span data-linked-readout="h1">H1 note10 / leading note11</span>
+                <span data-linked-readout="h2">H2 note07 / leading note08</span>
+                <span data-linked-readout="h3">H3 note02 / leading note04</span>
+                <span data-linked-readout="subtitle">Subtitle note04 / leading note07</span>
+                <span data-linked-readout="code">Code note03 / leading note05</span>
+                <span data-linked-readout="small">Small note02 / leading note04</span>
                 <span data-linked-readout="paragraph">Paragraph note04</span>
-                <span data-linked-readout="section">Section note10</span>
-                <span data-linked-readout="page">Page top note07</span>
-                <span data-linked-readout="pageBottom">Page bottom note08</span>
+                <span data-linked-readout="section">Section note11</span>
+                <span data-linked-readout="page">Page top note13</span>
+                <span data-linked-readout="pageBottom">Page bottom note14</span>
             </div>
 
             <div class="free-controls" data-free-controls>
-                <div class="role-controls" aria-label="Type role note assignments">
-                <label class="type-control" for="h1-note-control">
-                    <span class="type-control-label">H1</span>
-                    <input id="h1-note-control" type="range" min="0" max="16" step="1" value="7" data-role-control="h1" />
-                    <span class="type-control-value" data-role-output="h1">note07 · 27.59px</span>
-                </label>
+                <div class="role-controls" aria-label="Type size and leading note assignments">
+                    <label class="type-control" for="h1-note-control">
+                        <span class="type-control-label">H1 size</span>
+                        <input
+                            id="h1-note-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="10"
+                            data-role-control="h1"
+                        />
+                        <span class="type-control-value" data-role-output="h1">note10 · 45.93px</span>
+                    </label>
 
-                <label class="type-control" for="h2-note-control">
-                    <span class="type-control-label">H2</span>
-                    <input id="h2-note-control" type="range" min="0" max="16" step="1" value="7" data-role-control="h2" />
-                    <span class="type-control-value" data-role-output="h2">note07 · 27.60px</span>
-                </label>
+                    <label class="type-control" for="h1-line-control">
+                        <span class="type-control-label">H1 leading</span>
+                        <input
+                            id="h1-line-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="11"
+                            data-line-control="h1"
+                        />
+                        <span class="type-control-value" data-line-output="h1">note11 · 54.44px</span>
+                    </label>
 
-                <label class="type-control" for="h3-note-control">
-                    <span class="type-control-label">H3</span>
-                    <input id="h3-note-control" type="range" min="0" max="16" step="1" value="2" data-role-control="h3" />
-                    <span class="type-control-value" data-role-output="h3">note02 · 11.80px</span>
-                </label>
+                    <label class="type-control" for="h2-note-control">
+                        <span class="type-control-label">H2 size</span>
+                        <input
+                            id="h2-note-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="7"
+                            data-role-control="h2"
+                        />
+                        <span class="type-control-value" data-role-output="h2">note07 · 27.60px</span>
+                    </label>
 
-                <label class="type-control" for="subtitle-note-control">
-                    <span class="type-control-label">Subtitle</span>
-                    <input id="subtitle-note-control" type="range" min="0" max="16" step="1" value="1" data-role-control="subtitle" />
-                    <span class="type-control-value" data-role-output="subtitle">note01 · 9.96px</span>
-                </label>
+                    <label class="type-control" for="h2-line-control">
+                        <span class="type-control-label">H2 leading</span>
+                        <input
+                            id="h2-line-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="8"
+                            data-line-control="h2"
+                        />
+                        <span class="type-control-value" data-line-output="h2">note08 · 32.70px</span>
+                    </label>
 
-                <label class="type-control" for="body-note-control">
-                    <span class="type-control-label">Body</span>
-                    <input id="body-note-control" type="range" min="0" max="16" step="1" value="2" data-role-control="body" />
-                    <span class="type-control-value" data-role-output="body">note02 · 11.80px</span>
-                </label>
+                    <label class="type-control" for="h3-note-control">
+                        <span class="type-control-label">H3 size</span>
+                        <input
+                            id="h3-note-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="2"
+                            data-role-control="h3"
+                        />
+                        <span class="type-control-value" data-role-output="h3">note02 · 11.80px</span>
+                    </label>
 
-                <label class="type-control" for="code-note-control">
-                    <span class="type-control-label">Code</span>
-                    <input id="code-note-control" type="range" min="0" max="16" step="1" value="1" data-role-control="code" />
-                    <span class="type-control-value" data-role-output="code">note01 · 9.96px</span>
-                </label>
+                    <label class="type-control" for="h3-line-control">
+                        <span class="type-control-label">H3 leading</span>
+                        <input
+                            id="h3-line-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="4"
+                            data-line-control="h3"
+                        />
+                        <span class="type-control-value" data-line-output="h3">note04 · 16.57px</span>
+                    </label>
 
-                <label class="type-control" for="small-note-control">
-                    <span class="type-control-label">Small/meta</span>
-                    <input id="small-note-control" type="range" min="0" max="16" step="1" value="0" data-role-control="small" />
-                    <span class="type-control-value" data-role-output="small">note00 · 8.40px</span>
-                </label>
-                </div>
+                    <label class="type-control" for="subtitle-note-control">
+                        <span class="type-control-label">Subtitle size</span>
+                        <input
+                            id="subtitle-note-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="4"
+                            data-role-control="subtitle"
+                        />
+                        <span class="type-control-value" data-role-output="subtitle">note04 · 16.57px</span>
+                    </label>
 
-                <div class="line-controls" aria-label="Line-height note assignments">
-                <label class="type-control" for="h1-line-control">
-                    <span class="type-control-label">H1 leading</span>
-                    <input id="h1-line-control" type="range" min="0" max="16" step="1" value="10" data-line-control="h1" />
-                    <span class="type-control-value" data-line-output="h1">note10 · 45.93px</span>
-                </label>
+                    <label class="type-control" for="subtitle-line-control">
+                        <span class="type-control-label">Subtitle leading</span>
+                        <input
+                            id="subtitle-line-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="7"
+                            data-line-control="subtitle"
+                        />
+                        <span class="type-control-value" data-line-output="subtitle">note07 · 27.59px</span>
+                    </label>
 
-                <label class="type-control" for="h2-line-control">
-                    <span class="type-control-label">H2 leading</span>
-                    <input id="h2-line-control" type="range" min="0" max="16" step="1" value="9" data-line-control="h2" />
-                    <span class="type-control-value" data-line-output="h2">note09 · 38.76px</span>
-                </label>
+                    <label class="type-control" for="body-note-control">
+                        <span class="type-control-label">Body size</span>
+                        <input
+                            id="body-note-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="3"
+                            data-role-control="body"
+                        />
+                        <span class="type-control-value" data-role-output="body">note03 · 13.98px</span>
+                    </label>
 
-                <label class="type-control" for="h3-line-control">
-                    <span class="type-control-label">H3 leading</span>
-                    <input id="h3-line-control" type="range" min="0" max="16" step="1" value="1" data-line-control="h3" />
-                    <span class="type-control-value" data-line-output="h3">note01 · 9.96px</span>
-                </label>
+                    <label class="type-control" for="body-line-control">
+                        <span class="type-control-label">Body leading</span>
+                        <input
+                            id="body-line-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="6"
+                            data-line-control="body"
+                        />
+                        <span class="type-control-value" data-line-output="body">note06 · 23.28px</span>
+                    </label>
 
-                <label class="type-control" for="subtitle-line-control">
-                    <span class="type-control-label">Subtitle leading</span>
-                    <input id="subtitle-line-control" type="range" min="0" max="16" step="1" value="0" data-line-control="subtitle" />
-                    <span class="type-control-value" data-line-output="subtitle">note00 · 8.40px</span>
-                </label>
+                    <label class="type-control type-control-third" for="code-note-control">
+                        <span class="type-control-label">Code size</span>
+                        <input
+                            id="code-note-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="3"
+                            data-role-control="code"
+                        />
+                        <span class="type-control-value" data-role-output="code">note03 · 13.98px</span>
+                    </label>
 
-                <label class="type-control" for="body-line-control">
-                    <span class="type-control-label">Body leading</span>
-                    <input id="body-line-control" type="range" min="0" max="16" step="1" value="6" data-line-control="body" />
-                    <span class="type-control-value" data-line-output="body">note06 · 23.28px</span>
-                </label>
+                    <label class="type-control type-control-third" for="code-line-control">
+                        <span class="type-control-label">Code leading</span>
+                        <input
+                            id="code-line-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="5"
+                            data-line-control="code"
+                        />
+                        <span class="type-control-value" data-line-output="code">note05 · 19.64px</span>
+                    </label>
 
-                <label class="type-control" for="code-line-control">
-                    <span class="type-control-label">Code leading</span>
-                    <input id="code-line-control" type="range" min="0" max="16" step="1" value="4" data-line-control="code" />
-                    <span class="type-control-value" data-line-output="code">note04 · 16.57px</span>
-                </label>
+                    <label class="type-control type-control-third" for="code-space-control">
+                        <span class="type-control-label">Code padding</span>
+                        <input
+                            id="code-space-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="4"
+                            data-space-control="code"
+                        />
+                        <span class="type-control-value" data-space-output="code">note04 · 16.57px</span>
+                    </label>
 
-                <label class="type-control" for="small-line-control">
-                    <span class="type-control-label">Small leading</span>
-                    <input id="small-line-control" type="range" min="0" max="16" step="1" value="3" data-line-control="small" />
-                    <span class="type-control-value" data-line-output="small">note03 · 13.98px</span>
-                </label>
+                    <label class="type-control" for="small-note-control">
+                        <span class="type-control-label">Small/meta size</span>
+                        <input
+                            id="small-note-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="2"
+                            data-role-control="small"
+                        />
+                        <span class="type-control-value" data-role-output="small">note02 · 11.80px</span>
+                    </label>
+
+                    <label class="type-control" for="small-line-control">
+                        <span class="type-control-label">Small leading</span>
+                        <input
+                            id="small-line-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="4"
+                            data-line-control="small"
+                        />
+                        <span class="type-control-value" data-line-output="small">note04 · 16.57px</span>
+                    </label>
                 </div>
 
                 <div class="spacing-controls" aria-label="Spacing note assignments">
-                <label class="type-control" for="page-top-control">
-                    <span class="type-control-label">Page top</span>
-                    <input id="page-top-control" type="range" min="0" max="16" step="1" value="7" data-space-control="pageTop" />
-                    <span class="type-control-value" data-space-output="pageTop">note07 · 27.59px</span>
-                </label>
+                    <label class="type-control" for="page-top-control">
+                        <span class="type-control-label">Page top</span>
+                        <input
+                            id="page-top-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="13"
+                            data-space-control="pageTop"
+                        />
+                        <span class="type-control-value" data-space-output="pageTop">note13 · 76.47px</span>
+                    </label>
 
-                <label class="type-control" for="page-bottom-control">
-                    <span class="type-control-label">Page bottom</span>
-                    <input id="page-bottom-control" type="range" min="0" max="16" step="1" value="8" data-space-control="pageBottom" />
-                    <span class="type-control-value" data-space-output="pageBottom">note08 · 32.70px</span>
-                </label>
+                    <label class="type-control" for="page-bottom-control">
+                        <span class="type-control-label">Page bottom</span>
+                        <input
+                            id="page-bottom-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="14"
+                            data-space-control="pageBottom"
+                        />
+                        <span class="type-control-value" data-space-output="pageBottom">note14 · 90.63px</span>
+                    </label>
 
-                <label class="type-control" for="paragraph-gap-control">
-                    <span class="type-control-label">Paragraph gap</span>
-                    <input id="paragraph-gap-control" type="range" min="0" max="16" step="1" value="4" data-space-control="paragraph" />
-                    <span class="type-control-value" data-space-output="paragraph">note04 · 16.57px</span>
-                </label>
+                    <label class="type-control type-control-third" for="paragraph-gap-control">
+                        <span class="type-control-label">Paragraph gap</span>
+                        <input
+                            id="paragraph-gap-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="4"
+                            data-space-control="paragraph"
+                        />
+                        <span class="type-control-value" data-space-output="paragraph">note04 · 16.57px</span>
+                    </label>
 
-                <label class="type-control" for="section-gap-control">
-                    <span class="type-control-label">Section gap</span>
-                    <input id="section-gap-control" type="range" min="0" max="16" step="1" value="10" data-space-control="section" />
-                    <span class="type-control-value" data-space-output="section">note10 · 45.93px</span>
-                </label>
+                    <label class="type-control type-control-third" for="section-gap-control">
+                        <span class="type-control-label">Section gap</span>
+                        <input
+                            id="section-gap-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="11"
+                            data-space-control="section"
+                        />
+                        <span class="type-control-value" data-space-output="section">note11 · 54.44px</span>
+                    </label>
 
-                <label class="type-control" for="rule-gap-control">
-                    <span class="type-control-label">Rule gap</span>
-                    <input id="rule-gap-control" type="range" min="0" max="16" step="1" value="10" data-space-control="rule" />
-                    <span class="type-control-value" data-space-output="rule">note10 · 45.93px</span>
-                </label>
-
-                <label class="type-control" for="code-space-control">
-                    <span class="type-control-label">Code padding</span>
-                    <input id="code-space-control" type="range" min="0" max="16" step="1" value="4" data-space-control="code" />
-                    <span class="type-control-value" data-space-output="code">note04 · 16.57px</span>
-                </label>
+                    <label class="type-control type-control-third" for="rule-gap-control">
+                        <span class="type-control-label">Rule gap</span>
+                        <input
+                            id="rule-gap-control"
+                            type="range"
+                            min="0"
+                            max="16"
+                            step="1"
+                            value="10"
+                            data-space-control="rule"
+                        />
+                        <span class="type-control-value" data-space-output="rule">note10 · 45.93px</span>
+                    </label>
                 </div>
             </div>
         </section>
@@ -465,8 +631,6 @@ margin-top: var(--note08);</pre
                 </a>
             </li>
         </ul>
-
-        <hr />
 
         <footer>
             <p>
