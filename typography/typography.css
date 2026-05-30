@@ -173,6 +173,19 @@ body.typography-page .code-block pre {
     margin: 0;
 }
 
+body.typography-page .code-block-complete {
+    background-color: #20231d;
+    border-left-color: #6f8067;
+    margin-left: calc(var(--space-code) * 0.45);
+    margin-right: calc(var(--space-code) * 0.45);
+}
+
+body.typography-page .code-block-complete pre {
+    color: #e7e3d8;
+    font-family: "Source Code Pro", "Inconsolata", "Courier New", monospace;
+    font-size: calc(var(--type-code) * 0.8);
+}
+
 body.typography-page .code-caption {
     font-size: var(--type-small);
     line-height: var(--type-small-line);

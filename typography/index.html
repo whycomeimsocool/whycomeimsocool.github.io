@@ -7,7 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Inter:wght@400;500;600&family=Inconsolata:wght@300;400&family=Source+Code+Pro:wght@400&display=swap"
             rel="stylesheet"
         />
         <link rel="stylesheet" href="../_resources/css/style.css" />
@@ -428,7 +428,12 @@
 
         <h3>The ratio</h3>
 
+        <!--
         <div class="code-block"><pre>--fontRatio: calc(32 / 27);</pre></div>
+        -->
+        <div class="page-images page-images-full code-image">
+            <img src="../_resources/images/png/typography-code-ratio.png" alt="Typography system — font ratio code view" />
+        </div>
         <p class="code-caption">
             Sets the Font Ratio variable — the basis for the entire system. Preferably a musical interval, though any
             numerical value in any form will do.
@@ -436,7 +441,12 @@
 
         <h3>Minimum font size</h3>
 
+        <!--
         <div class="code-block"><pre>--minFontSize: calc((16 / var(--fontRatio)) * 1px);</pre></div>
+        -->
+        <div class="page-images page-images-full code-image">
+            <img src="../_resources/images/png/typography-code-font.png" alt="Typography system — minimum font size code view" />
+        </div>
         <p class="code-caption">
             Defines the Minimum Font Size variable, to be used in conjunction with Note 00. Starts at 16px for
             accessibility.
@@ -444,7 +454,12 @@
 
         <h3>Note 00 — the root</h3>
 
+        <!--
         <div class="code-block"><pre>--note00: clamp(var(--minFontSize), var(--fontSizeGrow), 1000000000px);</pre></div>
+        -->
+        <div class="page-images page-images-full code-image">
+            <img src="../_resources/images/png/typography-code-root.png" alt="Typography system — note root code view" />
+        </div>
         <p class="code-caption">
             Defines the Note 00 variable — the starting point for all other Notes — scaling all the way up to infinity
             (1 billion pixels, to be precise).
@@ -452,6 +467,7 @@
 
         <h3>The scale</h3>
 
+        <!--
         <div class="code-block">
             <pre>
 --note01: calc(var(--note00) * var(--fontRatio));
@@ -459,6 +475,10 @@
 --note03: calc(var(--note02) * var(--fontRatio));
 --note04: calc(var(--note03) * var(--fontRatio));</pre
             >
+        </div>
+        -->
+        <div class="page-images page-images-full code-image">
+            <img src="../_resources/images/png/typography-code-scale.png" alt="Typography system — note scale code view" />
         </div>
         <p class="code-caption">
             Each subsequent Note is defined by multiplying the immediately previous Note by the Font Ratio. These Notes
@@ -474,6 +494,7 @@
             units is required.
         </p>
 
+        <!--
         <div class="code-block">
             <pre>
 --minFontSizeVW: calc((16 / var(--fontRatio)) * 1vw);
@@ -484,12 +505,17 @@
 --fontSizeGrow: 1vw;</pre
             >
         </div>
+        -->
+        <div class="page-images page-images-full code-image">
+            <img src="../_resources/images/png/typography-code-viewport.png" alt="Typography system — viewport track code view" />
+        </div>
         <p class="code-caption">
             The vw-unit track mirrors the px track and is used exclusively for body and margin proportions.
         </p>
 
         <h3>Body sizing</h3>
 
+        <!--
         <div class="code-block">
             <pre>
 body {
@@ -506,6 +532,10 @@ body {
 }</pre
             >
         </div>
+        -->
+        <div class="page-images page-images-full code-image">
+            <img src="../_resources/images/png/typography-code-body.png" alt="Typography system — body sizing code view" />
+        </div>
         <p class="code-caption">
             The only media query concerned with sizing and responsiveness. At 767px the body sizes down using vw-based
             variables.
@@ -513,7 +543,7 @@ body {
 
         <h3>The complete block</h3>
 
-        <div class="code-block">
+        <div class="code-block code-block-complete">
             <pre>
 /*
   The following musical interval system and its associated code,
@@ -564,16 +594,26 @@ body {
 }</pre
             >
         </div>
+        <!--
+        <div class="page-images page-images-full code-image">
+            <img src="../_resources/images/png/typography-code-block.png" alt="Typography system — complete code block view" />
+        </div>
+        -->
         <p class="code-caption">The complete block. Free to use with credit, under CC BY-NC 4.0.</p>
 
         <h3>Example usage</h3>
 
+        <!--
         <div class="code-block">
             <pre>
 font-size: var(--note03);
 line-height: var(--note06);
 margin-top: var(--note08);</pre
             >
+        </div>
+        -->
+        <div class="page-images page-images-full code-image">
+            <img src="../_resources/images/png/typography-code-example.png" alt="Typography system — example usage code view" />
         </div>
         <p class="code-caption">
             How the system's implementation looks for a few properties — in this case, body text on this very page.

@@ -643,8 +643,37 @@ body.doc-page hr.thin {
     border-radius: 6px;
 }
 
+.page-images-full {
+    align-items: center;
+    flex-direction: column;
+}
+
 .page-images-full img {
-    width: 100%;
+    max-width: 100%;
+    width: auto;
+}
+
+.code-image {
+    margin-top: 2px;
+    margin-bottom: 56px;
+}
+
+.code-image + .code-caption {
+    margin-top: -46px;
+    margin-bottom: 56px;
+}
+
+.code-image img {
+    width: min(100%, 720px);
+}
+
+h2 + .code-image,
+h3 + .code-image {
+    margin-top: -2px;
+}
+
+.code-image + h3 {
+    margin-top: 56px;
 }
 
 body.doc-page code {
@@ -1063,7 +1092,7 @@ body.doc-page footer a:hover {
 /* Doc page responsive */
 @media (max-width: 640px) {
     body.doc-page {
-        padding: 40px 20px 72px;
+        padding: 40px 16px 72px;
     }
     body.doc-page h1 {
         font-size: clamp(28px, 7vw, 40px);
@@ -1075,5 +1104,12 @@ body.doc-page footer a:hover {
     .contrast-columns {
         grid-template-columns: 1fr;
         gap: 24px;
+    }
+    .code-image {
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+    .code-image img {
+        width: 100%;
     }
 }
