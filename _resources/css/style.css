@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400&display=swap");
+
 :root {
     --paper: #fafaf8;
     --ink: #111111;
@@ -8,6 +10,10 @@
     --rule-2: #ececec;
     --serif: "Newsreader", "Source Serif 4", Georgia, serif;
     --sans: "Inter", -apple-system, system-ui, sans-serif;
+    --mono: "Source Code Pro", "Inconsolata", "Courier New", monospace;
+    --code-selection-green: #9dae8f;
+    --code-syntax-green: rgb(166, 184, 150, 0.99);
+    --code-highlight-ink: #17181b;
 }
 
 *,
@@ -891,19 +897,78 @@ body.doc-page code {
 
 /* Code blocks */
 .code-block {
-    background: #f3f2ee;
-    border-left: 2px solid var(--rule);
+    background: #20231d;
+    border-left: 0;
+    border-radius: 10px;
+    box-shadow:
+        0 5px 7px -5px rgba(42, 42, 36, 0.34),
+        0 13px 18px -10px rgba(42, 42, 36, 0.27),
+        13px 13px 18px -10px rgba(42, 42, 36, 0.34),
+        -13px 13px 18px -10px rgba(42, 42, 36, 0.34),
+        0 23px 30px -20px rgba(42, 42, 36, 0.2),
+        23px 23px 30px -20px rgba(42, 42, 36, 0.24),
+        -23px 23px 30px -20px rgba(42, 42, 36, 0.24);
     padding: 16px 20px;
-    margin: 16px 0;
+    margin: 16px 8px 40px;
     overflow-x: auto;
 }
 
 .code-block pre {
-    font-family: "Inconsolata", "Courier New", monospace;
-    font-size: 13px;
+    font-family: var(--mono);
+    font-size: 12px;
     line-height: 1.65;
-    color: var(--ink);
+    color: #e7e3d8;
     white-space: pre;
+}
+
+.code-block pre::selection,
+.code-block pre *::selection {
+    background-color: var(--code-selection-green);
+    color: var(--code-highlight-ink);
+}
+
+.code-block pre::-moz-selection,
+.code-block pre *::-moz-selection {
+    background-color: var(--code-selection-green);
+    color: var(--code-highlight-ink);
+}
+
+.code-token-comment {
+    color: #8f9887;
+}
+
+.code-token-selector {
+    color: #d7c88f;
+}
+
+.code-token-property,
+.code-token-path {
+    color: #9fb6d8;
+}
+
+.code-token-at-rule {
+    color: #c6a7d8;
+}
+
+.code-token-function,
+.code-token-command {
+    color: var(--code-syntax-green);
+}
+
+.code-token-keyword,
+.code-token-string {
+    color: #b9b28a;
+}
+
+.code-token-number,
+.code-token-flag {
+    color: #d6a77a;
+}
+
+.code-token-operator,
+.code-token-punctuation,
+.code-token-tree {
+    color: #6f786b;
 }
 
 .code-caption {

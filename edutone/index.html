@@ -11,6 +11,7 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="../_resources/css/style.css" />
+        <script src="../_resources/js/code-highlight.js" defer></script>
     </head>
     <body class="doc-page">
         <a class="back" href="../">← Portfolio</a>
@@ -84,9 +85,8 @@
             independently testable, and leaves the door open for future hardware control sources.
         </p>
 
-        <!--
-        <div class="arch-diagram">
-            <pre>
+        <div class="code-block">
+            <pre data-code-language="diagram">
 +---------------------------------------------+
 | Qt6/QML UI Process                          |
 | Controls, visualizations, theme, pages      |
@@ -104,17 +104,17 @@
 +---------------------------------------------+</pre
             >
         </div>
-        -->
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/edutonebox-code-architecture.png" alt="EduToneBox — architecture diagram code view" />
         </div>
+        -->
 
         <h3>Signal flow</h3>
 
-        <!--
-        <div class="arch-diagram">
-            <pre>
+        <div class="code-block">
+            <pre data-code-language="diagram">
 Oscillator
   → ADSR envelope
   → FilterBank (optional)
@@ -123,17 +123,17 @@ Oscillator
   → CoreAudio or ALSA device</pre
             >
         </div>
-        -->
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/edutonebox-code-signal-flow.png" alt="EduToneBox — signal flow code view" />
         </div>
+        -->
 
         <h3>Control and visualization flow</h3>
 
-        <!--
-        <div class="arch-diagram">
-            <pre>
+        <div class="code-block">
+            <pre data-code-language="diagram">
 QML control change
   → OSCClient
   → UDP OSC message
@@ -146,11 +146,12 @@ Audio buffer
   → UI spectrum visualization</pre
             >
         </div>
-        -->
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/edutonebox-code-control.png" alt="EduToneBox — control and visualization code view" />
         </div>
+        -->
 
         <hr class="thin" />
 
@@ -258,9 +259,8 @@ Audio buffer
 
         <h2>Repository Layout</h2>
 
-        <!--
         <div class="code-block">
-            <pre>
+            <pre data-code-language="tree">
 AUDIO_BOX/
 ├── CMakeLists.txt
 ├── README.md
@@ -293,11 +293,12 @@ AUDIO_BOX/
     └── test_svfilter.cpp</pre
             >
         </div>
-        -->
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/edutonebox-code-repository.png" alt="EduToneBox — repository layout code view" />
         </div>
+        -->
 
         <hr class="thin" />
 

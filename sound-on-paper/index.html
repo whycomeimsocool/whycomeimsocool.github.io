@@ -11,6 +11,7 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="../_resources/css/style.css" />
+        <script src="../_resources/js/code-highlight.js" defer></script>
     </head>
     <body class="doc-page">
         <a class="back" href="../">← Portfolio</a>
@@ -102,12 +103,12 @@
         <h3>URL fragment key</h3>
         <p>The QR code points to a URL shaped like:</p>
 
+        <div class="code-block"><pre data-code-language="url">https://soundonpaper.com/p/quiet-river-17#k=PUBLIC_SHARE_KEY</pre></div>
         <!--
-        <div class="code-block"><pre>https://soundonpaper.com/p/quiet-river-17#k=PUBLIC_SHARE_KEY</pre></div>
-        -->
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/sound-code-url.png" alt="Sound on Paper — listener URL code view" />
         </div>
+        -->
         <p class="code-caption">
             The slug
             <code>quiet-river-17</code>
@@ -341,9 +342,8 @@
 
         <h3>Route structure</h3>
 
-        <!--
         <div class="code-block">
-            <pre>
+            <pre data-code-language="tree">
 app/
   (auth)/         signup, login, setup, unlock
   (creator)/      dashboard, audio, pieces, print, settings
@@ -353,17 +353,17 @@ app/
   api/            auth, key-vault, audio, pieces, public, admin, legal</pre
             >
         </div>
-        -->
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/sound-code-structure.png" alt="Sound on Paper — route structure code view" />
         </div>
+        -->
 
         <h3>Source structure</h3>
 
-        <!--
         <div class="code-block">
-            <pre>
+            <pre data-code-language="tree">
 src/
   crypto/
     browser-crypto.ts      key generation, wrapping, unwrapping
@@ -384,11 +384,12 @@ src/
     validation.ts          locked audio constraints (MP3/M4A, 10 MB, 3 min)</pre
             >
         </div>
-        -->
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/sound-code-source.png" alt="Sound on Paper — source structure code view" />
         </div>
+        -->
 
         <h3>Prisma models</h3>
         <ul class="feature-list">

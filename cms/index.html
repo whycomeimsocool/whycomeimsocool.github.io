@@ -11,6 +11,7 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="../_resources/css/style.css" />
+        <script src="../_resources/js/code-highlight.js" defer></script>
     </head>
     <body class="doc-page">
         <a class="back" href="../">← Portfolio</a>
@@ -74,8 +75,8 @@
 
         <h2>Project Map</h2>
 
-        <!-- <div class="code-block">
-            <pre>
+        <div class="code-block">
+            <pre data-code-language="tree">
 site/                          Public website
 site/posts.json                Published posts data
 site/action/action-items.json  Published action artwork and download data
@@ -93,11 +94,13 @@ _config/                       Templates and local configuration examples
 _assets/docs/                  Current docs and historical plans and reports
 _production_logs/              Local synced access log input</pre
             >
-        </div> -->
+        </div>
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/cms-code-project-map.png" alt="Custom CMS — project map code view" />
         </div>
+        -->
 
         <hr class="thin" />
 
@@ -245,40 +248,46 @@ _production_logs/              Local synced access log input</pre
 
         <h3>Starting the backend</h3>
 
-        <!-- <div class="code-block">
-            <pre>
+        <div class="code-block">
+            <pre data-code-language="shell">
 cd admin-panel/_resources/python
 ./setup_venv.sh
 python3 simple_server.py</pre
             >
-        </div> -->
+        </div>
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/cms-code-backend.png" alt="Custom CMS — backend startup code view" />
         </div>
+        -->
         <p class="code-caption">
             The configured admin start port is 5500, with up to 10 attempts for the next free port.
         </p>
 
         <h3>Starting the public site</h3>
 
-        <!-- <div class="code-block"><pre>open "_commands/ports_and_servers/servers/launch_PHP.command"</pre></div> -->
+        <div class="code-block"><pre data-code-language="shell">open "_commands/ports_and_servers/servers/launch_PHP.command"</pre></div>
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/cms-code-public-site.png" alt="Custom CMS — public site launch code view" />
         </div>
+        -->
 
         <h3>Combined launcher</h3>
 
-        <!-- <div class="code-block"><pre>open "_commands/CLEAN+LAUNCH.command"</pre></div> -->
+        <div class="code-block"><pre data-code-language="shell">open "_commands/CLEAN+LAUNCH.command"</pre></div>
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/cms-code-launcher.png" alt="Custom CMS — combined launcher code view" />
         </div>
+        -->
 
         <h3>Running tests</h3>
 
-        <!-- <div class="code-block">
-            <pre>
+        <div class="code-block">
+            <pre data-code-language="shell">
 # Python backend tests
 cd admin-panel/_resources/python
 python3 -m pytest
@@ -287,11 +296,13 @@ python3 -m pytest
 cd admin-panel/_resources/js
 npm test</pre
             >
-        </div> -->
+        </div>
 
+        <!--
         <div class="page-images page-images-full code-image">
             <img src="../_resources/images/png/cms-code-tests.png" alt="Custom CMS — test command code view" />
         </div>
+        -->
 
         <hr class="thin" />
 

@@ -147,43 +147,36 @@ body.typography-page code {
     padding: calc(var(--type-code) * 0.08) calc(var(--type-code) * 0.36);
 }
 
-body.typography-page code::selection,
-body.typography-page .code-block pre::selection {
-    background-color: rgb(166, 184, 150, 0.99);
-    color: #17181b;
-}
-
-body.typography-page code::-moz-selection,
-body.typography-page .code-block pre::-moz-selection {
-    background-color: rgb(166, 184, 150, 0.99);
-    color: #17181b;
-}
-
 body.typography-page .code-block {
-    background-color: #282e39;
-    border-left-color: rgb(166, 184, 150, 0.99);
+    background-color: #20231d;
+    border-left: 0;
+    border-radius: 10px;
+    box-shadow:
+        0 5px 7px -5px rgba(42, 42, 36, 0.34),
+        0 13px 18px -10px rgba(42, 42, 36, 0.27),
+        13px 13px 18px -10px rgba(42, 42, 36, 0.34),
+        -13px 13px 18px -10px rgba(42, 42, 36, 0.34),
+        0 23px 30px -20px rgba(42, 42, 36, 0.2),
+        23px 23px 30px -20px rgba(42, 42, 36, 0.24),
+        -23px 23px 30px -20px rgba(42, 42, 36, 0.24);
     padding: var(--space-code) calc(var(--space-code) * var(--fontRatio));
-    margin: var(--space-code) 0 var(--space-meta);
+    margin: var(--space-code) calc(var(--space-code) * 0.45) calc(var(--space-meta) + var(--space-code));
 }
 
 body.typography-page .code-block pre {
-    color: #f0f0f0;
-    font-size: var(--type-code);
+    color: #e7e3d8;
+    font-family: "Source Code Pro", "Inconsolata", "Courier New", monospace;
+    font-size: calc(var(--type-code) * 0.8);
     line-height: var(--type-code-line);
     margin: 0;
 }
 
 body.typography-page .code-block-complete {
-    background-color: #20231d;
-    border-left-color: #6f8067;
-    margin-left: calc(var(--space-code) * 0.45);
-    margin-right: calc(var(--space-code) * 0.45);
+    margin-bottom: calc(var(--space-meta) + var(--space-code));
 }
 
 body.typography-page .code-block-complete pre {
     color: #e7e3d8;
-    font-family: "Source Code Pro", "Inconsolata", "Courier New", monospace;
-    font-size: calc(var(--type-code) * 0.8);
 }
 
 body.typography-page .code-caption {
