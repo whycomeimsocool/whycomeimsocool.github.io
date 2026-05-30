@@ -293,7 +293,7 @@ button {
 }
 .proj-img {
     width: 100%;
-    aspect-ratio: 420 / 200;
+    aspect-ratio: 16 / 9;
     border-radius: 6px;
     overflow: hidden;
     background: transparent;
@@ -326,7 +326,6 @@ button {
 }
 .img-typography {
     background: transparent;
-    padding: 22px 28px;
 }
 
 /* ── Footer ─────────────────────────────────────────────────── */
@@ -361,9 +360,6 @@ button {
 }
 .footer ul li {
     margin-bottom: 4px;
-}
-.footer-bio {
-    padding-top: 4px;
 }
 .footer-mark {
     width: 56px;
@@ -458,9 +454,6 @@ button {
     .proj-img {
         aspect-ratio: 16 / 9;
         max-width: 560px;
-    }
-    .img-typography {
-        padding: 16px 20px;
     }
 
     .footer {
@@ -569,7 +562,6 @@ button {
     .footer-mark {
         width: 44px;
         height: 44px;
-        margin-bottom: 12px;
     }
 }
 
@@ -651,6 +643,10 @@ body.doc-page hr.thin {
     border-radius: 6px;
 }
 
+.page-images-full img {
+    width: 100%;
+}
+
 body.doc-page code {
     font-family: "Inconsolata", "Courier New", monospace;
     font-size: 13px;
@@ -696,7 +692,6 @@ body.doc-page code {
 
 .meta {
     font-size: 12px;
-    letter-spacing: 0.06em;
     color: var(--muted);
     margin-bottom: 20px;
 }
